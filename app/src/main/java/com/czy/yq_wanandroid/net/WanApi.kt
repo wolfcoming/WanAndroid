@@ -1,6 +1,7 @@
 package com.czy.yq_wanandroid.net
 
 import com.czy.yq_wanandroid.entity.WxArticle
+import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -14,4 +15,14 @@ interface WanApi {
 
     @GET("/wxarticle/chapters/json  ")
     fun getWxarticle2(): Call<String>
+
+
+    @GET("/wxarticle/chapters/json  ")
+    fun getWxarticle3(): Observable<String>
+
+
+    @GET("/wxarticle/chapters/json  ")
+    fun getWxarticle4(): Observable<BaseResult<List<WxArticle>>>
+
+
 }

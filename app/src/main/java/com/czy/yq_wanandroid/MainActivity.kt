@@ -1,52 +1,45 @@
 package com.czy.yq_wanandroid
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.czy.yq_wanandroid.entity.WxArticle
+import com.czy.yq_wanandroid.mvpbase.MvpActivity
 import com.czy.yq_wanandroid.net.BaseResult
 import com.czy.yq_wanandroid.net.WanApiService
+import com.czy.yq_wanandroid.proxyLean.Man
+import com.czy.yq_wanandroid.proxyLean.MyProxy
+import com.czy.yq_wanandroid.proxyLean.Subject
+import com.infoholdcity.basearchitecture.self_extends.log
 import com.yangqing.record.ext.toast
+import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
+import java.lang.reflect.Proxy
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-         findViewById<Button>(R.id.btnTest).setOnClickListener {
-             WanApiService.getWanApi().getWxarticle().enqueue(object :
-                 Callback<BaseResult<List<WxArticle>>> {
-                 override fun onResponse(
-                     call: Call<BaseResult<List<WxArticle>>>,
-                     response: Response<BaseResult<List<WxArticle>>>) {
-                     val wxArticle = response.body()?.data?.get(0)!!
-                     Log.e("YYYYY", "onCreate: " + wxArticle.name)
-                 }
+class MainActivity : MvpActivity<MainPresener>(),IMainView {
 
-                 override fun onFailure(call: Call<BaseResult<List<WxArticle>>>, t: Throwable) {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
+    }
 
-                 }
-             })
-         }
-        findViewById<Button>(R.id.btnTest2).setOnClickListener() {
+    override fun createPresenter(): MainPresener {
+        return MainPresener()
+    }
 
-            WanApiService.getWanApi().getWxarticle2().enqueue(object :
-                Callback<String> {
-                override fun onResponse(
-                    call: Call<String>,
-                    response: Response<String>) {
-                    val wxArticle = response.body()
-                    Log.e("YYYYY", "onCreate: " + wxArticle)
-                }
+    override fun init() {
+        mPresenter?.getMainData()
+    }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    t.printStackTrace()
-                    Log.e("YYYYY", "onCreate: " + t.printStackTrace())
-                }
-            })
-        }
+    override fun showMainView() {
+        toast("showMainView")
+    }
+
+    override fun getContent(): Context {
+         return this
     }
 }

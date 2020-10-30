@@ -12,4 +12,11 @@ data class WxArticle(
     var parentChapterId: Int,
     var userControlSetTop: Boolean,
     var visible: Int
-)
+
+
+
+) {
+    override fun toString(): String {
+        return "WxArticle(courseId=$courseId, id=$id, name='$name', order=$order, parentChapterId=$parentChapterId, userControlSetTop=$userControlSetTop, visible=$visible)"
+    }
+}

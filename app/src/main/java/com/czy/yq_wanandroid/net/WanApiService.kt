@@ -4,6 +4,7 @@ import android.util.Log
 import com.czy.yq_wanandroid.net.convert.MyGsonConverterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import java.util.concurrent.TimeUnit
 
 class WanApiService {
@@ -23,6 +24,7 @@ class WanApiService {
                 val mRetrofit = Retrofit.Builder()
                     .baseUrl(baseurl)
                     .addConverterFactory(MyGsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .client(mOkHttpClient)
                     .build()
                 wanApi = mRetrofit.create(WanApi::class.java)
