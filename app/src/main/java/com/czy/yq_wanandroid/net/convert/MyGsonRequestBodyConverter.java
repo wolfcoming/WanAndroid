@@ -4,10 +4,12 @@ package com.czy.yq_wanandroid.net.convert;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonWriter;
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
+
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okio.Buffer;

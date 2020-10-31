@@ -2,10 +2,7 @@ package com.czy.yq_wanandroid.net
 
 import com.czy.yq_wanandroid.entity.WxArticle
 import io.reactivex.rxjava3.core.Observable
-import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.GET
 
 interface WanApi {

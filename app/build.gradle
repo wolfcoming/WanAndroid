@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -47,7 +48,10 @@ dependencies {
 
     //addCallAdapterFactory
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
 
     implementation "io.reactivex.rxjava3:rxjava:3.0.7"
     implementation 'com.google.code.gson:gson:2.8.6'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
+    implementation 'com.trello.rxlifecycle4:rxlifecycle-components:4.0.1'
 }

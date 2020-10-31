@@ -1,9 +1,11 @@
 package com.czy.yq_wanandroid.mvpbase
 
-import android.content.Context
+import com.trello.rxlifecycle4.LifecycleTransformer
 
 interface IView {
-    fun getContent():Context
     fun showLoading()
     fun hideLoading()
+
+    //处理 网络请求 界面关闭时 rxjava自动注销
+    fun <T> bindLifecycleEvent(): LifecycleTransformer<T>
 }

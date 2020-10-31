@@ -1,11 +1,12 @@
 package com.czy.yq_wanandroid.mvpbase
 
-import com.czy.yq_wanandroid.base.BaseActivity
+import com.czy.yq_wanandroid.base.BaseFragment
 import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.LifecycleTransformer
-import com.trello.rxlifecycle4.android.ActivityEvent
+import com.trello.rxlifecycle4.android.FragmentEvent
 
-abstract class MvpActivity<P : MvpPresenter<*>> : BaseActivity(), IView{
+abstract class MvpFragment<P : MvpPresenter<*>> : BaseFragment(), IView {
+
     var mPresenter: P? = null
 
     abstract fun createPresenter(): P
@@ -26,9 +27,11 @@ abstract class MvpActivity<P : MvpPresenter<*>> : BaseActivity(), IView{
         mPresenter?.attach(this)
     }
 
+
     override fun <T> bindLifecycleEvent(): LifecycleTransformer<T> {
-        "ActivityEvent.DESTROY 执行解除绑定".log()
-        return bindUntilEvent(ActivityEvent.DESTROY)
+        "FragmentEvent.DESTROY 执行解除绑定".log()
+        return bindUntilEvent(FragmentEvent.DESTROY)
     }
+
 
 }
