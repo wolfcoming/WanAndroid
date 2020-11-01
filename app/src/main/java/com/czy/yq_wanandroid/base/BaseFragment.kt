@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.components.support.RxFragment
 
 abstract class BaseFragment : RxFragment() {
@@ -28,5 +29,15 @@ abstract class BaseFragment : RxFragment() {
         return rootView
     }
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        javaClass.simpleName + ":onCreate".log()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        javaClass.simpleName + ":onDestroy".log()
+    }
 
 }

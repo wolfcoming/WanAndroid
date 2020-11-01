@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/main_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_bar_home"
+        android:title="首页"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/main_answer"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_bar_wechat"
+        android:title="问答"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/main_project"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_bar_project"
+        android:title="体系"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/main_mine"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_bar_mine"
+        android:title="我的"
+        app:showAsAction="ifRoom" />
+</menu>
