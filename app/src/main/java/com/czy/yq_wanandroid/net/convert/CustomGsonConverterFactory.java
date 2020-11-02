@@ -30,19 +30,19 @@ import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 
-public final class MyGsonConverterFactory extends Converter.Factory {
-    public static MyGsonConverterFactory create() {
+public final class CustomGsonConverterFactory extends Converter.Factory {
+    public static CustomGsonConverterFactory create() {
         return create(new Gson());
     }
 
-    public static MyGsonConverterFactory create(Gson gson) {
+    public static CustomGsonConverterFactory create(Gson gson) {
         if (gson == null) throw new NullPointerException("gson == null");
-        return new MyGsonConverterFactory(gson);
+        return new CustomGsonConverterFactory(gson);
     }
 
     private final Gson gson;
 
-    private MyGsonConverterFactory(Gson gson) {
+    private CustomGsonConverterFactory(Gson gson) {
         this.gson = gson;
     }
 
@@ -58,7 +58,7 @@ public final class MyGsonConverterFactory extends Converter.Factory {
             };
         }
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new MyGsonResponseBodyConverter<>(gson, adapter);
+        return new CustomGsonResponseBodyConverter<>(gson, adapter);
     }
 
     @Override
@@ -68,6 +68,6 @@ public final class MyGsonConverterFactory extends Converter.Factory {
             Annotation[] methodAnnotations,
             Retrofit retrofit) {
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new MyGsonRequestBodyConverter<>(gson, adapter);
+        return new CustomGsonRequestBodyConverter<>(gson, adapter);
     }
 }

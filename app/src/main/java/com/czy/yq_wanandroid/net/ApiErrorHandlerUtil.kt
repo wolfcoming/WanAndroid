@@ -1,6 +1,8 @@
 package com.czy.yq_wanandroid.net
 
+import com.czy.yq_wanandroid.Constants
 import com.czy.yq_wanandroid.base.App
+import com.czy.yq_wanandroid.entity.BaseResult
 import com.czy.yq_wanandroid.utils.NetUtils
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
@@ -19,7 +21,6 @@ import javax.net.ssl.SSLException
  * @describe api错误统一处理类
  */
 object ApiErrorHandlerUtil {
-    val wanApiErrorCode: Int = 0
 
     fun throwApiException(result: String) {
         try {
@@ -32,7 +33,7 @@ object ApiErrorHandlerUtil {
 
     fun <T> throwApiException(result: T) {
         if (result is BaseResult<*>) {
-            if (result.errorCode != wanApiErrorCode) {
+            if (result.errorCode != Constants.API_SUCCESS_CODE) {
                 throw ApiException(result.errorCode, result.errorMsg)
             }
         }

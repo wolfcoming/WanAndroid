@@ -5,7 +5,7 @@ import com.czy.yq_wanandroid.MainPresener
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.entity.WxArticle
 import com.czy.yq_wanandroid.mvpbase.MvpFragment
-import com.czy.yq_wanandroid.net.BaseResult
+import com.czy.yq_wanandroid.entity.BaseResult
 import com.infoholdcity.basearchitecture.self_extends.log
 import kotlinx.android.synthetic.main.fragment_test.*
 

@@ -25,7 +25,7 @@ fun <T> Observable<T>.threadSwitch(): Observable<T> {
         .observeOn(AndroidSchedulers.mainThread())
 }
 // rxjava 统一错误处理扩展
-fun <T> Observable<T>.subscribeDeal(
+fun <T> Observable<T>.commonSubscribe(
     onNext: (reult: T) -> Unit,
     onError: (error: ApiException) -> Unit,
     onComplete: () -> Unit
@@ -49,27 +49,27 @@ fun <T> Observable<T>.subscribeDeal(
 }
 
 
-fun <T> Observable<T>.subscribeDeal(
+fun <T> Observable<T>.commonSubscribe(
     onNext: (result: T) -> Unit
 ): Disposable {
-    return this.subscribeDeal(onNext, {}, {})
+    return this.commonSubscribe(onNext, {}, {})
 }
 
-fun <T> Observable<T>.subscribeDeal(
+fun <T> Observable<T>.commonSubscribe(
     onNext: (result: T) -> Unit,
     onError: (error: ApiException) -> Unit
 ): Disposable {
-    return this.subscribeDeal(onNext, onError, {})
+    return this.commonSubscribe(onNext, onError, {})
 }
 
-fun <T> Observable<T>.subscribeDeal(
+fun <T> Observable<T>.commonSubscribe(
     onStart: () -> Unit,
     onNext: (result: T) -> Unit,
     onError: (error: ApiException) -> Unit,
     onComplete: () -> Unit
 ): Disposable {
     onStart
-    return this.subscribeDeal(onNext, onError, onComplete)
+    return this.commonSubscribe(onNext, onError, onComplete)
 }
 
 

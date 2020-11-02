@@ -1,5 +1,6 @@
 package com.czy.yq_wanandroid.net
 
+import com.czy.yq_wanandroid.entity.BaseResult
 import com.czy.yq_wanandroid.entity.WxArticle
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.Call
