@@ -19,7 +19,7 @@ import javax.net.ssl.SSLException
  * @describe api错误统一处理类
  */
 object ApiErrorHandlerUtil {
-    val wanApiErrorCode: Int = 10
+    val wanApiErrorCode: Int = 0
 
     fun throwApiException(result: String) {
         try {

@@ -14,8 +14,7 @@ data class WxArticle(
     var visible: Int
 
 
-
-) {
+) : BaseEntity() {
     override fun toString(): String {
         return "WxArticle(courseId=$courseId, id=$id, name='$name', order=$order, parentChapterId=$parentChapterId, userControlSetTop=$userControlSetTop, visible=$visible)"
     }
