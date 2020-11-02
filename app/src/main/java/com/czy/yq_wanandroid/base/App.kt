@@ -1,13 +1,18 @@
 package com.czy.yq_wanandroid.base
 
 import android.app.Application
+import android.content.Context
 import android.os.StrictMode
 
 
 class App : Application() {
+    companion object {
+       lateinit var mContext: Context
+    }
+
     override fun onCreate() {
         super.onCreate()
-//        enabledStrictMode()
+        mContext = this
     }
 
     private fun enabledStrictMode() {

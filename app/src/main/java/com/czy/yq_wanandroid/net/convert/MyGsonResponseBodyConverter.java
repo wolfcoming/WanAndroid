@@ -15,6 +15,7 @@
  */
 package com.czy.yq_wanandroid.net.convert;
 
+import com.czy.yq_wanandroid.net.ApiErrorHandlerUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.TypeAdapter;
@@ -43,6 +44,7 @@ final class MyGsonResponseBodyConverter<T> implements Converter<ResponseBody, T>
       if (jsonReader.peek() != JsonToken.END_DOCUMENT) {
         throw new JsonIOException("JSON document was not fully consumed.");
       }
+      ApiErrorHandlerUtil.INSTANCE.throwApiException(result);
       return result;
     } finally {
       value.close();

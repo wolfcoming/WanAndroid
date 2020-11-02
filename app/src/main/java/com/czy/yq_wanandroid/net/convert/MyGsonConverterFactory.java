@@ -17,11 +17,11 @@ package com.czy.yq_wanandroid.net.convert;
 
 import android.util.Log;
 
+import com.czy.yq_wanandroid.net.ApiErrorHandlerUtil;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
@@ -51,11 +51,10 @@ public final class MyGsonConverterFactory extends Converter.Factory {
             Type type, Annotation[] annotations, Retrofit retrofit) {
         if (String.class.equals(type)) {
             Log.e("YYYYY", "想要的数据类型为String类型是，直接将ResponseBody 转成String字符串返回 " );
-            return new Converter<ResponseBody, String>() {
-                @Override
-                public String convert(ResponseBody value) throws IOException {
-                    return value.string();
-                }
+            return (Converter<ResponseBody, String>) value -> {
+                String result = value.string();
+                ApiErrorHandlerUtil.INSTANCE.throwApiException(result);
+                return result;
             };
         }
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));

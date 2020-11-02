@@ -12,9 +12,10 @@ class MainPresener : MvpPresenter<IMainView>() {
             .delay(3, TimeUnit.SECONDS)
             .threadSwitch()
             .compose(baseView?.bindLifecycleEvent())
-            .subscribe {
-                it.toString().log()
-                baseView?.showMainView(it)
-            }
+            .subscribe({
+                it.log()//成功结果回调打印
+            }, {
+                it.printStackTrace()//异常打印
+            })
     }
 }
