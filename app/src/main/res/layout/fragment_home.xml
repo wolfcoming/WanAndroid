@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvTest"
-        android:gravity="center"
+    <com.czy.yq_wanandroid.common.CustomTitleBar
+        android:id="@+id/mTitleBar"
+        android:background="@color/common_blue"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="home" />
+        android:layout_height="50dp"
+        app:left="@drawable/ic_scan"
+        app:leftType="icon"
+        app:right="@drawable/ic_search"
+        app:rightType="icon"
+        app:title="首页" />
+
 </LinearLayout>

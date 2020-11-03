@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomTitleBar">
+        <attr name="leftType"  >
+            <enum name="icon" value="0" />
+            <enum name="text" value="1"/>
+        </attr>
+        <attr name="left" format="reference|string" />
+        <attr name="rightType"  >
+            <enum name="icon" value="0" />
+            <enum name="text" value="1"/>
+        </attr>
+        <attr name="right" format="reference|string" />
+        <attr name="title" format="string" />
+    </declare-styleable>
+</resources>
