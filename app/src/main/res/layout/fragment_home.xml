@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <com.czy.yq_wanandroid.common.CustomTitleBar
         android:id="@+id/mTitleBar"
-        android:background="@color/common_blue"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/common_blue"
         app:left="@drawable/ic_scan"
         app:leftType="icon"
         app:right="@drawable/ic_search"
         app:rightType="icon"
         app:title="首页" />
 
-    <com.youth.banner.Banner
-        android:id="@+id/mBanner"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mHomeRv"
-        tools:listitem="@layout/rv_item_article"
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/mSmartRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/mBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mHomeRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/rv_item_article" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 
 </LinearLayout>

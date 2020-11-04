@@ -27,7 +27,7 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
         holder.tvTitle.setText(this.datas[position].title)
         holder.ll_new.visibility = if (item.fresh) View.VISIBLE else View.GONE
         holder.ll_top.visibility = if (item.top) View.VISIBLE else View.GONE
-        holder.tv_author.text = if (item.author.isNullOrEmpty()) {
+        holder.tv_author.text = if (item.author.isEmpty()) {
             "无名~"
         } else item.author
         holder.tv_tag.visibility = View.GONE

@@ -7,12 +7,14 @@ import com.czy.yq_wanandroid.adapter.HomeBannerAdapter
 import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.czy.yq_wanandroid.entity.Banner
 import com.czy.yq_wanandroid.mvpbase.MvpFragment
+import com.czy.yq_wanandroid.net.ApiException
+import com.yangqing.record.ext.toast
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
-
+    var currentPage: Int = 0
     var articleList = ArrayList<ArticleEntity>()
     lateinit var articleAdapter: HomeArticleListAdapter
     override fun getLayoutId(): Int {
@@ -33,11 +35,21 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         articleAdapter = HomeArticleListAdapter(articleList)
         mHomeRv.adapter = articleAdapter
 
+        mSmartRefresh.setOnRefreshListener {
+            currentPage = 0
+            mPresenter?.getArticleList(currentPage, true)
+
+        }
+
+        mSmartRefresh.setOnLoadMoreListener {
+            currentPage++
+            mPresenter?.getArticleList(currentPage, false)
+        }
     }
 
     override fun initData() {
         mPresenter?.getBannerData()
-//        mPresenter?.getArticleList(0, true)
+        mPresenter?.getArticleList(currentPage, true)
     }
 
     override fun createPresenter(): HomePresenter {
@@ -59,6 +71,15 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
      * 展示文章列表数据
      */
     override fun showArticleList(result: List<ArticleEntity>?, fresh: Boolean) {
+        if (fresh) {
+            mSmartRefresh.finishRefresh()
+        } else {
+            if (result?.size == 0) {
+                mSmartRefresh.finishLoadMoreWithNoMoreData()
+            } else mSmartRefresh.finishLoadMore()
+        }
+
+
         if (result.isNullOrEmpty()) {
             showToast("获取文章列表数据为空")
             return
@@ -69,6 +90,12 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         articleList.addAll(result)
         articleAdapter.notifyDataSetChanged()
 
+    }
+
+    override fun getArticleListFail(e: ApiException) {
+        toast(e.message!!)
+        mSmartRefresh.finishRefresh(false)
+        mSmartRefresh.finishLoadMore(false)
     }
 
 }

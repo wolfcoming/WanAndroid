@@ -46,15 +46,19 @@ class HomePresenter : MvpPresenter<IHomeView>() {
                     list
                 })
                 .threadSwitchAndBindLifeCycle(baseView)
-                .commonSubscribe {
+                .commonSubscribe ({
                     baseView?.showArticleList(it, true)
-                }
+                },{
+                    baseView?.getArticleListFail(it)
+                })
         } else {
             WanApiService.getWanApi().getHomeArticle(pageNumber)
                 .threadSwitchAndBindLifeCycle(baseView)
-                .commonSubscribe {
+                .commonSubscribe ({
                     baseView?.showArticleList(it.data?.datas, false)
-                }
+                },{
+                    baseView?.getArticleListFail(it)
+                })
         }
     }
 
