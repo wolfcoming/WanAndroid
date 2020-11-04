@@ -2,7 +2,6 @@ package com.czy.yq_wanandroid.base
 
 import android.app.Application
 import android.content.Context
-import android.content.ContextWrapper
 import android.os.StrictMode
 import com.czy.yq_wanandroid.utils.ContentWrapperUtils
 

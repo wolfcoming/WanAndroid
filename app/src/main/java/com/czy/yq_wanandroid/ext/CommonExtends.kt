@@ -3,6 +3,7 @@ package com.yangqing.record.ext
 import android.app.Activity
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.czy.yq_wanandroid.mvpbase.IView
 import com.czy.yq_wanandroid.net.ApiErrorHandlerUtil
 import com.czy.yq_wanandroid.net.ApiException
 import com.infoholdcity.basearchitecture.self_extends.log
@@ -24,6 +25,14 @@ fun <T> Observable<T>.threadSwitch(): Observable<T> {
     return this.subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 }
+
+//线程切换且绑定生命周期
+fun <T> Observable<T>.threadSwitchAndBindLifeCycle(view: IView?): Observable<T> {
+    return this.subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .compose(view?.bindLifecycleEvent())
+}
+
 // rxjava 统一错误处理扩展
 fun <T> Observable<T>.commonSubscribe(
     onNext: (reult: T) -> Unit,
@@ -37,6 +46,7 @@ fun <T> Observable<T>.commonSubscribe(
             onNext(it)
         },
         {
+            it.printStackTrace()
             "throwable".log()
             val wanApiException = ApiErrorHandlerUtil.getWanApiException(it)
             onError(wanApiException)

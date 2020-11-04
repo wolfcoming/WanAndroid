@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <com.czy.yq_wanandroid.common.CustomTitleBar
@@ -15,5 +16,17 @@
         app:right="@drawable/ic_search"
         app:rightType="icon"
         app:title="首页" />
+
+    <com.youth.banner.Banner
+        android:id="@+id/mBanner"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mHomeRv"
+        tools:listitem="@layout/rv_item_article"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 
 </LinearLayout>

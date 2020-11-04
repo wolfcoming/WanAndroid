@@ -1,4 +1,4 @@
-package com.czy.yq_wanandroid;
+package com.czy.yq_wanandroid.test;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,11 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.czy.yq_wanandroid.net.WanApiService;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class TestActivity extends Activity {
     @Override
@@ -23,7 +20,5 @@ public class TestActivity extends Activity {
 
 
     public void test(){
-        WanApiService.Companion.getWanApi().getWxarticle4()
-                .delay(3, TimeUnit.SECONDS);
     }
 }

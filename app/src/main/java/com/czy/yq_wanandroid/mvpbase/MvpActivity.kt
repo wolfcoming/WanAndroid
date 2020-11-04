@@ -4,6 +4,7 @@ import com.czy.yq_wanandroid.base.BaseActivity
 import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.LifecycleTransformer
 import com.trello.rxlifecycle4.android.ActivityEvent
+import com.yangqing.record.ext.toast
 
 abstract class MvpActivity<P : MvpPresenter<*>> : BaseActivity(), IView{
     var mPresenter: P? = null
@@ -30,5 +31,9 @@ abstract class MvpActivity<P : MvpPresenter<*>> : BaseActivity(), IView{
         "ActivityEvent.DESTROY 执行解除绑定".log()
         return bindUntilEvent(ActivityEvent.DESTROY)
     }
-
+    override fun showToast(strig: String?) {
+        if (strig != null) {
+            toast(strig)
+        }
+    }
 }

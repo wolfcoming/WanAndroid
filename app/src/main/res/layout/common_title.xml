@@ -14,12 +14,13 @@
         android:text="左侧" />
 
     <TextView
-        android:textColor="@color/white"
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="标题" />
+        android:text="标题"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
 
     <Button
         android:id="@+id/btnRight"

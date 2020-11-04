@@ -7,9 +7,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.czy.yq_wanandroid.base.BaseActivity
 import com.czy.yq_wanandroid.fragment.AnswerFragment
-import com.czy.yq_wanandroid.fragment.HomeFragment
 import com.czy.yq_wanandroid.fragment.MineFragment
 import com.czy.yq_wanandroid.fragment.ProjectsFragment
+import com.czy.yq_wanandroid.fragment.home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
