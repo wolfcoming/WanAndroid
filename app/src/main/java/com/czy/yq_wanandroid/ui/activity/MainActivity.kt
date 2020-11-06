@@ -1,15 +1,16 @@
-package com.czy.yq_wanandroid
+package com.czy.yq_wanandroid.ui.activity
 
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.base.BaseActivity
-import com.czy.yq_wanandroid.fragment.AnswerFragment
-import com.czy.yq_wanandroid.fragment.MineFragment
-import com.czy.yq_wanandroid.fragment.ProjectsFragment
-import com.czy.yq_wanandroid.fragment.home.HomeFragment
+import com.czy.yq_wanandroid.ui.fragment.AnswerFragment
+import com.czy.yq_wanandroid.ui.fragment.MineFragment
+import com.czy.yq_wanandroid.ui.fragment.ProjectsFragment
+import com.czy.yq_wanandroid.ui.fragment.home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {

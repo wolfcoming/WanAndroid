@@ -1,4 +1,4 @@
-package com.czy.yq_wanandroid.fragment.home
+package com.czy.yq_wanandroid.ui.fragment.home
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.czy.yq_wanandroid.R
