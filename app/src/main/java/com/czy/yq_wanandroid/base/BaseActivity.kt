@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import com.czy.yq_wanandroid.utils.display.DisplayInfoUtils
+import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 
 
 abstract class BaseActivity : RxAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        "onCreate".log()
         //去除状态栏区域，让contentView能够展示在状态栏里边
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -48,4 +50,46 @@ abstract class BaseActivity : RxAppCompatActivity() {
             topView.paddingBottom
         )
     }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        "onSaveInstanceState".log()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        "onRestoreInstanceState".log()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        "onStart".log()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        "onResume".log()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        "onPause".log()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        "onStop".log()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        "onDestroy".log()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        "onRestart".log()
+    }
+
 }

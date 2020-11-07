@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.base.BaseActivity
-import com.czy.yq_wanandroid.ui.fragment.AnswerFragment
+import com.czy.yq_wanandroid.ui.fragment.answer.AnswerFragment
 import com.czy.yq_wanandroid.ui.fragment.MineFragment
 import com.czy.yq_wanandroid.ui.fragment.ProjectsFragment
 import com.czy.yq_wanandroid.ui.fragment.home.HomeFragment

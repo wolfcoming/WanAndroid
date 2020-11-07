@@ -2,11 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <TextView
-        android:gravity="center"
+    <com.czy.yq_wanandroid.common.CustomTitleBar
+        android:id="@+id/mTitleBar"
+        android:background="@color/common_blue"
+        app:title="问答"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="answer" />
+        android:layout_height="50dp"/>
+    <com.czy.yq_wanandroid.common.MultipleViewLayout
+        android:id="@+id/multiply"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/mSmartRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mAnswerRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+    </com.czy.yq_wanandroid.common.MultipleViewLayout>
 </LinearLayout>

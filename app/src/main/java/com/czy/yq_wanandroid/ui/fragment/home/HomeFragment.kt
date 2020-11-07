@@ -23,33 +23,32 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
 
     override fun initView() {
         changNormalTopView(context!!, mTitleBar)
-        mTitleBar.leftClickListener {
-            mPresenter?.getArticleList(1, false)
-        }
-
-        mTitleBar.rightClickListener {
-            mPresenter?.getArticleList(0, true)
-        }
-
         mHomeRv.layoutManager = LinearLayoutManager(context)
         articleAdapter = HomeArticleListAdapter(articleList)
         mHomeRv.adapter = articleAdapter
 
         mSmartRefresh.setOnRefreshListener {
             currentPage = 0
-            mPresenter?.getArticleList(currentPage, true)
+            mPresenter?.getHomeData(currentPage, true)
 
         }
 
         mSmartRefresh.setOnLoadMoreListener {
             currentPage++
-            mPresenter?.getArticleList(currentPage, false)
+            mPresenter?.getHomeData(currentPage, false)
+        }
+
+        multiply.setErrorViewClickListener {
+            initData()
+        }
+        multiply.setEmptyViewClickListener {
+            initData()
         }
     }
 
     override fun initData() {
-        mPresenter?.getBannerData()
-        mPresenter?.getArticleList(currentPage, true)
+        multiply.showLoadingView()
+        mPresenter?.getHomeData(currentPage, true)
     }
 
     override fun createPresenter(): HomePresenter {
@@ -59,7 +58,7 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
     /**
      * 展示banner图数据
      */
-    override fun showBannerView(result: List<Banner>?) {
+    fun showBannerView(result: List<Banner>?) {
         if (result != null) {
             mBanner.addBannerLifecycleObserver(this)
                 .setAdapter(HomeBannerAdapter(result))
@@ -70,7 +69,8 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
     /**
      * 展示文章列表数据
      */
-    override fun showArticleList(result: List<ArticleEntity>?, fresh: Boolean) {
+    fun showArticleList(result: List<ArticleEntity>?, fresh: Boolean) {
+        multiply.showContentView()
         if (fresh) {
             mSmartRefresh.finishRefresh()
         } else {
@@ -92,8 +92,19 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
 
     }
 
-    override fun getArticleListFail(e: ApiException) {
+
+    override fun showData(
+        articleList: List<ArticleEntity>?,
+        bannerList: List<Banner>?,
+        fresh: Boolean
+    ) {
+        showArticleList(articleList, fresh)
+        showBannerView(bannerList)
+    }
+
+    override fun getDataFail(e: ApiException, fresh: Boolean) {
         toast(e.message!!)
+        if (fresh) multiply.showErrorView(e.message)
         mSmartRefresh.finishRefresh(false)
         mSmartRefresh.finishLoadMore(false)
     }

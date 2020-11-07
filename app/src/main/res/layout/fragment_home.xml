@@ -17,35 +17,39 @@
         app:rightType="icon"
         app:title="首页" />
 
-
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/mSmartRefresh"
+    <com.czy.yq_wanandroid.common.MultipleViewLayout
+        android:id="@+id/multiply"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/mSmartRefresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <com.youth.banner.Banner
-                    android:id="@+id/mBanner"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mHomeRv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:listitem="@layout/rv_item_article" />
-            </LinearLayout>
+                    <com.youth.banner.Banner
+                        android:id="@+id/mBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp" />
 
-        </androidx.core.widget.NestedScrollView>
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/mHomeRv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listitem="@layout/rv_item_article" />
+                </LinearLayout>
 
+            </androidx.core.widget.NestedScrollView>
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+    </com.czy.yq_wanandroid.common.MultipleViewLayout>
 
 </LinearLayout>

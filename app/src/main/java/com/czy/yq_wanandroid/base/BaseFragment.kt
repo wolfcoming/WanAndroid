@@ -35,12 +35,10 @@ abstract class BaseFragment : RxFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        javaClass.simpleName + ":onCreate".log()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        javaClass.simpleName + ":onDestroy".log()
     }
     open fun changNormalTopView(context: Context, topView: View) {
         if (context == null || topView == null || Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {

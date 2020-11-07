@@ -6,7 +6,6 @@ import com.czy.yq_wanandroid.mvpbase.IView
 import com.czy.yq_wanandroid.net.ApiException
 
 interface IHomeView : IView {
-    fun showBannerView(result: List<Banner>?)
-    fun showArticleList(result: List<ArticleEntity>?, fresh:Boolean)
-    fun getArticleListFail(e:ApiException)
+    fun showData(articleList: List<ArticleEntity>?, bannerList: List<Banner>?,fresh:Boolean)
+    fun getDataFail(e:ApiException,fresh: Boolean)
 }
