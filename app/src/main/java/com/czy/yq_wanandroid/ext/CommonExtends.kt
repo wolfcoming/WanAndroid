@@ -11,7 +11,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 
 fun Activity.toast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
@@ -42,18 +41,18 @@ fun <T> Observable<T>.commonSubscribe(
 ): Disposable {
     return this.subscribe(
         {
-            "onNext".log()
+//            "onNext".log()
             //此处也可以做 统一错误码异常处理（缺点是 无法解决java代码调用问题）
             onNext(it)
         },
         {
             it.printStackTrace()
-            "throwable".log()
+//            "throwable".log()
             val wanApiException = ApiErrorHandlerUtil.getWanApiException(it)
             onError(wanApiException)
         },
         {
-            "onComplete".log()
+//            "onComplete".log()
             onComplete
         }
     )

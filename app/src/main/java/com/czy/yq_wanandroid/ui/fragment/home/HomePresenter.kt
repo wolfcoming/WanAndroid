@@ -9,11 +9,7 @@ import com.czy.yq_wanandroid.net.WanApiService
 import com.yangqing.record.ext.commonSubscribe
 import com.yangqing.record.ext.threadSwitchAndBindLifeCycle
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.functions.BiFunction
 import io.reactivex.rxjava3.functions.Function3
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class HomePresenter : MvpPresenter<IHomeView>() {
 

@@ -1,9 +1,6 @@
 package com.czy.yq_wanandroid.net
 
-import com.czy.yq_wanandroid.entity.ArticleEntity
-import com.czy.yq_wanandroid.entity.ArticleList
-import com.czy.yq_wanandroid.entity.Banner
-import com.czy.yq_wanandroid.entity.BaseResult
+import com.czy.yq_wanandroid.entity.*
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -25,4 +22,8 @@ interface WanApi {
     //问答列表
     @GET("/wenda/list/{page}/json")
     fun getAnswerList(@Path("page") page: Int): Observable<BaseResult<ArticleList<ArticleEntity>>>
+
+    //体系数据
+    @GET("/tree/json")
+    fun getProjectsData(): Observable<BaseResult<List<ProjectEntity>>>
 }

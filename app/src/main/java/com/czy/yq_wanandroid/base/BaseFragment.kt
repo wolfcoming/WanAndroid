@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.czy.yq_wanandroid.utils.display.DisplayInfoUtils
-import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.components.support.RxFragment
 
 abstract class BaseFragment : RxFragment() {
@@ -40,7 +39,7 @@ abstract class BaseFragment : RxFragment() {
     override fun onDestroy() {
         super.onDestroy()
     }
-    open fun changNormalTopView(context: Context, topView: View) {
+    open fun changNormalTopView(context: Context?, topView: View?) {
         if (context == null || topView == null || Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return
         }

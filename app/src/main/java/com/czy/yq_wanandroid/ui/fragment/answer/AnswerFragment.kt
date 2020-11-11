@@ -9,9 +9,6 @@ import com.czy.yq_wanandroid.net.ApiException
 import com.infoholdcity.basearchitecture.self_extends.log
 import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.fragment_answer.*
-import kotlinx.android.synthetic.main.fragment_answer.mSmartRefresh
-import kotlinx.android.synthetic.main.fragment_answer.mTitleBar
-import kotlinx.android.synthetic.main.fragment_answer.multiply
 
 class AnswerFragment:MvpFragment<AnswerPresenter>(),IAnswerView {
     var curPage = 0

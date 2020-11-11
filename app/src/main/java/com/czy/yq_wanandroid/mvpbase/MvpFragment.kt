@@ -30,7 +30,7 @@ abstract class MvpFragment<P : MvpPresenter<*>> : BaseFragment(), IView {
 
 
     override fun <T> bindLifecycleEvent(): LifecycleTransformer<T> {
-        "FragmentEvent.DESTROY 执行解除绑定".log()
+//        "FragmentEvent.DESTROY 执行解除绑定".log()
         return bindUntilEvent(FragmentEvent.DESTROY)
     }
 

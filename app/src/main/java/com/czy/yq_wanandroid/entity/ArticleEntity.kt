@@ -9,7 +9,7 @@ data class ArticleEntity(
     val chapterName: String,
     val collect: Boolean,
     val courseId: Int,
-    val desc: String,
+    val desc: String?,
     val descMd: String,
     val envelopePic: String,
     val fresh: Boolean,

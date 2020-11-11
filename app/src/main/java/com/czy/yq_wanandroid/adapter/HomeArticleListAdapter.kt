@@ -1,6 +1,9 @@
 package com.czy.yq_wanandroid.adapter
 
 import android.content.Intent
+import android.drm.DrmStore
+import android.net.Uri
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +11,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.czy.yq_wanandroid.R
-import com.czy.yq_wanandroid.ui.activity.WebViewActivity
 import com.czy.yq_wanandroid.entity.ArticleEntity
+import com.czy.yq_wanandroid.ui.activity.WebViewActivity
 
 class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.ArticleListViewHolder> {
     private lateinit var datas: ArrayList<ArticleEntity>
@@ -34,13 +37,19 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
         } else item.author
         holder.tv_tag.visibility = View.GONE
         holder.tv_time.text = item.niceDate
-        holder.tv_desc.text = item.desc
-        holder.tv_chapter_name.text = item.superChapterName+"·"+item.chapterName
+        if (item.desc.isNullOrEmpty()) {
+            holder.tv_desc.visibility = View.GONE
+        } else {
+            holder.tv_desc.visibility = View.VISIBLE
+            holder.tv_desc.text = Html.fromHtml(item.desc).toString();
+        }
+
+        holder.tv_chapter_name.text = item.superChapterName + "·" + item.chapterName
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
-            val intent = Intent(context,WebViewActivity::class.java)
-            intent.putExtra("title",item.title)
-            intent.putExtra("url",item.link)
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra("title", item.title)
+            intent.putExtra("url", item.link)
             context.startActivity(intent)
         }
     }

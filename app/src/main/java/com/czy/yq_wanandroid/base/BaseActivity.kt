@@ -1,6 +1,7 @@
 package com.czy.yq_wanandroid.base
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -15,7 +16,7 @@ import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 abstract class BaseActivity : RxAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        "onCreate".log()
+        "${this.javaClass.simpleName}:  onCreate".log()
         //去除状态栏区域，让contentView能够展示在状态栏里边
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -52,44 +53,51 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
 
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        "onSaveInstanceState".log()
-    }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        "onRestoreInstanceState".log()
-    }
 
     override fun onStart() {
         super.onStart()
-        "onStart".log()
+        "${this.javaClass.simpleName}:  onStart".log()
     }
 
     override fun onResume() {
         super.onResume()
-        "onResume".log()
+        "${this.javaClass.simpleName}:  onResume".log()
     }
 
     override fun onPause() {
         super.onPause()
-        "onPause".log()
+        "${this.javaClass.simpleName}:  onPause".log()
     }
 
     override fun onStop() {
         super.onStop()
-        "onStop".log()
+        "${this.javaClass.simpleName}:  onStop".log()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        "onDestroy".log()
+        "${this.javaClass.simpleName}:  onDestroy".log()
     }
 
     override fun onRestart() {
         super.onRestart()
-        "onRestart".log()
+        "${this.javaClass.simpleName}:  onRestart".log()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        "${this.javaClass.simpleName}:  onSaveInstanceState".log()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        "${this.javaClass.simpleName}:  onRestoreInstanceState".log()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        "${this.javaClass.simpleName}:  onConfigurationChanged".log()
     }
 
 }

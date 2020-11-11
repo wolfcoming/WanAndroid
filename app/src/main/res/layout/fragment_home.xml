@@ -9,7 +9,7 @@
     <com.czy.yq_wanandroid.common.CustomTitleBar
         android:id="@+id/mTitleBar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/title_bar_height"
         android:background="@color/common_blue"
         app:left="@drawable/ic_scan"
         app:leftType="icon"

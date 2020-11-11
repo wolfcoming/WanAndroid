@@ -8,6 +8,7 @@ import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
+import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.activity_webview.*
 
 class WebViewActivity : BaseActivity() {
@@ -29,7 +30,7 @@ class WebViewActivity : BaseActivity() {
         mWebview.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(webview: WebView?, progress: Int) {
                 super.onProgressChanged(webview, progress)
-                progress.log()
+//                progress.log()
                 mProgressBar.visibility = View.VISIBLE
                 mProgressBar.setProgress(progress)
             }
@@ -39,7 +40,7 @@ class WebViewActivity : BaseActivity() {
 
             override fun onPageFinished(webview: WebView?, url: String?) {
                 super.onPageFinished(webview, url)
-                "pageFinished".log()
+//                "pageFinished".log()
                 mProgressBar.visibility = View.GONE
             }
 
@@ -50,6 +51,7 @@ class WebViewActivity : BaseActivity() {
     }
 
     override fun initData() {
+
 
     }
 

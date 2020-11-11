@@ -28,7 +28,7 @@ abstract class MvpActivity<P : MvpPresenter<*>> : BaseActivity(), IView{
     }
 
     override fun <T> bindLifecycleEvent(): LifecycleTransformer<T> {
-        "ActivityEvent.DESTROY 执行解除绑定".log()
+//        "ActivityEvent.DESTROY 执行解除绑定".log()
         return bindUntilEvent(ActivityEvent.DESTROY)
     }
     override fun showToast(strig: String?) {

@@ -10,7 +10,7 @@
         android:background="@color/common_blue"
         app:title="问答"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="@dimen/title_bar_height"/>
     <com.czy.yq_wanandroid.common.MultipleViewLayout
         android:id="@+id/multiply"
         android:layout_width="match_parent"
