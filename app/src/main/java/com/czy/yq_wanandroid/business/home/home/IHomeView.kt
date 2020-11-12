@@ -1,4 +1,4 @@
-package com.czy.yq_wanandroid.ui.fragment.home
+package com.czy.yq_wanandroid.business.home.home
 
 import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.czy.yq_wanandroid.entity.Banner

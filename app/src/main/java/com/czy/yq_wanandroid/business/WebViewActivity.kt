@@ -1,14 +1,12 @@
-package com.czy.yq_wanandroid.ui.activity
+package com.czy.yq_wanandroid.business
 
 import android.view.View
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.base.BaseActivity
-import com.infoholdcity.basearchitecture.self_extends.log
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
-import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.activity_webview.*
 
 class WebViewActivity : BaseActivity() {

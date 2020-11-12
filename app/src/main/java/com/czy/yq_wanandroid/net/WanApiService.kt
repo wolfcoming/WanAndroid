@@ -1,6 +1,5 @@
 package com.czy.yq_wanandroid.net
 
-import android.util.Log
 import com.czy.yq_wanandroid.net.convert.CustomGsonConverterFactory
 import com.czy.yq_wanandroid.net.interceptor.NetInterceptor
 import okhttp3.OkHttpClient
@@ -17,7 +16,7 @@ class WanApiService {
         private val mOkHttpClient = OkHttpClient.Builder()
             .connectTimeout(timeout, TimeUnit.SECONDS)
             .readTimeout(timeout, TimeUnit.SECONDS)
-//            .addInterceptor(NetInterceptor())
+            .addInterceptor(NetInterceptor())
             .build()
 
         fun getWanApi(): WanApi {

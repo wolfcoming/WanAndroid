@@ -4,6 +4,7 @@ import com.czy.yq_wanandroid.entity.*
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface WanApi {
 
@@ -26,4 +27,11 @@ interface WanApi {
     //体系数据
     @GET("/tree/json")
     fun getProjectsData(): Observable<BaseResult<List<ProjectEntity>>>
+
+    //体系数据下的文章列表
+    @GET("/article/list/{page}/json")
+    fun getProjectsListById(
+        @Path("page") page: Int,
+        @Query("cid") cid: Int
+    ): Observable<BaseResult<ArticleList<ArticleEntity>>>
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,18 +8,17 @@
         android:id="@+id/mTitleBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar_height"
-        android:background="@color/common_blue"
-        app:title="体系" />
+        android:background="@color/common_blue" />
 
-    <com.czy.yq_wanandroid.common.MultipleViewLayout
-        android:id="@+id/multiply"
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/mSmartRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mProjectRv"
+            android:id="@+id/mProjectListRv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.czy.yq_wanandroid.common.MultipleViewLayout>
+            android:layout_height="match_parent" />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

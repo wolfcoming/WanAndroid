@@ -1,4 +1,4 @@
-package com.czy.yq_wanandroid.ui.fragment.answer
+package com.czy.yq_wanandroid.business.home.answer
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.czy.yq_wanandroid.R

@@ -1,7 +1,6 @@
 package com.czy.yq_wanandroid.mvpbase
 
 import com.czy.yq_wanandroid.base.BaseFragment
-import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.LifecycleTransformer
 import com.trello.rxlifecycle4.android.FragmentEvent
 import com.yangqing.record.ext.toast

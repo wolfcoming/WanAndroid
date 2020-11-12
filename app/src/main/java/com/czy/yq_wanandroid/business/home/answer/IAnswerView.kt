@@ -1,4 +1,4 @@
-package com.czy.yq_wanandroid.ui.fragment.answer
+package com.czy.yq_wanandroid.business.home.answer
 
 import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.czy.yq_wanandroid.mvpbase.IView

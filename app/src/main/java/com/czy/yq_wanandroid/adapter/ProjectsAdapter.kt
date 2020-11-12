@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.czy.yq_wanandroid.R
+import com.czy.yq_wanandroid.business.projects.ProjectsListActivity
 import com.czy.yq_wanandroid.common.FlowLayout
 import com.czy.yq_wanandroid.entity.ProjectEntity
 
@@ -30,6 +31,7 @@ class ProjectsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         projectsViewHolder.flowLayout.addData(childrenList as ArrayList<String>) {
             val entity = this.datas[position].children[it]
             Toast.makeText(holder.flowLayout.context, entity.name, Toast.LENGTH_SHORT).show()
+            ProjectsListActivity.start(holder.itemView.context, entity.name, entity.id)
         }
     }
 

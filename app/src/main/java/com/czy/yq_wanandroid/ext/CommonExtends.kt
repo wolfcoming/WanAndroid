@@ -6,13 +6,14 @@ import androidx.fragment.app.Fragment
 import com.czy.yq_wanandroid.mvpbase.IView
 import com.czy.yq_wanandroid.net.ApiErrorHandlerUtil
 import com.czy.yq_wanandroid.net.ApiException
-import com.infoholdcity.basearchitecture.self_extends.log
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
-fun Activity.toast(msg: String) {
+fun Activity.toast(msg: String?) {
+    if (msg.isNullOrEmpty()) return
     Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
 }
 

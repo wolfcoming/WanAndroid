@@ -1,7 +1,6 @@
 package com.czy.yq_wanandroid.mvpbase
 
 import com.czy.yq_wanandroid.base.BaseActivity
-import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.LifecycleTransformer
 import com.trello.rxlifecycle4.android.ActivityEvent
 import com.yangqing.record.ext.toast

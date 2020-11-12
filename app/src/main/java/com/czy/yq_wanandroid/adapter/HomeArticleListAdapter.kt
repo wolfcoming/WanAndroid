@@ -1,8 +1,6 @@
 package com.czy.yq_wanandroid.adapter
 
 import android.content.Intent
-import android.drm.DrmStore
-import android.net.Uri
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +9,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.czy.yq_wanandroid.R
+import com.czy.yq_wanandroid.business.WebViewActivity
 import com.czy.yq_wanandroid.entity.ArticleEntity
-import com.czy.yq_wanandroid.ui.activity.WebViewActivity
 
 class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.ArticleListViewHolder> {
     private lateinit var datas: ArrayList<ArticleEntity>
