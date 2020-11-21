@@ -16,9 +16,11 @@ abstract class MvpFragment<P : MvpPresenter<*>> : BaseFragment(), IView {
     }
 
     override fun showLoading() {
+        super.showLoading()
     }
 
     override fun hideLoading() {
+        super.hideLoading()
     }
 
     override fun initViewBefore() {

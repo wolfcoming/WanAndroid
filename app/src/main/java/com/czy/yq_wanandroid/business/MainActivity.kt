@@ -7,9 +7,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.base.BaseActivity
-import com.czy.yq_wanandroid.business.home.MineFragment
 import com.czy.yq_wanandroid.business.home.answer.AnswerFragment
 import com.czy.yq_wanandroid.business.home.home.HomeFragment
+import com.czy.yq_wanandroid.business.home.mine.MineFragment
 import com.czy.yq_wanandroid.business.home.projects.ProjectsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -67,7 +67,5 @@ class MainActivity : BaseActivity() {
         override fun createFragment(position: Int): Fragment {
             return fragments[position]
         }
-
     }
-
 }

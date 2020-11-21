@@ -19,5 +19,14 @@ public class TestActivity extends Activity {
 
 
     public void test(){
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                interrupt();
+            }
+        };
+        thread.start();
     }
+
 }

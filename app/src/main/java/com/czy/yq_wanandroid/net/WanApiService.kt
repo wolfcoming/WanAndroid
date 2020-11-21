@@ -17,6 +17,7 @@ class WanApiService {
             .connectTimeout(timeout, TimeUnit.SECONDS)
             .readTimeout(timeout, TimeUnit.SECONDS)
             .addInterceptor(NetInterceptor())
+//            .cache(Cache(App.mContext.cacheDir,10*1024*1024))
             .build()
 
         fun getWanApi(): WanApi {

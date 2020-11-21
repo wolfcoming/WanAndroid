@@ -10,6 +10,7 @@
 
     <color name="common_blue">#5F78F8</color>
     <color name="common_gray">#999999</color>
+    <color name="common_light_gray">#fefefe</color>
     <color name="main">#4282f4</color>
     <color name="main_alpha">#994282f4</color>
     <color name="assist">#3cdc86</color>
@@ -49,4 +50,11 @@
     <color name="text_invert">#ffffff</color>
     <color name="text_invert_alpha">#88ffffff</color>
     <color name="text_on_main">#ffffff</color>
+
+
+    <color name="basic_ui_action_bar_bg">@color/main</color>
+    <color name="basic_ui_action_bar_icon">@color/text_invert</color>
+    <color name="basic_ui_action_bar_text">@color/text_invert</color>
+    <color name="basic_ui_action_bar_text_alpha">@color/text_invert_alpha</color>
+    <color name="basic_ui_action_bar_bottom_line">@color/line</color>
 </resources>

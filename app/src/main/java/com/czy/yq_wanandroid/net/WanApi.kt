@@ -2,9 +2,7 @@ package com.czy.yq_wanandroid.net
 
 import com.czy.yq_wanandroid.entity.*
 import io.reactivex.rxjava3.core.Observable
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface WanApi {
 
@@ -34,4 +32,13 @@ interface WanApi {
         @Path("page") page: Int,
         @Query("cid") cid: Int
     ): Observable<BaseResult<ArticleList<ArticleEntity>>>
+
+
+    //登录
+    @FormUrlEncoded
+    @POST("/user/login")
+    fun login(
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): Observable<BaseResult<UserInfo>>
 }

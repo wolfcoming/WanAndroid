@@ -8,7 +8,6 @@ import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.TextView
 import com.czy.yq_wanandroid.R
-import com.infoholdcity.basearchitecture.self_extends.log
 
 class FlowLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -39,14 +38,9 @@ class FlowLayout @JvmOverloads constructor(
                 view.layoutParams.height
             )
             view.measure(chirldWidthMeasureSpec, chirldHeightMeasureSpec)
-            if (i == childCount - 1) {
-                "${(view.measuredWidth + curLayoutWidth + mHorizontalSpacing + paddingRight)} - $selfWidht".log()
-            }
             if (view.measuredWidth + curLayoutWidth + mHorizontalSpacing + paddingRight >= selfWidht) {
                 curLayoutWidth = paddingLeft + view.measuredWidth + mHorizontalSpacing
                 flowLayoutHeight = flowLayoutHeight + view.measuredHeight + mVerticalSpacing
-                "换行".log()
-                flowLayoutHeight.log()
             } else {
                 curLayoutWidth += view.measuredWidth + mHorizontalSpacing
                 flowLayoutHeight = Math.max(view.measuredHeight, flowLayoutHeight)
