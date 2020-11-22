@@ -7,6 +7,7 @@ import com.czy.yq_wanandroid.utils.ContentWrapperUtils
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.tencent.bugly.crashreport.CrashReport
 
 
 class App : Application() {
@@ -18,6 +19,8 @@ class App : Application() {
         super.onCreate()
         mContext = this
         ContentWrapperUtils.init(this)
+        //bugly
+        CrashReport.initCrashReport(getApplicationContext(), "e049243189", true);
     }
 
     private fun enabledStrictMode() {
