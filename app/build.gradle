@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -70,4 +71,9 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'com.tencent.bugly:crashreport:3.2.422'
     implementation 'com.tencent.bugly:nativecrashreport:3.7.5'
+
+    def room_version = "2.2.5"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
 }

@@ -1,8 +1,11 @@
 package com.czy.yq_wanandroid.business
 
 import android.view.View
+import com.czy.yq_wanandroid.Constants.READHISTORY_MAX_COUNT
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.base.BaseActivity
+import com.czy.yq_wanandroid.room.AppDatabase
+import com.czy.yq_wanandroid.room.entity.ReadHistory
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
@@ -19,6 +22,12 @@ class WebViewActivity : BaseActivity() {
         var title = intent.getStringExtra("title")
         val url = intent.getStringExtra("url")!!
         mTitleBar.setTitle(title)
+        Thread {
+            AppDatabase.instance.readHistoryDao()
+                .addReadHistory(ReadHistory(url, title, System.currentTimeMillis()))
+            AppDatabase.instance.readHistoryDao().autoDeleteOverMax(READHISTORY_MAX_COUNT)
+        }.start()
+
         initWebView()
         mWebview.loadUrl(url)
     }
@@ -40,6 +49,7 @@ class WebViewActivity : BaseActivity() {
                 super.onPageFinished(webview, url)
 //                "pageFinished".log()
                 mProgressBar.visibility = View.GONE
+
             }
 
             override fun shouldOverrideUrlLoading(p0: WebView?, p1: String?): Boolean {
@@ -74,4 +84,9 @@ class WebViewActivity : BaseActivity() {
         webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND)
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
 }

@@ -6,6 +6,7 @@ import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.base.BaseFragment
 import com.czy.yq_wanandroid.base.UserManage
 import com.czy.yq_wanandroid.business.login.LoginActivity
+import com.czy.yq_wanandroid.business.readHistory.ReadHistoryActivity
 import com.czy.yq_wanandroid.entity.UserInfo
 import com.czy.yq_wanandroid.event.LoginEvent
 import com.yangqing.record.ext.toast
@@ -33,6 +34,7 @@ class MineFragment : BaseFragment() {
         ll_history.setOnClickListener {
             UserManage.checkLogin(context!!) {
                 toast("阅读历史待开发")
+                startActivity(Intent(context, ReadHistoryActivity::class.java))
             }
         }
         ll_exit.setOnClickListener {
