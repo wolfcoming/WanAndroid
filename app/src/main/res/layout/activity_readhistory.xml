@@ -12,8 +12,14 @@
         android:background="@color/common_blue"
         app:title="阅读历史" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mHistoryRv"
+
+    <com.czy.yq_wanandroid.common.MultipleViewLayout
+        android:id="@+id/multiply"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mHistoryRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.czy.yq_wanandroid.common.MultipleViewLayout>
 </LinearLayout>

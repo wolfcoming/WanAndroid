@@ -36,6 +36,9 @@
         <activity android:name=".business.projects.ProjectsListActivity" />
         <activity android:name=".business.login.LoginActivity" />
         <activity android:name=".business.readHistory.ReadHistoryActivity" />
+        <activity android:name=".test.TestUiActivity" >
+
+        </activity>
     </application>
 
 </manifest>

@@ -5,4 +5,5 @@ import com.czy.yq_wanandroid.room.entity.ReadHistory
 
 interface IReadHistoryView : IView {
     fun showHistory(result: List<ReadHistory>)
+    fun showLoadError(msg:String)
 }

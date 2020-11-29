@@ -1,10 +1,12 @@
 package com.czy.yq_wanandroid.business.readHistory
 
+import android.os.Handler
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.ReadHistoryAdapter
 import com.czy.yq_wanandroid.mvpbase.MvpActivity
 import com.czy.yq_wanandroid.room.entity.ReadHistory
+import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.activity_readhistory.*
 
 class ReadHistoryActivity : MvpActivity<ReadHistoryPresenter>(), IReadHistoryView {
@@ -19,14 +21,36 @@ class ReadHistoryActivity : MvpActivity<ReadHistoryPresenter>(), IReadHistoryVie
     override fun initView() {
         changNormalTopView(this, mTitleBar)
         mHistoryRv.layoutManager = LinearLayoutManager(this)
+        multiply.setEmptyViewClickListener {
+            initData()
+        }
+
+        multiply.setErrorViewClickListener {
+            initData()
+        }
     }
 
     override fun initData() {
-        mPresenter?.getHistory(0, 100)
+        multiply.showLoadingView()
+        Handler().postDelayed({
+            mPresenter?.getHistory(0, 100)
+        },1000)
+
     }
 
     override fun showHistory(result: List<ReadHistory>) {
+        if(result.isEmpty()) {
+            multiply.showEmptyView()
+            return
+        }
+        multiply.showContentView()
         val adapter = ReadHistoryAdapter(result)
         mHistoryRv.adapter = adapter
+    }
+
+
+    override fun showLoadError(msg: String) {
+        multiply.showErrorView(msg)
+        toast(msg)
     }
 }

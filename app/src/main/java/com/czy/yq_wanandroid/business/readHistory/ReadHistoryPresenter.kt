@@ -13,9 +13,11 @@ class ReadHistoryPresenter : MvpPresenter<IReadHistoryView>() {
             it.onNext(AppDatabase.instance.readHistoryDao().getReadHistory(offset, pageSize))
         }
             .threadSwitch()
-            .subscribe {
+            .subscribe( {
                 it.log()
                 baseView?.showHistory(it)
-            }
+            },{
+                baseView?.showLoadError("数据加载失败")
+            })
     }
 }
