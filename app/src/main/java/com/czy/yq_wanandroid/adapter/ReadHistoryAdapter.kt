@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.business.WebViewActivity
+import com.czy.yq_wanandroid.common.SideslipLayout
 import com.czy.yq_wanandroid.room.AppDatabase
 import com.czy.yq_wanandroid.room.entity.ReadHistory
 import com.yangqing.record.ext.threadSwitch
@@ -62,11 +63,13 @@ open class ReadHistoryAdapter : RecyclerView.Adapter<ReadHistoryAdapter.ReadHist
         var tvTitle: TextView
         var tvTime: TextView
         var btnDel:Button
+        var sideslipLayout: SideslipLayout
 
         constructor(view: View) : super(view) {
             tvTitle = view.findViewById<TextView>(R.id.tvTitle)
             tvTime = view.findViewById<TextView>(R.id.tvTime)
             btnDel = view.findViewById(R.id.btnDel)
+            sideslipLayout = view.findViewById(R.id.sideslip)
         }
     }
 }

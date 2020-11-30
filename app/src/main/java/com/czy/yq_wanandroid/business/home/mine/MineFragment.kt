@@ -32,10 +32,7 @@ class MineFragment : BaseFragment() {
             }
         }
         ll_history.setOnClickListener {
-            UserManage.checkLogin(context!!) {
-                toast("阅读历史待开发")
-                startActivity(Intent(context, ReadHistoryActivity::class.java))
-            }
+            startActivity(Intent(context, ReadHistoryActivity::class.java))
         }
         ll_exit.setOnClickListener {
             UserManage.exitLogin()
