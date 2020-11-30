@@ -56,7 +56,9 @@ open class SideslipLayout @JvmOverloads constructor(
                 isClickEvent = true
                 if (sideslipLayout != null && sideslipLayout != this) {
                     if (sideslipLayout!!.isOpenStatus()) {
-                        sideslipLayout?.scrollToSuitablePosition()
+                        requestDisallowInterceptTouchEvent(true)
+                        sideslipLayout?.smoothClose()
+                        requestDisallowInterceptTouchEvent(false)
                     }
                 }
                 drawableHotspotChanged(event.x, event.y)
@@ -98,13 +100,10 @@ open class SideslipLayout @JvmOverloads constructor(
      * 滚动到合适位置
      */
     private fun scrollToSuitablePosition() {
-        var dex = 0
-        if (scrollX > criticalValue){
-            dex = criticalValue * 2 - scrollX
-            smoothExpand(dex)
-        }else{
-            dex = -scrollX
-            smoothClose(dex)
+        if (scrollX > criticalValue) {
+            smoothExpand()
+        } else {
+            smoothClose()
         }
     }
 
@@ -119,7 +118,7 @@ open class SideslipLayout @JvmOverloads constructor(
     private fun limitScroll() {
         //限制滑动范围
         if (scrollX > criticalValue * 2) scrollTo(criticalValue * 2, 0)
-        if (scrollX < 0)  scrollTo(0, 0)
+        if (scrollX < 0) scrollTo(0, 0)
     }
 
     fun isOpenStatus(): Boolean {
@@ -127,14 +126,18 @@ open class SideslipLayout @JvmOverloads constructor(
     }
 
 
-    fun smoothExpand(dex:Int) {
+    private fun smoothExpand() {
         sideslipLayout = this
-        scroller.startScroll(scrollX, 0, dex, 0)
+        scroller.startScroll(scrollX, 0, criticalValue * 2 - scrollX, 0)
         invalidate()
     }
 
-    fun smoothClose(dex:Int) {
-        scroller.startScroll(scrollX, 0, dex, 0)
+    private fun smoothClose() {
+        scroller.startScroll(scrollX, 0, -scrollX, 0)
         invalidate()
+    }
+
+    fun close(){
+        scrollTo(0,0)
     }
 }

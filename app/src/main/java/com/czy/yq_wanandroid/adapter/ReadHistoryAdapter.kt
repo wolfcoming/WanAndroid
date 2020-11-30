@@ -43,7 +43,8 @@ open class ReadHistoryAdapter : RecyclerView.Adapter<ReadHistoryAdapter.ReadHist
                 .threadSwitch()
                 .subscribe {
                     (datas as ArrayList).remove(item)
-                    notifyItemRemoved(position)
+                    notifyDataSetChanged()
+                    holder.sideslipLayout.close()
                 }
         }
         holder.itemView.setOnClickListener {
@@ -62,7 +63,7 @@ open class ReadHistoryAdapter : RecyclerView.Adapter<ReadHistoryAdapter.ReadHist
     class ReadHistoryViewHolder : RecyclerView.ViewHolder {
         var tvTitle: TextView
         var tvTime: TextView
-        var btnDel:Button
+        var btnDel:TextView
         var sideslipLayout: SideslipLayout
 
         constructor(view: View) : super(view) {

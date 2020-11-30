@@ -28,9 +28,12 @@
             android:text="2020-11-23 09:08:58"
             android:textColor="@color/common_gray" />
     </LinearLayout>
-    <Button
+    <TextView
         android:text="删除"
         android:id="@+id/btnDel"
         android:layout_width="100dp"
+        android:textColor="#f00"
+        android:gravity="center"
+        android:textSize="18dp"
         android:layout_height="match_parent"/>
 </com.czy.yq_wanandroid.common.SideslipLayout>
