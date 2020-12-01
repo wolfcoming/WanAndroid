@@ -41,4 +41,13 @@ interface WanApi {
         @Field("username") username: String,
         @Field("password") password: String
     ): Observable<BaseResult<UserInfo>>
+
+
+    /**
+     * 收藏文章列表
+     * 方法：GET
+     * 参数： 页码：拼接在链接中，从0开始。
+     */
+    @GET("lg/collect/list/{page}/json")
+    fun getCollectArticleList(@Path("page") page: Int): Observable<BaseResult<ArticleList<ArticleEntity>>>
 }

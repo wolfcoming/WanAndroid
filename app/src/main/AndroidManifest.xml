@@ -33,7 +33,7 @@
         </activity>
         <activity
             android:name=".business.WebViewActivity"
-            android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation"></activity>
+            android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation"/>
         <activity android:name=".business.projects.ProjectsListActivity" />
         <activity android:name=".business.login.LoginActivity" />
         <activity android:name=".business.readHistory.ReadHistoryActivity" />
@@ -47,6 +47,7 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
+        <activity android:name=".business.collect.CollectArticleActivity" />
     </application>
 
 </manifest>

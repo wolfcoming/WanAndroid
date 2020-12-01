@@ -72,7 +72,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
             loadingDialog = LoadingDialog.Builder(this)
                 .setLoadingMsg("加载中...")
                 .setCanCancel(false)
-                .setDemines(0.1f)
+                .setDemines(0f)
                 .build()
         }
         loadingDialog?.let {

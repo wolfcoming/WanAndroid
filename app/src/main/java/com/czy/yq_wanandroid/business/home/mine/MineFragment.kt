@@ -5,6 +5,7 @@ import android.view.View
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.base.BaseFragment
 import com.czy.yq_wanandroid.base.UserManage
+import com.czy.yq_wanandroid.business.collect.CollectArticleActivity
 import com.czy.yq_wanandroid.business.login.LoginActivity
 import com.czy.yq_wanandroid.business.readHistory.ReadHistoryActivity
 import com.czy.yq_wanandroid.entity.UserInfo
@@ -28,7 +29,7 @@ class MineFragment : BaseFragment() {
 
         ll_collect.setOnClickListener {
             UserManage.checkLogin(context!!) {
-                toast("收藏功能待开发")
+                startActivity(Intent(context, CollectArticleActivity::class.java))
             }
         }
         ll_history.setOnClickListener {

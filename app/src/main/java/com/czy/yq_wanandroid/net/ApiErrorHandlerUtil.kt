@@ -34,6 +34,10 @@ object ApiErrorHandlerUtil {
     fun <T> throwApiException(result: T) {
         if (result is BaseResult<*>) {
             if (result.errorCode != Constants.API_SUCCESS_CODE) {
+//                if(result.errorCode == Constants.API_NEED_LOGIN){
+//                    //跳转登录
+//
+//                }
                 throw ApiException(result.errorCode, result.errorMsg)
             }
         }
