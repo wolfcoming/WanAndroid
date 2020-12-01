@@ -140,4 +140,9 @@ open class SideslipLayout @JvmOverloads constructor(
     fun close(){
         scrollTo(0,0)
     }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        sideslipLayout = null
+    }
 }
