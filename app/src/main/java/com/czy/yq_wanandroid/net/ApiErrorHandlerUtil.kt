@@ -2,6 +2,7 @@ package com.czy.yq_wanandroid.net
 
 import com.czy.yq_wanandroid.Constants
 import com.czy.yq_wanandroid.base.App
+import com.czy.yq_wanandroid.base.UserManage
 import com.czy.yq_wanandroid.entity.BaseResult
 import com.czy.yq_wanandroid.utils.NetUtils
 import com.google.gson.Gson
@@ -34,10 +35,11 @@ object ApiErrorHandlerUtil {
     fun <T> throwApiException(result: T) {
         if (result is BaseResult<*>) {
             if (result.errorCode != Constants.API_SUCCESS_CODE) {
-//                if(result.errorCode == Constants.API_NEED_LOGIN){
-//                    //跳转登录
-//
-//                }
+                if(result.errorCode == Constants.API_NEED_LOGIN){
+                    //跳转登录
+                    UserManage.exitLogin()
+                    UserManage.gotoLogin()
+                }
                 throw ApiException(result.errorCode, result.errorMsg)
             }
         }

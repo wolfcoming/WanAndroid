@@ -7,10 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.business.WebViewActivity
 import com.czy.yq_wanandroid.entity.ArticleEntity
+import com.czy.yq_wanandroid.net.WanApiService
+import com.infoholdcity.basearchitecture.self_extends.log
+import com.yangqing.record.ext.commonSubscribe
+import com.yangqing.record.ext.threadSwitch
 
 class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.ArticleListViewHolder> {
     private lateinit var datas: ArrayList<ArticleEntity>
@@ -27,7 +32,7 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
 
     override fun onBindViewHolder(holder: ArticleListViewHolder, position: Int) {
         val item = datas[position]
-        holder.tvTitle.setText(this.datas[position].title)
+        holder.tvTitle.text = this.datas[position].title
         holder.ll_new.visibility = if (item.fresh) View.VISIBLE else View.GONE
         holder.ll_top.visibility = if (item.top) View.VISIBLE else View.GONE
         holder.tv_author.text = if (item.author.isEmpty()) {
@@ -43,6 +48,18 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
         }
 
         holder.tv_chapter_name.text = item.superChapterName + "·" + item.chapterName
+        if (item.collect) (holder.ll_collect.getChildAt(0) as TextView).text = "已收藏" else
+            (holder.ll_collect.getChildAt(0) as TextView).text = "收藏"
+        holder.ll_collect.setOnClickListener {
+            WanApiService.getWanApi().collectArticle(item.chapterId)
+                .threadSwitch()
+                .commonSubscribe ({
+                    item.collect = true
+                    notifyItemChanged(position)
+                },{
+                    Toast.makeText(holder.itemView.context, it.message, Toast.LENGTH_SHORT).show()
+                })
+        }
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, WebViewActivity::class.java)
@@ -65,6 +82,7 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
         lateinit var tv_chapter_name: TextView
         lateinit var ll_new: LinearLayout
         lateinit var ll_top: LinearLayout
+        var ll_collect: LinearLayout
 
         constructor(itemView: View) : super(itemView) {
             tvTitle = itemView.findViewById<TextView>(R.id.tv_title)
@@ -75,6 +93,7 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
             tv_chapter_name = itemView.findViewById<TextView>(R.id.tv_chapter_name)
             ll_new = itemView.findViewById(R.id.ll_new)
             ll_top = itemView.findViewById(R.id.ll_top)
+            ll_collect = itemView.findViewById(R.id.ll_collect)
         }
 
     }

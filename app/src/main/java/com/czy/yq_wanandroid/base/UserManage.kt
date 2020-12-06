@@ -1,6 +1,7 @@
 package com.czy.yq_wanandroid.base
 
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import com.czy.yq_wanandroid.business.login.LoginActivity
 import com.czy.yq_wanandroid.entity.UserInfo
@@ -39,6 +40,12 @@ class UserManage {
                     .addResultListener { result() }
                     .call()
             }
+        }
+
+        fun gotoLogin() {
+            val intent = Intent(App.mContext, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            App.mContext.startActivity(intent)
         }
     }
 }

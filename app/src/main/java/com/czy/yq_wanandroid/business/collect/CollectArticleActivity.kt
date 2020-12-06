@@ -30,11 +30,11 @@ class CollectArticleActivity:MvpActivity<CollectArticlePresenter>(),ICollectArti
     }
 
     override fun showCollectArticle(datas: List<ArticleEntity>) {
-        if(datas.size == 0) {
+        if(datas.isEmpty()) {
             multiply.showEmptyView()
             return
         }
-        var adapter = HomeArticleListAdapter(datas as ArrayList<ArticleEntity>)
+        val adapter = HomeArticleListAdapter(datas as ArrayList<ArticleEntity>)
         mCollectRv.adapter = adapter
         multiply.showContentView()
     }

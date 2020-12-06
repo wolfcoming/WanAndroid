@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/ll_new"
+            android:layout_toEndOf="@+id/ll_new"
             android:textColor="@color/common_gray"
             android:textSize="@dimen/text_notes"
             tools:text="林帅并不帅" />
@@ -67,7 +67,7 @@
             android:layout_height="0dp"
             android:layout_alignTop="@+id/tv_author"
             android:layout_alignBottom="@+id/tv_author"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:textColor="@color/text_third"
             android:textSize="@dimen/text_notes"
@@ -160,6 +160,19 @@
             android:textSize="@dimen/text_notes"
             tools:text="动画效果·Lottie" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_collect"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/ll_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="收藏"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </RelativeLayout>

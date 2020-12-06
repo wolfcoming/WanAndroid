@@ -26,7 +26,6 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         mHomeRv.layoutManager = LinearLayoutManager(context)
         articleAdapter = HomeArticleListAdapter(articleList)
         mHomeRv.adapter = articleAdapter
-
         mSmartRefresh.setOnRefreshListener {
             currentPage = 0
             mPresenter?.getHomeData(currentPage, true)
@@ -58,7 +57,7 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
     /**
      * 展示banner图数据
      */
-    fun showBannerView(result: List<Banner>?) {
+    private fun showBannerView(result: List<Banner>?) {
         if (result != null) {
             mBanner.addBannerLifecycleObserver(this)
                 .setAdapter(HomeBannerAdapter(result))
@@ -69,7 +68,7 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
     /**
      * 展示文章列表数据
      */
-    fun showArticleList(result: List<ArticleEntity>?, fresh: Boolean) {
+    private fun showArticleList(result: List<ArticleEntity>?, fresh: Boolean) {
         multiply.showContentView()
         if (fresh) {
             mSmartRefresh.finishRefresh()
