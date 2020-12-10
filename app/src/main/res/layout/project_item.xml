@@ -16,7 +16,7 @@
     <com.czy.yq_wanandroid.common.FlowLayout
         android:paddingLeft="10dp"
         android:id="@+id/mFlowLayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
          />
 </LinearLayout>

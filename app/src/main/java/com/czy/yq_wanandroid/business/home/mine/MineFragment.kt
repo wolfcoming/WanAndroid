@@ -10,7 +10,6 @@ import com.czy.yq_wanandroid.business.login.LoginActivity
 import com.czy.yq_wanandroid.business.readHistory.ReadHistoryActivity
 import com.czy.yq_wanandroid.entity.UserInfo
 import com.czy.yq_wanandroid.event.LoginEvent
-import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.fragment_mine.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode

@@ -28,6 +28,7 @@ class MainActivity : BaseActivity() {
         fragments.add(AnswerFragment())
         fragments.add(ProjectsFragment())
         fragments.add(MineFragment())
+        mViewpager.offscreenPageLimit = 1
         val viewPagerFragmentStateAdapter = ViewPagerFragmentStateAdapter(this, fragments)
         mViewpager.adapter = viewPagerFragmentStateAdapter
         mBottomNav.setOnNavigationItemSelectedListener {
@@ -38,7 +39,7 @@ class MainActivity : BaseActivity() {
                 R.id.main_mine -> 3
                 else -> -1
             }
-            mViewpager.setCurrentItem(position, true)
+            mViewpager.setCurrentItem(position, false)
             true
         }
         mViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

@@ -3,7 +3,6 @@ package com.czy.yq_wanandroid.business.collect
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
-import com.czy.yq_wanandroid.adapter.ReadHistoryAdapter
 import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.czy.yq_wanandroid.mvpbase.MvpActivity
 import com.infoholdcity.basearchitecture.self_extends.log
