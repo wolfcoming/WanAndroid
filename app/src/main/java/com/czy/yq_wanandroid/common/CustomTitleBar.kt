@@ -1,5 +1,6 @@
 package com.czy.yq_wanandroid.common
 
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
@@ -52,6 +53,10 @@ class CustomTitleBar @JvmOverloads constructor(
         btnLeft.setOnClickListener {
             if (this::leftClick.isInitialized) {
                 leftClick(it)
+            }else{
+                if(context is Activity){
+                    context.finish()
+                }
             }
         }
         btnRight.setOnClickListener {

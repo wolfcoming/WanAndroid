@@ -9,6 +9,8 @@
         android:id="@+id/mTitleBar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        app:left="@drawable/ic_back"
+        app:leftType="icon"
         android:background="@color/common_blue"
         app:title="详情页" />
 

@@ -24,9 +24,10 @@ class WanApiService {
             .readTimeout(timeout, TimeUnit.SECONDS)
             .addInterceptor(NetInterceptor())
             .cookieJar(
-                PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.mContext))
+//                PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.mContext))
+                CookieManage()
             )
-            .cache(Cache(App.mContext.cacheDir, 10 * 1024 * 1024))
+//            .cache(Cache(App.mContext.cacheDir, 10 * 1024 * 1024))
             .build()
 
         fun getWanApi(): WanApi {

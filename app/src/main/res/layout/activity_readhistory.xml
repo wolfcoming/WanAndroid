@@ -7,6 +7,8 @@
 
     <com.czy.yq_wanandroid.common.CustomTitleBar
         android:id="@+id/mTitleBar"
+        app:left="@drawable/ic_back"
+        app:leftType="icon"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar_height"
         android:background="@color/common_blue"

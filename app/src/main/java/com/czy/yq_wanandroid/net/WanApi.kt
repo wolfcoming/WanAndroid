@@ -51,7 +51,15 @@ interface WanApi {
     @GET("lg/collect/list/{page}/json")
     fun getCollectArticleList(@Path("page") page: Int): Observable<BaseResult<ArticleList<ArticleEntity>>>
 
-    //https://www.wanandroid.com/lg/collect/1165/json
+    /**
+     * 收藏文章
+     */
     @POST("lg/collect/{id}/json")
-    fun collectArticle(@Path("id") id:Int):Observable<BaseResult<String>>
+    fun collectArticle(@Path("id") id: Int): Observable<BaseResult<String>>
+
+    /**
+     * 取消收藏文章
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    fun unCollectArticle(@Path("id") id: Int): Observable<BaseResult<String>>
 }

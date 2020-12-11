@@ -6,11 +6,14 @@ import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
 import com.czy.yq_wanandroid.adapter.HomeBannerAdapter
 import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.czy.yq_wanandroid.entity.Banner
+import com.czy.yq_wanandroid.event.LoginEvent
 import com.czy.yq_wanandroid.mvpbase.MvpFragment
 import com.czy.yq_wanandroid.net.ApiException
 import com.yangqing.record.ext.toast
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 
 class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
@@ -108,6 +111,16 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         mSmartRefresh.finishLoadMore(false)
     }
 
+    override fun isRegisterEventBus(): Boolean {
+        return true
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onLoginEvent(loginEvent: LoginEvent) {
+        if (isDetached) return
+        initData()
+    }
 }
 
 

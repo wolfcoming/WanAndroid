@@ -8,6 +8,8 @@
     <com.czy.yq_wanandroid.common.CustomTitleBar
         app:title="我的收藏"
         android:id="@+id/mTitleBar"
+        app:left="@drawable/ic_back"
+        app:leftType="icon"
         android:background="@color/common_blue"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar_height"/>

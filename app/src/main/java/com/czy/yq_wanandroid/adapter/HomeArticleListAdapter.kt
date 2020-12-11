@@ -1,5 +1,6 @@
 package com.czy.yq_wanandroid.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.text.Html
 import android.view.LayoutInflater
@@ -18,7 +19,7 @@ import com.yangqing.record.ext.commonSubscribe
 import com.yangqing.record.ext.threadSwitch
 
 class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.ArticleListViewHolder> {
-    private lateinit var datas: ArrayList<ArticleEntity>
+    private var datas: ArrayList<ArticleEntity>
 
     constructor(data: ArrayList<ArticleEntity>) {
         this.datas = data
@@ -48,17 +49,12 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
         }
 
         holder.tv_chapter_name.text = item.superChapterName + "·" + item.chapterName
+
         if (item.collect) (holder.ll_collect.getChildAt(0) as TextView).text = "已收藏" else
             (holder.ll_collect.getChildAt(0) as TextView).text = "收藏"
+
         holder.ll_collect.setOnClickListener {
-            WanApiService.getWanApi().collectArticle(item.chapterId)
-                .threadSwitch()
-                .commonSubscribe ({
-                    item.collect = true
-                    notifyItemChanged(position)
-                },{
-                    Toast.makeText(holder.itemView.context, it.message, Toast.LENGTH_SHORT).show()
-                })
+            dealCollect(item, position, holder.itemView.context)
         }
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
@@ -69,23 +65,50 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
         }
     }
 
+
+    /**
+     * 收藏文章逻辑
+     */
+    private fun dealCollect(item: ArticleEntity, position: Int, context: Context) {
+        if (!item.collect) {
+            WanApiService.getWanApi().collectArticle(item.id)
+                .threadSwitch()
+                .commonSubscribe({
+                    item.collect = true
+                    notifyItemChanged(position)
+                }, {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                })
+        } else {
+            WanApiService.getWanApi().unCollectArticle(item.id)
+                .threadSwitch()
+                .commonSubscribe({
+                    item.collect = false
+                    notifyItemChanged(position)
+                }, {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                })
+        }
+
+    }
+
     override fun getItemCount(): Int {
         return this.datas.size
     }
 
     class ArticleListViewHolder : RecyclerView.ViewHolder {
-        lateinit var tvTitle: TextView
-        lateinit var tv_author: TextView
-        lateinit var tv_tag: TextView
-        lateinit var tv_time: TextView
-        lateinit var tv_desc: TextView
-        lateinit var tv_chapter_name: TextView
-        lateinit var ll_new: LinearLayout
-        lateinit var ll_top: LinearLayout
+        var tvTitle: TextView
+        var tv_author: TextView
+        var tv_tag: TextView
+        var tv_time: TextView
+        var tv_desc: TextView
+        var tv_chapter_name: TextView
+        var ll_new: LinearLayout
+        var ll_top: LinearLayout
         var ll_collect: LinearLayout
 
         constructor(itemView: View) : super(itemView) {
-            tvTitle = itemView.findViewById<TextView>(R.id.tv_title)
+            tvTitle = itemView.findViewById(R.id.tv_title)
             tv_author = itemView.findViewById<TextView>(R.id.tv_author)
             tv_tag = itemView.findViewById<TextView>(R.id.tv_tag)
             tv_time = itemView.findViewById<TextView>(R.id.tv_time)
@@ -95,6 +118,5 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
             ll_top = itemView.findViewById(R.id.ll_top)
             ll_collect = itemView.findViewById(R.id.ll_collect)
         }
-
     }
 }
