@@ -28,7 +28,7 @@ class MainActivity : BaseActivity() {
         fragments.add(AnswerFragment())
         fragments.add(ProjectsFragment())
         fragments.add(MineFragment())
-        mViewpager.offscreenPageLimit = 1
+//        mViewpager.offscreenPageLimit = 1
         val viewPagerFragmentStateAdapter = ViewPagerFragmentStateAdapter(this, fragments)
         mViewpager.adapter = viewPagerFragmentStateAdapter
         mBottomNav.setOnNavigationItemSelectedListener {
