@@ -10,6 +10,9 @@ class CollectArticlePresenter : MvpPresenter<ICollectArticleView>() {
         WanApiService.getWanApi().getCollectArticleList(page)
             .threadSwitchAndBindLifeCycle(baseView)
             .commonSubscribe({
+                it.data!!.datas.map {
+                    it.collect = true
+                }
                 baseView?.showCollectArticle(it.data!!.datas)
             }, {
                 baseView?.showFailureView(it.message!!)

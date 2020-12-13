@@ -10,7 +10,7 @@ import com.infoholdcity.basearchitecture.self_extends.log
 import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.fragment_answer.*
 
-class AnswerFragment:MvpFragment<AnswerPresenter>(),IAnswerView {
+class AnswerFragment : MvpFragment<AnswerPresenter>(), IAnswerView {
     var curPage = 0
     override fun getLayoutId(): Int {
         return R.layout.fragment_answer
@@ -19,14 +19,14 @@ class AnswerFragment:MvpFragment<AnswerPresenter>(),IAnswerView {
     val datas = ArrayList<ArticleEntity>()
     lateinit var mAdapter: HomeArticleListAdapter
     override fun initView() {
-        changNormalTopView(context!!,mTitleBar)
+        changNormalTopView(context!!, mTitleBar)
         mSmartRefresh.setOnLoadMoreListener {
             curPage = 0
-            mPresenter?.getAnswerList(curPage,true)
+            mPresenter?.getAnswerList(curPage, true)
         }
         mSmartRefresh.setOnLoadMoreListener {
             curPage++
-            mPresenter?.getAnswerList(curPage,false)
+            mPresenter?.getAnswerList(curPage, false)
         }
         mAnswerRv.layoutManager = LinearLayoutManager(context)
         mAdapter = HomeArticleListAdapter(datas)
@@ -49,6 +49,7 @@ class AnswerFragment:MvpFragment<AnswerPresenter>(),IAnswerView {
         return AnswerPresenter()
     }
 
+
     override fun showAnswerList(result: List<ArticleEntity>?, fresh: Boolean) {
         multiply.showContentView()
         if (fresh) {
@@ -62,7 +63,7 @@ class AnswerFragment:MvpFragment<AnswerPresenter>(),IAnswerView {
             showToast("获取文章列表数据为空")
             return
         }
-        if(fresh){
+        if (fresh) {
             this.datas.clear()
         }
         datas.addAll(result)
@@ -77,4 +78,13 @@ class AnswerFragment:MvpFragment<AnswerPresenter>(),IAnswerView {
         mSmartRefresh.finishRefresh(false)
         mSmartRefresh.finishLoadMore(false)
     }
+
+    override fun onVisible(ifFirstVisiable: Boolean) {
+        super.onVisible(ifFirstVisiable)
+        if (ifFirstVisiable) {
+            multiply.showLoadingView()
+            mPresenter?.getAnswerList(curPage, true)
+        }
+    }
+
 }

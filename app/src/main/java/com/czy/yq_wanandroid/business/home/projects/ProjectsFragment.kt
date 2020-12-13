@@ -24,8 +24,14 @@ class ProjectsFragment : MvpFragment<ProjectsPrensenter>(), IProjectsView {
     }
 
     override fun initData() {
-        multiply.showLoadingView()
-        mPresenter?.getProjectsData()
+    }
+
+    override fun onVisible(isFirstVisible: Boolean) {
+        super.onVisible(isFirstVisible)
+        if (isFirstVisible) {
+            multiply.showLoadingView()
+            mPresenter?.getProjectsData()
+        }
     }
 
     override fun createPresenter(): ProjectsPrensenter {

@@ -16,6 +16,7 @@ abstract class BaseFragment : RxFragment() {
     abstract fun initView()
     abstract fun initData()
     open fun initViewBefore() {}
+    var mViewCreated = false;
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,6 +34,7 @@ abstract class BaseFragment : RxFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = LayoutInflater.from(context).inflate(getLayoutId(), container, false)
+        mViewCreated = true
         return rootView
     }
 

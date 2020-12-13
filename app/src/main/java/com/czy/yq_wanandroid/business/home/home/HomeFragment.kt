@@ -49,8 +49,7 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
     }
 
     override fun initData() {
-        multiply.showLoadingView()
-        mPresenter?.getHomeData(currentPage, true)
+
     }
 
     override fun createPresenter(): HomePresenter {
@@ -120,6 +119,15 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
     fun onLoginEvent(loginEvent: LoginEvent) {
         if (isDetached) return
         initData()
+    }
+
+
+    override fun onVisible(isFirstVisible: Boolean) {
+        super.onVisible(isFirstVisible)
+        if(isFirstVisible){
+            multiply.showLoadingView()
+            mPresenter?.getHomeData(currentPage, true)
+        }
     }
 }
 
