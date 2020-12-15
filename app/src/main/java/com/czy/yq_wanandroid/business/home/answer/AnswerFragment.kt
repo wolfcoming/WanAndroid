@@ -41,8 +41,7 @@ class AnswerFragment : MvpFragment<AnswerPresenter>(), IAnswerView {
     }
 
     override fun initData() {
-        multiply.showLoadingView()
-        mPresenter?.getAnswerList(curPage, true)
+
     }
 
     override fun createPresenter(): AnswerPresenter {

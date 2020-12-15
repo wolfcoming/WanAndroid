@@ -25,11 +25,7 @@
         <activity
             android:name=".business.MainActivity"
             android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation">
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN" />
 
-                            <category android:name="android.intent.category.LAUNCHER" />
-                        </intent-filter>
         </activity>
         <activity
             android:name=".business.WebViewActivity"
@@ -48,6 +44,14 @@
 <!--            </intent-filter>-->
         </activity>
         <activity android:name=".business.collect.CollectArticleActivity" />
+        <activity android:name=".business.MainActivity2" />
+        <activity android:name=".business.SplashActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

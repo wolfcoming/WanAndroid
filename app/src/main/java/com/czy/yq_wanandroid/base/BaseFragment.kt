@@ -51,7 +51,9 @@ abstract class BaseFragment : RxFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (isRegisterEventBus()) {
-            EventBus.getDefault().register(this)
+            if(!EventBus.getDefault().isRegistered(this)){
+                EventBus.getDefault().register(this)
+            }
         }
         initViewBefore()
         initView()
