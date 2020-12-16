@@ -13,7 +13,7 @@
         android:textColor="@color/black"
         android:textSize="18dp" />
 
-    <com.czy.yq_wanandroid.common.FlowLayout
+    <com.czy.lib_ui.FlowLayout
         android:paddingLeft="10dp"
         android:id="@+id/mFlowLayout"
         android:layout_width="wrap_content"

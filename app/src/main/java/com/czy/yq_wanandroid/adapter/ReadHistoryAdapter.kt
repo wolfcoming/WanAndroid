@@ -1,14 +1,14 @@
 package com.czy.yq_wanandroid.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
+import com.czy.business_base.ArouterConfig
 import com.czy.yq_wanandroid.R
-import com.czy.yq_wanandroid.business.WebViewActivity
-import com.czy.yq_wanandroid.common.SideslipLayout
+import com.czy.lib_ui.SideslipLayout
 import com.czy.yq_wanandroid.room.AppDatabase
 import com.czy.yq_wanandroid.room.entity.ReadHistory
 import com.yangqing.record.ext.threadSwitch
@@ -45,11 +45,10 @@ open class ReadHistoryAdapter : RecyclerView.Adapter<ReadHistoryAdapter.ReadHist
                 }
         }
         holder.itemView.setOnClickListener {
-            val context = holder.itemView.context
-            val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtra("title", item.title)
-            intent.putExtra("url", item.link)
-            context.startActivity(intent)
+            ARouter.getInstance().build(ArouterConfig.webviewPath)
+                .withString("title", item.title)
+                .withString("url", item.link)
+                .navigation()
         }
     }
 

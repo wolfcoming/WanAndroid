@@ -1,11 +1,13 @@
 package com.czy.yq_wanandroid.business
 
 import android.content.Intent
+import com.alibaba.android.arouter.launcher.ARouter
+import com.czy.business_base.ArouterConfig
 import com.czy.yq_wanandroid.R
-import com.czy.yq_wanandroid.base.BaseActivity
+import com.czy.lib_base.BaseActivity
 import kotlinx.android.synthetic.main.activity_spalsh.*
 
-class SplashActivity:BaseActivity() {
+class SplashActivity:  BaseActivity() {
     override fun getLayoutId(): Int {
         return R.layout.activity_spalsh
     }
@@ -16,7 +18,8 @@ class SplashActivity:BaseActivity() {
         }
 
         btnTwo.setOnClickListener {
-            startActivity(Intent(this,MainActivity2::class.java))
+            ARouter.getInstance().build(ArouterConfig.mainActivity).navigation()
+//            startActivity(Intent(this,MainActivity2::class.java))
         }
     }
 

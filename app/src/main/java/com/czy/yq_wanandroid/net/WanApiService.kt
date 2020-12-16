@@ -1,11 +1,7 @@
 package com.czy.yq_wanandroid.net
 
-import com.czy.yq_wanandroid.base.App
-import com.czy.yq_wanandroid.net.convert.CustomGsonConverterFactory
-import com.czy.yq_wanandroid.net.interceptor.NetInterceptor
-import com.franmontiel.persistentcookiejar.PersistentCookieJar
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
+import com.czy.lib_base.net.convert.CustomGsonConverterFactory
+import com.czy.lib_base.net.interceptor.NetInterceptor
 import com.infoholdcity.basearchitecture.self_extends.log
 import okhttp3.*
 import retrofit2.Retrofit
@@ -47,26 +43,24 @@ class WanApiService {
     class CookieManage : CookieJar {
         var cache: MutableList<Cookie> = ArrayList()
         override fun loadForRequest(url: HttpUrl): List<Cookie> {
-//            //过期的Cookie
-//            val invalidCookies: MutableList<Cookie> = ArrayList()
-//            //有效的Cookie
-//            val validCookies: MutableList<Cookie> = ArrayList()
-//            for (cookie in cache) {
-//                if (cookie.expiresAt < System.currentTimeMillis()) {
-//                    //判断是否过期
-//                    invalidCookies.add(cookie)
-//                } else if (cookie.matches(url)) {
-//                    //匹配Cookie对应url
-//                    validCookies.add(cookie)
-//                }
-//            }
-//            //缓存中移除过期的Cookie
-//            cache.removeAll(invalidCookies)
-//            //返回List<Cookie>让Request进行设置
-//            "上传的cookie：$validCookies".log()
-//            return validCookies
-            return cache
-
+            //过期的Cookie
+            val invalidCookies: MutableList<Cookie> = ArrayList()
+            //有效的Cookie
+            val validCookies: MutableList<Cookie> = ArrayList()
+            for (cookie in cache) {
+                if (cookie.expiresAt < System.currentTimeMillis()) {
+                    //判断是否过期
+                    invalidCookies.add(cookie)
+                } else if (cookie.matches(url)) {
+                    //匹配Cookie对应url
+                    validCookies.add(cookie)
+                }
+            }
+            //缓存中移除过期的Cookie
+            cache.removeAll(invalidCookies)
+            //返回List<Cookie>让Request进行设置
+            "上传的cookie：$validCookies".log()
+            return validCookies
         }
 
         override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {

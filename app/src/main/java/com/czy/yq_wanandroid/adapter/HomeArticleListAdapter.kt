@@ -1,7 +1,6 @@
 package com.czy.yq_wanandroid.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
+import com.czy.business_base.ArouterConfig
 import com.czy.yq_wanandroid.R
-import com.czy.yq_wanandroid.business.WebViewActivity
 import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.czy.yq_wanandroid.net.WanApiService
-import com.infoholdcity.basearchitecture.self_extends.log
 import com.yangqing.record.ext.commonSubscribe
 import com.yangqing.record.ext.threadSwitch
 
@@ -57,11 +56,10 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
             dealCollect(item, position, holder.itemView.context)
         }
         holder.itemView.setOnClickListener {
-            val context = holder.itemView.context
-            val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtra("title", item.title)
-            intent.putExtra("url", item.link)
-            context.startActivity(intent)
+            ARouter.getInstance().build(ArouterConfig.webviewPath)
+                .withString("title", item.title)
+                .withString("url", item.link)
+                .navigation()
         }
     }
 

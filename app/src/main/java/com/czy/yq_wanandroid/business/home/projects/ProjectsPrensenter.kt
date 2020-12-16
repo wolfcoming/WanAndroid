@@ -1,6 +1,6 @@
 package com.czy.yq_wanandroid.business.home.projects
 
-import com.czy.yq_wanandroid.mvpbase.MvpPresenter
+import com.czy.lib_base.mvpbase.MvpPresenter
 import com.czy.yq_wanandroid.net.WanApiService
 import com.yangqing.record.ext.commonSubscribe
 import com.yangqing.record.ext.threadSwitchAndBindLifeCycle

@@ -3,9 +3,9 @@ package com.yangqing.record.ext
 import android.app.Activity
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.czy.yq_wanandroid.mvpbase.IView
-import com.czy.yq_wanandroid.net.ApiErrorHandlerUtil
-import com.czy.yq_wanandroid.net.ApiException
+import com.czy.lib_base.mvpbase.IView
+import com.czy.lib_base.net.ApiErrorHandlerUtil
+import com.czy.lib_base.net.ApiException
 import com.infoholdcity.basearchitecture.self_extends.log
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable

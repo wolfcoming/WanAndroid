@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.czy.yq_wanandroid.room.dao.ReadHistoryDao
 import com.czy.yq_wanandroid.room.entity.ReadHistory
-import com.czy.yq_wanandroid.utils.ContentWrapperUtils
+import com.czy.lib_base.utils.ContentWrapperUtils
 
 @Database(entities = arrayOf(ReadHistory::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {

@@ -7,8 +7,8 @@ import com.czy.yq_wanandroid.adapter.HomeBannerAdapter
 import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.czy.yq_wanandroid.entity.Banner
 import com.czy.yq_wanandroid.event.LoginEvent
-import com.czy.yq_wanandroid.mvpbase.MvpFragment
-import com.czy.yq_wanandroid.net.ApiException
+import com.czy.lib_base.mvpbase.MvpFragment
+import com.czy.lib_base.net.ApiException
 import com.yangqing.record.ext.toast
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -105,7 +105,7 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
 
     override fun getDataFail(e: ApiException, fresh: Boolean) {
         toast(e.message!!)
-        if (fresh) multiply.showErrorView(e.message)
+        if (fresh) multiply.showErrorView(e.message!!)
         mSmartRefresh.finishRefresh(false)
         mSmartRefresh.finishLoadMore(false)
     }

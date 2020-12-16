@@ -1,5 +1,7 @@
 package com.czy.yq_wanandroid.entity
 
+import com.czy.lib_base.net.entity.BaseEntity
+
 data class ArticleList<T>(
     val curPage: Int,
     val datas: List<T>,
@@ -8,4 +10,4 @@ data class ArticleList<T>(
     val pageCount: Int,
     val size: Int,
     val total: Int
-)
+):BaseEntity()

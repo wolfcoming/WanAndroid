@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <com.czy.yq_wanandroid.common.CustomTitleBar
+    <com.czy.lib_ui.CustomTitleBar
         app:title="我的收藏"
         android:id="@+id/mTitleBar"
         app:left="@drawable/ic_back"
@@ -13,7 +13,7 @@
         android:background="@color/common_blue"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar_height"/>
-    <com.czy.yq_wanandroid.common.MultipleViewLayout
+    <com.czy.lib_ui.MultipleViewLayout
         android:id="@+id/multiply"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,6 +21,6 @@
             android:id="@+id/mCollectRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    </com.czy.yq_wanandroid.common.MultipleViewLayout>
+    </com.czy.lib_ui.MultipleViewLayout>
 
 </LinearLayout>

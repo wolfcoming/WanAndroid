@@ -4,7 +4,7 @@ import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.base.UserManage
 import com.czy.yq_wanandroid.entity.UserInfo
 import com.czy.yq_wanandroid.event.LoginEvent
-import com.czy.yq_wanandroid.mvpbase.MvpActivity
+import com.czy.lib_base.mvpbase.MvpActivity
 import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.activity_login.*
 

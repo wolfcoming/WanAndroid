@@ -4,8 +4,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
 import com.czy.yq_wanandroid.entity.ArticleEntity
-import com.czy.yq_wanandroid.mvpbase.MvpFragment
-import com.czy.yq_wanandroid.net.ApiException
+import com.czy.lib_base.mvpbase.MvpFragment
+import com.czy.lib_base.net.ApiException
 import com.infoholdcity.basearchitecture.self_extends.log
 import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.fragment_answer.*
@@ -73,7 +73,7 @@ class AnswerFragment : MvpFragment<AnswerPresenter>(), IAnswerView {
     override fun getDataFaile(e: ApiException, fresh: Boolean) {
         "wendang".log()
         toast(e.message!!)
-        if (fresh) multiply.showErrorView(e.message)
+        if (fresh) multiply.showErrorView(e.message!!)
         mSmartRefresh.finishRefresh(false)
         mSmartRefresh.finishLoadMore(false)
     }

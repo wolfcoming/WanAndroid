@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.czy.yq_wanandroid.common.CustomTitleBar
+    <com.czy.lib_ui.CustomTitleBar
         android:id="@+id/mTitleBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar_height"

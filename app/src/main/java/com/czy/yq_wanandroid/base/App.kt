@@ -3,7 +3,9 @@ package com.czy.yq_wanandroid.base
 import android.app.Application
 import android.content.Context
 import android.os.StrictMode
-import com.czy.yq_wanandroid.utils.ContentWrapperUtils
+import com.alibaba.android.arouter.launcher.ARouter
+import com.czy.lib_base.utils.ContentWrapperUtils
+import com.czy.yq_wanandroid.BuildConfig
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -21,6 +23,16 @@ class App : Application() {
         ContentWrapperUtils.init(this)
         //bugly
         CrashReport.initCrashReport(getApplicationContext(), "e049243189", true);
+        initArouter()
+    }
+
+    private fun initArouter() {
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()
+            ARouter.openDebug()
+            ARouter.printStackTrace();
+        }
+        ARouter.init(this)
     }
 
     private fun enabledStrictMode() {

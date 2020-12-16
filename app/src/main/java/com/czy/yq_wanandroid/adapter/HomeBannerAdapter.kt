@@ -4,8 +4,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.czy.yq_wanandroid.entity.Banner
+import com.imooc.lib_image_loader.app.ImageLoaderManager
 import com.youth.banner.adapter.BannerAdapter
 
 class HomeBannerAdapter(datas: List<Banner>) :
@@ -24,8 +24,7 @@ class HomeBannerAdapter(datas: List<Banner>) :
     }
 
     override fun onBindView(holder: BannerViewHolder, data: Banner, position: Int, size: Int) {
-        Glide.with(holder.imageView.context).load(this.mDatas[position].imagePath)
-            .into(holder.imageView)
+        ImageLoaderManager.getInstance().displayImageForView(holder.imageView,this.mDatas[position].imagePath)
     }
 
     class BannerViewHolder(@param:NonNull var imageView: ImageView) :

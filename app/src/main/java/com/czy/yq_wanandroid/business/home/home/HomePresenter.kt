@@ -3,8 +3,8 @@ package com.czy.yq_wanandroid.business.home.home
 import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.czy.yq_wanandroid.entity.ArticleList
 import com.czy.yq_wanandroid.entity.Banner
-import com.czy.yq_wanandroid.entity.BaseResult
-import com.czy.yq_wanandroid.mvpbase.MvpPresenter
+import com.czy.lib_base.net.entity.BaseResult
+import com.czy.lib_base.mvpbase.MvpPresenter
 import com.czy.yq_wanandroid.net.WanApiService
 import com.yangqing.record.ext.commonSubscribe
 import com.yangqing.record.ext.threadSwitchAndBindLifeCycle

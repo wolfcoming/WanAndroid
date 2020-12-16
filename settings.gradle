@@ -1,3 +1,9 @@
+include ':business_base'
+include ':lib_ui'
+include ':lib_net'
+include ':bus_webview'
+include ':lib_base'
+include ':lib_image_loader'
 include ':systemlearn'
 include ':app'
 rootProject.name = "yq_wanAndroid"

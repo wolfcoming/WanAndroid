@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.czy.yq_wanandroid.common.CustomTitleBar
+    <com.czy.lib_ui.CustomTitleBar
         android:id="@+id/mTitleBar"
         app:left="@drawable/ic_back"
         app:leftType="icon"
@@ -15,7 +15,7 @@
         app:title="阅读历史" />
 
 
-    <com.czy.yq_wanandroid.common.MultipleViewLayout
+    <com.czy.lib_ui.MultipleViewLayout
         android:id="@+id/multiply"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -23,5 +23,5 @@
             android:id="@+id/mHistoryRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </com.czy.yq_wanandroid.common.MultipleViewLayout>
+    </com.czy.lib_ui.MultipleViewLayout>
 </LinearLayout>

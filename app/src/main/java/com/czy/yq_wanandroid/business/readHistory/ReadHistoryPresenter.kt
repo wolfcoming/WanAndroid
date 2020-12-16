@@ -1,6 +1,6 @@
 package com.czy.yq_wanandroid.business.readHistory
 
-import com.czy.yq_wanandroid.mvpbase.MvpPresenter
+import com.czy.lib_base.mvpbase.MvpPresenter
 import com.czy.yq_wanandroid.room.AppDatabase
 import com.czy.yq_wanandroid.room.entity.ReadHistory
 import com.infoholdcity.basearchitecture.self_extends.log

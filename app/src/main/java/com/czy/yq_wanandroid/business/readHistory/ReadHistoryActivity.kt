@@ -4,7 +4,7 @@ import android.os.Handler
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.ReadHistoryAdapter
-import com.czy.yq_wanandroid.mvpbase.MvpActivity
+import com.czy.lib_base.mvpbase.MvpActivity
 import com.czy.yq_wanandroid.room.entity.ReadHistory
 import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.activity_readhistory.*

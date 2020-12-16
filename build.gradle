@@ -16,6 +16,10 @@ buildscript {
     }
 }
 
+//android{
+//
+//}
+
 allprojects {
     repositories {
         google()

@@ -5,16 +5,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.czy.business_base.ArouterConfig
 import com.czy.yq_wanandroid.R
-import com.czy.yq_wanandroid.base.BaseActivity
+import com.czy.lib_base.BaseActivity
 import com.czy.yq_wanandroid.business.home.answer.AnswerFragment
 import com.czy.yq_wanandroid.business.home.home.HomeFragment
 import com.czy.yq_wanandroid.business.home.mine.MineFragment
 import com.czy.yq_wanandroid.business.home.projects.ProjectsFragment
 import kotlinx.android.synthetic.main.activity_main2.*
 
-class MainActivity2 : BaseActivity() {
+@Route(path = ArouterConfig.mainActivity)
+class MainActivity2 : com.czy.lib_base.BaseActivity() {
     override fun getLayoutId(): Int {
         return R.layout.activity_main2
     }

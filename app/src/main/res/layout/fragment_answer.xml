@@ -5,13 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <com.czy.yq_wanandroid.common.CustomTitleBar
+    <com.czy.lib_ui.CustomTitleBar
         android:id="@+id/mTitleBar"
         android:background="@color/common_blue"
         app:title="问答"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar_height"/>
-    <com.czy.yq_wanandroid.common.MultipleViewLayout
+    <com.czy.lib_ui.MultipleViewLayout
         android:id="@+id/multiply"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,5 +24,5 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-    </com.czy.yq_wanandroid.common.MultipleViewLayout>
+    </com.czy.lib_ui.MultipleViewLayout>
 </LinearLayout>

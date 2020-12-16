@@ -1,5 +1,7 @@
 package com.czy.yq_wanandroid.entity
 
+import com.czy.lib_base.net.entity.BaseEntity
+
 data class ProjectEntity(
     val children: List<Children>,
     val courseId: Int,
@@ -9,7 +11,7 @@ data class ProjectEntity(
     val parentChapterId: Int,
     val userControlSetTop: Boolean,
     val visible: Int
-):BaseEntity()
+): BaseEntity()
 
 data class Children(
     val children: List<Any>,

@@ -27,9 +27,6 @@
             android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation">
 
         </activity>
-        <activity
-            android:name=".business.WebViewActivity"
-            android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation"/>
         <activity android:name=".business.projects.ProjectsListActivity" />
         <activity android:name=".business.login.LoginActivity" />
         <activity android:name=".business.readHistory.ReadHistoryActivity" />

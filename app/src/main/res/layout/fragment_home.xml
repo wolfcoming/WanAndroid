@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.czy.yq_wanandroid.common.CustomTitleBar
+    <com.czy.lib_ui.CustomTitleBar
         android:id="@+id/mTitleBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar_height"
@@ -17,7 +17,7 @@
         app:rightType="icon"
         app:title="首页" />
 
-    <com.czy.yq_wanandroid.common.MultipleViewLayout
+    <com.czy.lib_ui.MultipleViewLayout
         android:id="@+id/multiply"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -50,6 +50,6 @@
 
             </androidx.core.widget.NestedScrollView>
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-    </com.czy.yq_wanandroid.common.MultipleViewLayout>
+    </com.czy.lib_ui.MultipleViewLayout>
 
 </LinearLayout>

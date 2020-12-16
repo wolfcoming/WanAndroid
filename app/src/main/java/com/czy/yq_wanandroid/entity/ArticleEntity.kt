@@ -1,5 +1,7 @@
 package com.czy.yq_wanandroid.entity
 
+import com.czy.lib_base.net.entity.BaseEntity
+
 data class ArticleEntity(
     val apkLink: String,
     val audit: Int,
@@ -37,4 +39,4 @@ data class ArticleEntity(
     var top: Boolean
 
 
-)
+):BaseEntity()

@@ -1,5 +1,7 @@
 package com.czy.yq_wanandroid.entity
 
+import com.czy.lib_base.net.entity.BaseEntity
+
 /**
  * 用户信息
  */
