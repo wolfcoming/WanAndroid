@@ -1,4 +1,4 @@
-package com.imooc.lib_image_loader.image;
+package com.example.lib_imageloader.image;
 
 import android.graphics.Bitmap;
 

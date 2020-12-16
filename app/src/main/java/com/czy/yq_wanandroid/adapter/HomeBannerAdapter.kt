@@ -1,11 +1,17 @@
 package com.czy.yq_wanandroid.adapter
 
+import android.graphics.Bitmap
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.target.Target
 import com.czy.yq_wanandroid.entity.Banner
-import com.imooc.lib_image_loader.app.ImageLoaderManager
+import com.example.lib_imageloader.image.CustomRequestListener
+import com.example.lib_imageloader.image.ImageLoaderManager
+import com.infoholdcity.basearchitecture.self_extends.log
 import com.youth.banner.adapter.BannerAdapter
 
 class HomeBannerAdapter(datas: List<Banner>) :

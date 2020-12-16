@@ -13,6 +13,7 @@ import com.czy.yq_wanandroid.business.home.answer.AnswerFragment
 import com.czy.yq_wanandroid.business.home.home.HomeFragment
 import com.czy.yq_wanandroid.business.home.mine.MineFragment
 import com.czy.yq_wanandroid.business.home.projects.ProjectsFragment
+import com.example.lib_imageloader.image.ImageLoaderManager
 import kotlinx.android.synthetic.main.activity_main2.*
 
 @Route(path = ArouterConfig.mainActivity)
@@ -67,7 +68,7 @@ class MainActivity2 : com.czy.lib_base.BaseActivity() {
     }
 
     override fun initData() {
-
+        ImageLoaderManager.getInstance().displayImageForViewGroup(mBottomNav,"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1353138978,364163918&fm=26&gp=0.jpg")
     }
 
     class ViewPagerFragmentStateAdapter(

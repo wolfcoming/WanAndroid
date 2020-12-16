@@ -1,18 +1,20 @@
-package com.imooc.lib_image_loader.app;
+package com.example.lib_imageloader.image;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RemoteViews;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RemoteViews;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
@@ -23,10 +25,7 @@ import com.bumptech.glide.request.target.NotificationTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
-import com.imooc.lib_image_loader.R;
-import com.imooc.lib_image_loader.image.CustomRequestListener;
-import com.imooc.lib_image_loader.image.Utils;
-
+import com.example.lib_imageloader.R;
 
 import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
 
@@ -39,21 +38,13 @@ public class ImageLoaderManager {
     }
 
     public static ImageLoaderManager getInstance() {
-        return ImageLoaderManager.SingletonHolder.instance;
+        return SingletonHolder.instance;
     }
 
     private static class SingletonHolder {
         private static ImageLoaderManager instance = new ImageLoaderManager();
     }
 
-    /**
-     * 为notification加载图
-     */
-    public void displayImageForNotification(Context context, RemoteViews rv, int id,
-                                            Notification notification, int NOTIFICATION_ID, String url) {
-        this.displayImageForTarget(context,
-                initNotificationTarget(context, id, rv, notification, NOTIFICATION_ID), url);
-    }
 
     /**
      * 不带回调的加载
@@ -71,14 +62,17 @@ public class ImageLoaderManager {
                 .asBitmap()
                 .load(url)
                 .apply(initCommonRequestOption())
+                .addListener(requestListener)
                 .transition(withCrossFade())
                 .into(imageView);
     }
 
-    /**
-     * 带回调的加载图片方法
-     */
+
     public void displayImageForCircle(final ImageView imageView, String url) {
+        displayImageWidthRadius(imageView, url, -1);
+    }
+
+    public void displayImageWidthRadius(final ImageView imageView, String url, float radius) {
         Glide.with(imageView.getContext())
                 .asBitmap()
                 .load(url)
@@ -88,12 +82,17 @@ public class ImageLoaderManager {
                     protected void setResource(final Bitmap resource) {
                         RoundedBitmapDrawable circularBitmapDrawable =
                                 RoundedBitmapDrawableFactory.create(imageView.getResources(), resource);
-                        circularBitmapDrawable.setCircular(true);
+                        if (radius == -1) {
+                            circularBitmapDrawable.setCircular(true);
+                        } else {
+                            circularBitmapDrawable.setCornerRadius(radius);
+                        }
                         imageView.setImageDrawable(circularBitmapDrawable);
                     }
                 });
     }
 
+    @SuppressLint("StaticFieldLeak")
     public void displayImageForViewGroup(final ViewGroup group, String url) {
         Glide.with(group.getContext())
                 .asBitmap()
@@ -104,39 +103,40 @@ public class ImageLoaderManager {
                     public void onResourceReady(@NonNull Bitmap resource,
                                                 @Nullable Transition<? super Bitmap> transition) {
                         final Bitmap res = resource;
-//                        Observable.just(resource)
-//                                .map(new Function<Bitmap, Drawable>() {
-//                                    @Override
-//                                    public Drawable apply(Bitmap bitmap) {
-//                                        Drawable drawable = new BitmapDrawable(
-//                                                Utils.doBlur(res, 100, true)
-//                                        );
-//                                        return drawable;
-//                                    }
-//                                })
-//                                .subscribeOn(Schedulers.io())
-//                                .observeOn(AndroidSchedulers.mainThread())
-//                                .subscribe(new Consumer<Drawable>() {
-//                                    @Override
-//                                    public void accept(Drawable drawable) throws Exception {
-//                                        group.setBackground(drawable);
-//                                    }
-//                                });
+                        new AsyncTask<Void, Void, Drawable>() {
+                            @Override
+                            protected Drawable doInBackground(Void... voids) {
+                                Drawable drawable =
+                                        new BitmapDrawable(
+                                                group.getContext().getResources(),
+                                                Utils.doBlur(res, 100, true)
+                                        );
+                                return drawable;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Drawable drawable) {
+                                super.onPostExecute(drawable);
+                                group.setBackground(drawable);
+                            }
+                        }.execute();
+
                     }
                 });
     }
 
+
     /**
      * 为非view加载图片
      */
-    private void displayImageForTarget(Context context, Target target, String url) {
+    private void displayImageForTarget(Context context, Target<Bitmap> target, String url) {
         this.displayImageForTarget(context, target, url, null);
     }
 
     /**
      * 为非view加载图片
      */
-    private void displayImageForTarget(Context context, Target target, String url,
+    private void displayImageForTarget(Context context, Target<Bitmap> target, String url,
                                        CustomRequestListener requestListener) {
         Glide.with(context)
                 .asBitmap()
@@ -160,8 +160,8 @@ public class ImageLoaderManager {
 
     private RequestOptions initCommonRequestOption() {
         RequestOptions options = new RequestOptions();
-        options.placeholder(R.mipmap.b4y)
-                .error(R.mipmap.b4y)
+        options.placeholder(R.drawable.ic_image_loading)
+                .error(R.drawable.ic_image_error)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .skipMemoryCache(false)
                 .priority(Priority.NORMAL);

@@ -51,4 +51,6 @@ dependencies {
     implementation project(path: ':business_base')
     runtimeOnly project(path: ':bus_webview')//runtimeOnly 在编译期间是无法使用该模块代码的
     kapt 'com.alibaba:arouter-compiler:1.5.1'
+
+
 }
