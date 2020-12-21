@@ -1,5 +1,6 @@
 package com.czy.yq_wanandroid.business.home.home
 
+import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
@@ -9,6 +10,8 @@ import com.czy.yq_wanandroid.entity.Banner
 import com.czy.yq_wanandroid.event.LoginEvent
 import com.czy.lib_base.mvpbase.MvpFragment
 import com.czy.lib_base.net.ApiException
+import com.czy.lib_qrcode.app.CaptureActivity
+import com.czy.yq_wanandroid.flowResult.FlowResult
 import com.yangqing.record.ext.toast
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -45,6 +48,15 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         }
         multiply.setEmptyViewClickListener {
             initData()
+        }
+        mTitleBar.leftClickListener {
+            FlowResult.Builder(activity)
+                .setIntent(Intent(context, CaptureActivity::class.java))
+                .addResultListener {
+                    toast(it.getStringExtra("result"))
+                }
+                .filterResultCode(300)
+                .call()
         }
     }
 
@@ -124,7 +136,7 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
 
     override fun onVisible(isFirstVisible: Boolean) {
         super.onVisible(isFirstVisible)
-        if(isFirstVisible){
+        if (isFirstVisible) {
             multiply.showLoadingView()
             mPresenter?.getHomeData(currentPage, true)
         }

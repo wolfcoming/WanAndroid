@@ -2,7 +2,9 @@ package com.czy.yq_wanandroid.base
 
 import android.app.Application
 import android.content.Context
+import android.os.Debug
 import android.os.StrictMode
+import androidx.core.os.TraceCompat
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.lib_base.utils.ContentWrapperUtils
 import com.czy.yq_wanandroid.BuildConfig
@@ -24,6 +26,7 @@ class App : Application() {
         //bugly
         CrashReport.initCrashReport(getApplicationContext(), "e049243189", true);
         initArouter()
+
     }
 
     private fun initArouter() {

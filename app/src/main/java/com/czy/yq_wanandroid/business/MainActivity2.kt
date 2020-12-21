@@ -1,5 +1,7 @@
 package com.czy.yq_wanandroid.business
 
+import android.os.Debug
+import androidx.core.os.TraceCompat
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -68,7 +70,7 @@ class MainActivity2 : com.czy.lib_base.BaseActivity() {
     }
 
     override fun initData() {
-        ImageLoaderManager.getInstance().displayImageForViewGroup(mBottomNav,"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1353138978,364163918&fm=26&gp=0.jpg")
+//        ImageLoaderManager.getInstance().displayImageForViewGroup(mBottomNav,"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1353138978,364163918&fm=26&gp=0.jpg")
     }
 
     class ViewPagerFragmentStateAdapter(
