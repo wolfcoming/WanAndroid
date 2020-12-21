@@ -7,6 +7,7 @@ import android.os.StrictMode
 import androidx.core.os.TraceCompat
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.lib_base.utils.ContentWrapperUtils
+import com.czy.lib_base.utils.LauncherTime
 import com.czy.yq_wanandroid.BuildConfig
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
@@ -17,6 +18,12 @@ import com.tencent.bugly.crashreport.CrashReport
 class App : Application() {
     companion object {
         lateinit var mContext: Context
+    }
+
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        LauncherTime.startRecrod()
     }
 
     override fun onCreate() {
