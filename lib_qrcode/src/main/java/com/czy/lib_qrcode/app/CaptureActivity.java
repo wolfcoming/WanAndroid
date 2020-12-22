@@ -384,7 +384,6 @@ public final class CaptureActivity extends Activity
   @SuppressWarnings("unchecked") private void handleDecodeInternally(Result rawResult,
                                                                      Bitmap barcode) {
     viewfinderView.setVisibility(View.GONE);
-
     Map<ResultMetadataType, Object> metadata =
         (Map<ResultMetadataType, Object>) rawResult.getResultMetadata();
     if (metadata != null) {

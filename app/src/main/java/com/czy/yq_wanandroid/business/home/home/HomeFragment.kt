@@ -2,6 +2,8 @@ package com.czy.yq_wanandroid.business.home.home
 
 import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.launcher.ARouter
+import com.czy.business_base.ArouterConfig
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
 import com.czy.yq_wanandroid.adapter.HomeBannerAdapter
@@ -53,9 +55,16 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
             FlowResult.Builder(activity)
                 .setIntent(Intent(context, CaptureActivity::class.java))
                 .addResultListener {
-                    toast(it.getStringExtra("result"))
+                    val result = it.getStringExtra("SCAN_RESULT")
+                    result?.let {
+                        if (result.startsWith("http")) {
+                            ARouter.getInstance().build(ArouterConfig.webviewPath)
+                                .withString("url", result)
+                                .withString("title", result)
+                                .navigation()
+                        }
+                    }
                 }
-                .filterResultCode(300)
                 .call()
         }
     }
