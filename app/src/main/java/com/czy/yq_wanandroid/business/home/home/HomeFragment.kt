@@ -1,5 +1,6 @@
 package com.czy.yq_wanandroid.business.home.home
 
+import android.Manifest
 import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
@@ -14,6 +15,7 @@ import com.czy.lib_base.mvpbase.MvpFragment
 import com.czy.lib_base.net.ApiException
 import com.czy.lib_qrcode.app.CaptureActivity
 import com.czy.yq_wanandroid.flowResult.FlowResult
+import com.tbruyelle.rxpermissions3.RxPermissions
 import com.yangqing.record.ext.toast
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -52,20 +54,29 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
             initData()
         }
         mTitleBar.leftClickListener {
-            FlowResult.Builder(activity)
-                .setIntent(Intent(context, CaptureActivity::class.java))
-                .addResultListener {
-                    val result = it.getStringExtra("SCAN_RESULT")
-                    result?.let {
-                        if (result.startsWith("http")) {
-                            ARouter.getInstance().build(ArouterConfig.webviewPath)
-                                .withString("url", result)
-                                .withString("title", result)
-                                .navigation()
-                        }
+            RxPermissions(this)
+                .request(Manifest.permission.CAMERA)
+                .subscribe {
+                    if (it) {
+                        FlowResult.Builder(activity)
+                            .setIntent(Intent(context, CaptureActivity::class.java))
+                            .addResultListener {
+                                val result = it.getStringExtra("SCAN_RESULT")
+                                result?.let {
+                                    if (result.startsWith("http")) {
+                                        ARouter.getInstance().build(ArouterConfig.webviewPath)
+                                            .withString("url", result)
+                                            .withString("title", result)
+                                            .navigation()
+                                    }
+                                }
+                            }
+                            .call()
+                    } else {
+                        toast("暂无相机权限")
                     }
                 }
-                .call()
+
         }
     }
 

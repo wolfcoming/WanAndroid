@@ -1,7 +1,7 @@
 package com.czy.yq_wanandroid.business
 
-import android.os.Debug
-import androidx.core.os.TraceCompat
+import android.net.Uri
+import android.os.Handler
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -10,13 +10,14 @@ import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.czy.business_base.ArouterConfig
 import com.czy.yq_wanandroid.R
-import com.czy.lib_base.BaseActivity
 import com.czy.yq_wanandroid.business.home.answer.AnswerFragment
 import com.czy.yq_wanandroid.business.home.home.HomeFragment
 import com.czy.yq_wanandroid.business.home.mine.MineFragment
 import com.czy.yq_wanandroid.business.home.projects.ProjectsFragment
-import com.example.lib_imageloader.image.ImageLoaderManager
+import com.czy.yq_wanandroid.test.PhoneCode
+import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.activity_main2.*
+
 
 @Route(path = ArouterConfig.mainActivity)
 class MainActivity2 : com.czy.lib_base.BaseActivity() {
