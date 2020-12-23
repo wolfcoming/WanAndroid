@@ -34,4 +34,5 @@ android {
 
 dependencies {
     api project(path: ':lib_base')
+    api 'org.aspectj:aspectjrt:1.9.5'
 }

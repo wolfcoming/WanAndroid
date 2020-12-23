@@ -1,7 +1,10 @@
 package com.czy.yq_wanandroid.business.home.home
 
 import android.Manifest
+import android.app.Activity
+import android.app.Application
 import android.content.Intent
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
@@ -31,7 +34,38 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         return R.layout.fragment_home
     }
 
+    class  Test :Application.ActivityLifecycleCallbacks{
+        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onActivityStarted(activity: Activity) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onActivityResumed(activity: Activity) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onActivityPaused(activity: Activity) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onActivityStopped(activity: Activity) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onActivityDestroyed(activity: Activity) {
+            TODO("Not yet implemented")
+        }
+
+    }
     override fun initView() {
+
         changNormalTopView(context!!, mTitleBar)
         mHomeRv.layoutManager = LinearLayoutManager(context)
         articleAdapter = HomeArticleListAdapter(articleList)

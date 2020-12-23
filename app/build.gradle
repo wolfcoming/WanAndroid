@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'android-aspectjx'
 }
 
 android {
@@ -44,6 +45,14 @@ android {
     }
 }
 
+aspectjx {
+    //指定只对含有关键字'universal-image-loader', 'AspectJX-Demo/library'的库进行织入扫描，忽略其他库，提升编译效率
+//    includeJarFilter 'universal-image-loader', 'AspectJX-Demo/library'
+//    excludeJarFilter '.jar'
+//    ajcArgs '-Xlint:warning'
+}
+
+
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     implementation 'com.youth.banner:banner:2.1.0'
@@ -51,6 +60,5 @@ dependencies {
     implementation project(path: ':business_base')
     runtimeOnly project(path: ':bus_webview')//runtimeOnly 在编译期间是无法使用该模块代码的
     kapt 'com.alibaba:arouter-compiler:1.5.1'
-
 
 }
