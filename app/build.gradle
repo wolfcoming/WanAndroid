@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-    id 'android-aspectjx'
 }
 
 android {
@@ -44,14 +43,6 @@ android {
         jvmTarget = '1.8'
     }
 }
-
-aspectjx {
-    //指定只对含有关键字'universal-image-loader', 'AspectJX-Demo/library'的库进行织入扫描，忽略其他库，提升编译效率
-//    includeJarFilter 'universal-image-loader', 'AspectJX-Demo/library'
-//    excludeJarFilter '.jar'
-//    ajcArgs '-Xlint:warning'
-}
-
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])

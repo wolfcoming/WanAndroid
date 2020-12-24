@@ -9,6 +9,11 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.lib_base.utils.ContentWrapperUtils
 import com.czy.lib_base.utils.LauncherTime
 import com.czy.yq_wanandroid.BuildConfig
+import com.czy.yq_wanandroid.launchstarter.TaskDispatcher
+import com.czy.yq_wanandroid.launchstarter.task.Task
+import com.czy.yq_wanandroid.tasks.InitArouter
+import com.czy.yq_wanandroid.tasks.InitBuglyTask
+import com.czy.yq_wanandroid.tasks.InitSmartRefresh
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -30,40 +35,15 @@ class App : Application() {
         super.onCreate()
         mContext = this
         ContentWrapperUtils.init(this)
-        //bugly
-        CrashReport.initCrashReport(getApplicationContext(), "e049243189", true);
-        initArouter()
 
-    }
-
-    private fun initArouter() {
-        if (BuildConfig.DEBUG) {
-            ARouter.openLog()
-            ARouter.openDebug()
-            ARouter.printStackTrace();
-        }
-        ARouter.init(this)
-    }
-
-    private fun enabledStrictMode() {
-        StrictMode.setThreadPolicy(
-            StrictMode.ThreadPolicy.Builder() //
-                .detectAll() //
-                .penaltyLog() //
-                .penaltyDeath() //
-                .build()
-        )
-    }
-
-    init {
-        //设置全局的Header构建器
-        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
-            ClassicsHeader(context)
-        }
-        //设置全局的Footer构建器
-        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
-            ClassicsFooter(context)
-        }
+        TaskDispatcher.init(this)
+        val taskDispatcher = TaskDispatcher.createInstance()
+        taskDispatcher
+            .addTask(InitBuglyTask())
+            .addTask(InitArouter())
+            .addTask(InitSmartRefresh())
+            .start()
+        taskDispatcher.await()
 
     }
 
