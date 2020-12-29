@@ -80,7 +80,7 @@ class FlowLayout @JvmOverloads constructor(
             tv.setPadding(20, 10, 20, 10)
             tv.text = this.datas[index].replace(" ", "")
             tv.setBackgroundResource(R.drawable.bg_flowlaout_item)
-            tv.setTextColor(Color.WHITE)
+            tv.setTextColor(Color.BLACK)
             tv.setOnClickListener {
                 if (this::mItemClick.isInitialized) {
                     mItemClick(index)

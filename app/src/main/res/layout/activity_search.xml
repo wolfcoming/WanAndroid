@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/mTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/common_blue"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_back" />
+
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                android:hint="请输入搜索内容"
+                android:textSize="12dp" />
+        </androidx.cardview.widget.CardView>
+
+
+        <ImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_search" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/llSearchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingTop="12dp"
+                android:text="热门搜索" />
+
+            <com.czy.lib_ui.FlowLayout
+                android:id="@+id/flHot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingTop="12dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="历史搜索" />
+
+                <TextView
+                    android:id="@+id/tvClear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="清除" />
+            </RelativeLayout>
+
+            <com.czy.lib_ui.FlowLayout
+                android:id="@+id/flHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <com.czy.lib_ui.MultipleViewLayout
+            android:background="@color/white"
+            android:visibility="gone"
+            android:id="@+id/multiply"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                android:id="@+id/mSmartRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mSearchRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+        </com.czy.lib_ui.MultipleViewLayout>
+
+    </FrameLayout>
+
+
+</LinearLayout>

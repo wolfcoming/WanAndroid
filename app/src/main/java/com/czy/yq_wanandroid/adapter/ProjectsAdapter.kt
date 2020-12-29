@@ -30,7 +30,6 @@ class ProjectsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         val childrenList = this.datas[position].children.map { it.name }
         projectsViewHolder.flowLayout.addData(childrenList as ArrayList<String>) {
             val entity = this.datas[position].children[it]
-            Toast.makeText(holder.flowLayout.context, entity.name, Toast.LENGTH_SHORT).show()
             ProjectsListActivity.start(holder.itemView.context, entity.name, entity.id)
         }
     }

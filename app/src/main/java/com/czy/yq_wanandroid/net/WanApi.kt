@@ -63,4 +63,17 @@ interface WanApi {
      */
     @POST("lg/uncollect_originId/{id}/json")
     fun unCollectArticle(@Path("id") id: Int): Observable<BaseResult<String>>
+
+    //搜索热词
+    @GET("hotkey/json")
+    fun getHotKeys(): Observable<BaseResult<List<HotKey>>>
+
+    //搜索
+    @FormUrlEncoded
+    @POST("article/query/{id}/json")
+    fun search(
+        @Path("id") id: Int,
+        @Field("k") words: String
+    ): Observable<BaseResult<ArticleList<ArticleEntity>>>
+
 }

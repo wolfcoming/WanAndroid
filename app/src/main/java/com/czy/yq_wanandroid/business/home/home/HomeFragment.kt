@@ -17,6 +17,7 @@ import com.czy.yq_wanandroid.event.LoginEvent
 import com.czy.lib_base.mvpbase.MvpFragment
 import com.czy.lib_base.net.ApiException
 import com.czy.lib_qrcode.app.CaptureActivity
+import com.czy.yq_wanandroid.business.search.SearchActivity
 import com.czy.yq_wanandroid.flowResult.FlowResult
 import com.tbruyelle.rxpermissions3.RxPermissions
 import com.yangqing.record.ext.toast
@@ -34,39 +35,9 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         return R.layout.fragment_home
     }
 
-    class  Test :Application.ActivityLifecycleCallbacks{
-        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onActivityStarted(activity: Activity) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onActivityResumed(activity: Activity) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onActivityPaused(activity: Activity) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onActivityStopped(activity: Activity) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onActivityDestroyed(activity: Activity) {
-            TODO("Not yet implemented")
-        }
-
-    }
     override fun initView() {
 
-        changNormalTopView(context!!, mTitleBar)
+        changNormalTopView(activity, mTitleBar)
         mHomeRv.layoutManager = LinearLayoutManager(context)
         articleAdapter = HomeArticleListAdapter(articleList)
         mHomeRv.adapter = articleAdapter
@@ -110,7 +81,9 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
                         toast("暂无相机权限")
                     }
                 }
-
+        }
+        mTitleBar.rightClickListener {
+            startActivity(Intent(activity, SearchActivity::class.java))
         }
     }
 
