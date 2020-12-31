@@ -2,7 +2,7 @@ package com.czy.lib_webview
 
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.czy.business_base.ArouterConfig
+import com.czy.lib_base.ArouterConfig
 import com.czy.lib_base.BaseActivity
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebSettings

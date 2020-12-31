@@ -1,7 +1,10 @@
 package com.czy.lib_base.net
 
+import com.alibaba.android.arouter.launcher.ARouter
+import com.czy.lib_base.ArouterConfig
 import com.czy.lib_base.Constants
 import com.czy.lib_base.net.entity.BaseResult
+import com.czy.lib_base.provider.IErrorCodeInterceptProvider
 import com.czy.lib_base.utils.ContentWrapperUtils
 import com.czy.lib_base.utils.NetUtils
 import com.google.gson.Gson
@@ -34,11 +37,10 @@ object ApiErrorHandlerUtil {
     fun <T> throwApiException(result: T) {
         if (result is BaseResult<*>) {
             if (result.errorCode != Constants.API_SUCCESS_CODE) {
-                if(result.errorCode == Constants.API_NEED_LOGIN){
-//                    //跳转登录
-//                    UserManage.exitLogin()
-//                    UserManage.gotoLogin()
-                }
+                val provider: IErrorCodeInterceptProvider =
+                    ARouter.getInstance().build(ArouterConfig.errorCodeProcess)
+                        .navigation() as IErrorCodeInterceptProvider
+                provider.processErrorCode(result.errorCode, onGetMsg(result.errorCode))
                 throw ApiException(result.errorCode, result.errorMsg)
             }
         }
@@ -105,6 +107,7 @@ object ApiErrorHandlerUtil {
             Code.HTTP -> "请求错误，请稍后重试"
             Code.HOST -> "服务器连接失败，请检查网络设置"
             Code.SSL -> "证书验证失败"
+            Constants.API_NEED_LOGIN -> "需要登录"
             else -> "未知错误，请稍后重试"
         }
     }

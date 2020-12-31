@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.czy.business_base.ArouterConfig
+import com.czy.lib_base.ArouterConfig
 import com.czy.lib_base.sp.SpHelpUtils
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.business.home.answer.AnswerFragment

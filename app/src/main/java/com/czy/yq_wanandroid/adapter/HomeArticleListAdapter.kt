@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.czy.business_base.ArouterConfig
+import com.czy.lib_base.ArouterConfig
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.czy.yq_wanandroid.net.WanApiService
