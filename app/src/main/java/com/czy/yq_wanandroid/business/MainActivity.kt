@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.czy.business_base.ArouterConfig
 import com.czy.lib_base.BaseActivity
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.business.home.answer.AnswerFragment

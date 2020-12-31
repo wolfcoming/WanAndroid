@@ -17,6 +17,7 @@ class ReadHistoryPresenter : MvpPresenter<IReadHistoryView>() {
                 it.log()
                 baseView?.showHistory(it)
             },{
+                it.printStackTrace()
                 baseView?.showLoadError("数据加载失败")
             })
     }

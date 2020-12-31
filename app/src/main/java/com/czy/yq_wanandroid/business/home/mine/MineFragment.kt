@@ -2,9 +2,8 @@ package com.czy.yq_wanandroid.business.home.mine
 
 import android.content.Intent
 import android.view.View
-import com.czy.yq_wanandroid.R
-import com.czy.lib_base.BaseFragment
 import com.czy.lib_base.LazyFragment
+import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.base.UserManage
 import com.czy.yq_wanandroid.business.collect.CollectArticleActivity
 import com.czy.yq_wanandroid.business.login.LoginActivity

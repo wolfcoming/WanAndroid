@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Looper;
 import android.util.Log;
 
-
 import androidx.annotation.UiThread;
 
 import com.czy.yq_wanandroid.launchstarter.sort.TaskSortUtil;

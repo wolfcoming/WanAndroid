@@ -1,10 +1,15 @@
 package com.czy.yq_wanandroid.business.search
 
+import com.czy.lib_base.Constants.SEARCHHISTORY_MAX_COUNT
 import com.czy.lib_base.mvpbase.MvpPresenter
 import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.czy.yq_wanandroid.net.WanApiService
+import com.czy.yq_wanandroid.room.AppDatabase
+import com.czy.yq_wanandroid.room.entity.SearchHistory
 import com.yangqing.record.ext.commonSubscribe
+import com.yangqing.record.ext.threadSwitch
 import com.yangqing.record.ext.threadSwitchAndBindLifeCycle
+import io.reactivex.rxjava3.core.Observable
 
 class SearchPresenter : MvpPresenter<ISearchView>() {
 
@@ -25,6 +30,30 @@ class SearchPresenter : MvpPresenter<ISearchView>() {
                 baseView?.showArticleList(it.data!!.datas as ArrayList<ArticleEntity>)
             }) {
                 baseView?.getArticleListFailed(it.message!!)
+            }
+    }
+
+    fun insertSearchHistory(name: String) {
+        if (name.isEmpty()) return
+        try {
+            Thread {
+                AppDatabase.instance.searchHistoryDao()
+                    .insertSearch(SearchHistory(name, System.currentTimeMillis()))
+                AppDatabase.instance.searchHistoryDao().autoDelete(SEARCHHISTORY_MAX_COUNT)
+            }.start()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+
+    }
+
+    fun getAllSearchHistory() {
+        Observable.create<List<String>> {
+            val historySearch = AppDatabase.instance.searchHistoryDao().getHistorySearch()
+            it.onNext(historySearch.map { it.name })
+        }.threadSwitch()
+            .subscribe {
+                baseView?.showHistoryInput(it)
             }
     }
 }

@@ -1,10 +1,10 @@
 package com.czy.yq_wanandroid.business.home.projects
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.czy.lib_base.mvpbase.MvpFragment
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.ProjectsAdapter
 import com.czy.yq_wanandroid.entity.ProjectEntity
-import com.czy.lib_base.mvpbase.MvpFragment
 import kotlinx.android.synthetic.main.fragment_projects.*
 
 class ProjectsFragment : MvpFragment<ProjectsPrensenter>(), IProjectsView {

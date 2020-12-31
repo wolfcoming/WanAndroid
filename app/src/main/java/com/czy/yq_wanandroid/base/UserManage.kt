@@ -1,7 +1,6 @@
 package com.czy.yq_wanandroid.base
 
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
 import com.czy.yq_wanandroid.business.login.LoginActivity
 import com.czy.yq_wanandroid.entity.UserInfo

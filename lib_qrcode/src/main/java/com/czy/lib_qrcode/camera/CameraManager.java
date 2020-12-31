@@ -29,7 +29,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-
 import com.czy.lib_qrcode.app.PreferencesActivity;
 import com.czy.lib_qrcode.decode.PlanarYUVLuminanceSource;
 import com.czy.lib_qrcode.util.Util;

@@ -3,7 +3,10 @@ package com.czy.yq_wanandroid.net
 import com.czy.lib_base.net.convert.CustomGsonConverterFactory
 import com.czy.lib_base.net.interceptor.NetInterceptor
 import com.infoholdcity.basearchitecture.self_extends.log
-import okhttp3.*
+import okhttp3.Cookie
+import okhttp3.CookieJar
+import okhttp3.HttpUrl
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import java.util.concurrent.TimeUnit

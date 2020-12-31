@@ -21,7 +21,6 @@ import android.hardware.Camera;
 import android.os.Build;
 import android.util.Log;
 
-
 import com.czy.lib_qrcode.util.Util;
 
 import java.lang.reflect.InvocationTargetException;

@@ -12,8 +12,6 @@ import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
 import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.czy.yq_wanandroid.entity.HotKey
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.activity_search.mTitleBar
-import kotlinx.android.synthetic.main.activity_search.multiply
 
 class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
     val datas: ArrayList<ArticleEntity> = ArrayList()
@@ -64,6 +62,7 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
             false
         }
         ivSearch.setOnClickListener {
+            KeyboardUtils.hideSoftInput(this)
             getContentData(true)
         }
 
@@ -72,6 +71,7 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
 
     override fun initData() {
         mPresenter?.getHotKey()
+        mPresenter?.getAllSearchHistory()
     }
 
     override fun showHotKeys(list: List<HotKey>) {
@@ -87,8 +87,12 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
         showToast(msg)
     }
 
-    override fun showHistoryInput(list: List<HotKey>) {
-
+    override fun showHistoryInput(list: List<String>) {
+        flHistory.addData(list as ArrayList<String>){
+            currentWords = list[it]
+            etSearch.setText(currentWords)
+            getContentData(true)
+        }
     }
 
 
@@ -105,7 +109,7 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
             } else mSmartRefresh.finishLoadMore()
         }
         if (result.isNullOrEmpty()) {
-            showToast("获取文章列表数据为空")
+            multiply.showEmptyView()
             return
         }
 
@@ -129,6 +133,8 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
         if (isFresh) {
             multiply.showLoadingView()
         }
+
+        mPresenter?.insertSearchHistory(currentWords)
         mPresenter?.searchArticle(pageIndex, currentWords)
     }
 

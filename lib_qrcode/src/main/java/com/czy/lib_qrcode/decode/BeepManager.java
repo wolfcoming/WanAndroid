@@ -26,7 +26,6 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-
 import com.czy.lib_qrcode.R;
 
 import java.io.IOException;

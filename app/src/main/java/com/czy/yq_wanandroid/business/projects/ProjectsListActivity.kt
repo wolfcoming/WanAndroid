@@ -3,10 +3,10 @@ package com.czy.yq_wanandroid.business.projects
 import android.content.Context
 import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.czy.lib_base.mvpbase.MvpActivity
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
 import com.czy.yq_wanandroid.entity.ArticleEntity
-import com.czy.lib_base.mvpbase.MvpActivity
 import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.activity_project_list.*
 

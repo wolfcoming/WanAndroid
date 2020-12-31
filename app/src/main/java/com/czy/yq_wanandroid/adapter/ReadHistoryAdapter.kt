@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
-import com.czy.yq_wanandroid.R
 import com.czy.lib_ui.SideslipLayout
+import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.room.AppDatabase
 import com.czy.yq_wanandroid.room.entity.ReadHistory
 import com.yangqing.record.ext.threadSwitch

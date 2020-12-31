@@ -1,7 +1,5 @@
 package com.czy.yq_wanandroid.business
 
-import android.net.Uri
-import android.os.Handler
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -15,7 +13,6 @@ import com.czy.yq_wanandroid.business.home.answer.AnswerFragment
 import com.czy.yq_wanandroid.business.home.home.HomeFragment
 import com.czy.yq_wanandroid.business.home.mine.MineFragment
 import com.czy.yq_wanandroid.business.home.projects.ProjectsFragment
-import com.czy.yq_wanandroid.test.PhoneCode
 import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.activity_main2.*
 

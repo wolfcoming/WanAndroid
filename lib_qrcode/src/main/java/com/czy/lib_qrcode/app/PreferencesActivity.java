@@ -23,7 +23,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 
-
 import com.czy.lib_qrcode.R;
 
 import java.util.ArrayList;

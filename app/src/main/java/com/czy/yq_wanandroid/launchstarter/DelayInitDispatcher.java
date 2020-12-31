@@ -3,7 +3,6 @@ package com.czy.yq_wanandroid.launchstarter;
 import android.os.Looper;
 import android.os.MessageQueue;
 
-
 import com.czy.yq_wanandroid.launchstarter.task.DispatchRunnable;
 import com.czy.yq_wanandroid.launchstarter.task.Task;
 

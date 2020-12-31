@@ -8,5 +8,8 @@ object Constants {
 
     //阅读历史最大缓存数量
     val READHISTORY_MAX_COUNT = 100
+    //搜索历史最大缓存数量
+    val SEARCHHISTORY_MAX_COUNT = 20
+
 
 }
