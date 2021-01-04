@@ -7,6 +7,7 @@ import com.czy.lib_base.utils.LauncherTime
 import com.czy.yq_wanandroid.launchstarter.TaskDispatcher
 import com.czy.yq_wanandroid.tasks.InitArouter
 import com.czy.yq_wanandroid.tasks.InitBuglyTask
+import com.czy.yq_wanandroid.tasks.InitCompontService
 import com.czy.yq_wanandroid.tasks.InitSmartRefresh
 
 
@@ -32,6 +33,7 @@ class App : Application() {
             .addTask(InitBuglyTask())
             .addTask(InitArouter())
             .addTask(InitSmartRefresh())
+            .addTask(InitCompontService())
             .start()
         taskDispatcher.await()
 

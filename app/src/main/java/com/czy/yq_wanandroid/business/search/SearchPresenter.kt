@@ -2,8 +2,8 @@ package com.czy.yq_wanandroid.business.search
 
 import com.czy.lib_base.Constants.SEARCHHISTORY_MAX_COUNT
 import com.czy.lib_base.mvpbase.MvpPresenter
-import com.czy.yq_wanandroid.entity.ArticleEntity
-import com.czy.yq_wanandroid.net.WanApiService
+import com.czy.business_base.entity.ArticleEntity
+import com.czy.business_base.api.WanApiService
 import com.czy.yq_wanandroid.room.AppDatabase
 import com.czy.yq_wanandroid.room.entity.SearchHistory
 import com.yangqing.record.ext.commonSubscribe

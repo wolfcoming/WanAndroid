@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
-import com.czy.yq_wanandroid.entity.Banner
+import com.czy.business_base.entity.Banner
 import com.example.lib_imageloader.image.ImageLoaderManager
 import com.youth.banner.adapter.BannerAdapter
 

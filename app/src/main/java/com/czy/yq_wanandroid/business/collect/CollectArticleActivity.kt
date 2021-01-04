@@ -1,10 +1,10 @@
 package com.czy.yq_wanandroid.business.collect
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.czy.business_base.entity.ArticleEntity
 import com.czy.lib_base.mvpbase.MvpActivity
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
-import com.czy.yq_wanandroid.entity.ArticleEntity
 import com.infoholdcity.basearchitecture.self_extends.log
 import kotlinx.android.synthetic.main.activity_collect.*
 

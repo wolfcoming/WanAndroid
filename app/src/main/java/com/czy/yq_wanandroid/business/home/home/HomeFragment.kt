@@ -12,10 +12,10 @@ import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
 import com.czy.yq_wanandroid.adapter.HomeBannerAdapter
 import com.czy.yq_wanandroid.business.search.SearchActivity
-import com.czy.yq_wanandroid.entity.ArticleEntity
-import com.czy.yq_wanandroid.entity.Banner
-import com.czy.yq_wanandroid.event.LoginEvent
-import com.czy.yq_wanandroid.flowResult.FlowResult
+import com.czy.business_base.entity.ArticleEntity
+import com.czy.business_base.entity.Banner
+import com.czy.business_base.event.LoginEvent
+import com.czy.lib_base.flowResult.FlowResult
 import com.tbruyelle.rxpermissions3.RxPermissions
 import com.yangqing.record.ext.toast
 import com.youth.banner.indicator.CircleIndicator

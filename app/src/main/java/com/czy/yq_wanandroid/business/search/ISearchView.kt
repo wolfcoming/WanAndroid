@@ -1,8 +1,8 @@
 package com.czy.yq_wanandroid.business.search
 
 import com.czy.lib_base.mvpbase.IView
-import com.czy.yq_wanandroid.entity.ArticleEntity
-import com.czy.yq_wanandroid.entity.HotKey
+import com.czy.business_base.entity.ArticleEntity
+import com.czy.business_base.entity.HotKey
 
 interface ISearchView : IView {
     fun showHotKeys(list: List<HotKey>)

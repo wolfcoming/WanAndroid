@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.czy.business_base.entity.ProjectEntity
 import com.czy.lib_ui.FlowLayout
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.business.projects.ProjectsListActivity
-import com.czy.yq_wanandroid.entity.ProjectEntity
 
 class ProjectsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

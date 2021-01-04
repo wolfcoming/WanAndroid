@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.lib_base.ArouterConfig
 import com.czy.yq_wanandroid.R
-import com.czy.yq_wanandroid.entity.ArticleEntity
-import com.czy.yq_wanandroid.net.WanApiService
+import com.czy.business_base.api.WanApiService
+import com.czy.business_base.entity.ArticleEntity
 import com.yangqing.record.ext.commonSubscribe
 import com.yangqing.record.ext.threadSwitch
 
