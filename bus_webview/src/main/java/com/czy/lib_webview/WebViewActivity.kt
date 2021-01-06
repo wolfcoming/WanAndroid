@@ -1,6 +1,8 @@
-package com.czy.lib_webview
+    package com.czy.lib_webview
 
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewParent
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.czy.lib_base.ArouterConfig
 import com.czy.lib_base.BaseActivity
@@ -10,7 +12,8 @@ import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.activity_webview.*
 
-@Route(path = ArouterConfig.webviewPath)
+
+    @Route(path = ArouterConfig.webviewPath)
 class WebViewActivity : BaseActivity() {
     override fun getLayoutId(): Int {
         return R.layout.activity_webview
@@ -85,6 +88,17 @@ class WebViewActivity : BaseActivity() {
 
 
     override fun onDestroy() {
+        if(mWebview!=null){
+            val parent: ViewGroup = mWebview.parent as ViewGroup
+            parent.removeView(mWebview)
+            mWebview.stopLoading()
+            mWebview.settings.javaScriptEnabled = false
+            mWebview.clearHistory()
+            mWebview.clearView()
+            mWebview.clearAnimation()
+            mWebview.removeAllViews();
+            mWebview.destroy()
+        }
         super.onDestroy()
 
     }
