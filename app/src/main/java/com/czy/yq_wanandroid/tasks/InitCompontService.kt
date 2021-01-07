@@ -9,7 +9,8 @@ import java.lang.Exception
  */
 class InitCompontService : Task() {
     var compontServices = arrayOf(
-        "com.example.bus_login.service.UserServiceRegister"
+        "com.example.bus_login.service.UserServiceRegister",
+        "com.czy.yq_wanandroid.service.AppServiceRegister"
     )
 
     override fun run() {

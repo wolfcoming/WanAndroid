@@ -1,9 +1,6 @@
 package com.czy.yq_wanandroid.room.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.czy.yq_wanandroid.room.entity.SearchHistory
 
 @Dao
@@ -17,4 +14,7 @@ interface SearchHistoryDao {
     @Query("""delete from search_history where name NOT IN 
         (select name from search_history order by time DESC limit 0,:maxCount)""")
     fun autoDelete(maxCount: Int)
+
+    @Query("delete from search_history")
+    fun delete()
 }

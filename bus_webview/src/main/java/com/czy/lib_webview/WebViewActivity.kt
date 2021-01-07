@@ -1,9 +1,10 @@
-    package com.czy.lib_webview
+package com.czy.lib_webview
 
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewParent
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.czy.business_base.service.ServiceFactory
 import com.czy.lib_base.ArouterConfig
 import com.czy.lib_base.BaseActivity
 import com.tencent.smtt.sdk.WebChromeClient
@@ -13,7 +14,7 @@ import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.activity_webview.*
 
 
-    @Route(path = ArouterConfig.webviewPath)
+@Route(path = ArouterConfig.webviewPath)
 class WebViewActivity : BaseActivity() {
     override fun getLayoutId(): Int {
         return R.layout.activity_webview
@@ -24,12 +25,7 @@ class WebViewActivity : BaseActivity() {
         var title = intent.getStringExtra("title")
         val url = intent.getStringExtra("url")!!
         mTitleBar.setTitle(title)
-//        Thread {
-//            AppDatabase.instance.readHistoryDao()
-//                .addReadHistory(ReadHistory(url, title, System.currentTimeMillis()))
-//            AppDatabase.instance.readHistoryDao().autoDeleteOverMax(READHISTORY_MAX_COUNT)
-//        }.start()
-
+        ServiceFactory.getAppService().recodeReadHistory(url, title, System.currentTimeMillis())
         initWebView()
         mWebview.loadUrl(url)
     }
@@ -88,7 +84,7 @@ class WebViewActivity : BaseActivity() {
 
 
     override fun onDestroy() {
-        if(mWebview!=null){
+        if (mWebview != null) {
             val parent: ViewGroup = mWebview.parent as ViewGroup
             parent.removeView(mWebview)
             mWebview.stopLoading()

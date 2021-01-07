@@ -10,6 +10,7 @@ import com.czy.lib_base.utils.KeyboardUtils
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
 import com.czy.business_base.entity.ArticleEntity
+import com.czy.business_base.entity.ArticleList
 import com.czy.business_base.entity.HotKey
 import kotlinx.android.synthetic.main.activity_search.*
 
@@ -49,6 +50,7 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
             override fun afterTextChanged(s: Editable) {
                 if (s.isBlank()) {
                     showContentView(false)
+                    mPresenter?.getAllSearchHistory()
                 }
                 currentWords = s.toString()
             }
@@ -67,6 +69,9 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
         }
 
         ivBack.setOnClickListener { finish() }
+        tvClear.setOnClickListener {
+            mPresenter?.clearSearchHistory()
+        }
     }
 
     override fun initData() {
@@ -96,24 +101,24 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
     }
 
 
-    override fun showArticleList(result: ArrayList<ArticleEntity>) {
+    override fun showArticleList(result: ArticleList<ArticleEntity>) {
         if (isFresh) {
+            if (result.datas.isEmpty()) {
+                multiply.showEmptyView()
+                return
+            }
             datas.clear()
         }
+
         multiply.showContentView()
-        if (isFresh) {
+        if (result.over) {
+            mSmartRefresh.finishLoadMoreWithNoMoreData()
+        } else{
             mSmartRefresh.finishRefresh()
-        } else {
-            if (result?.size == 0) {
-                mSmartRefresh.finishLoadMoreWithNoMoreData()
-            } else mSmartRefresh.finishLoadMore()
-        }
-        if (result.isNullOrEmpty()) {
-            multiply.showEmptyView()
-            return
+            mSmartRefresh.finishLoadMore()
         }
 
-        datas.addAll(result)
+        datas.addAll(result.datas)
         mSearchRv.adapter?.notifyDataSetChanged()
     }
 
@@ -129,7 +134,7 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
     fun getContentData(fresh: Boolean) {
         showContentView(true)
         isFresh = fresh
-        pageIndex = if (fresh) 0 else pageIndex++
+        if (fresh) 0 else pageIndex++
         if (isFresh) {
             multiply.showLoadingView()
         }
