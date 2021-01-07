@@ -2,6 +2,10 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
 }
+apply plugin: 'maven'
+
+def pomName = "qrcode"
+def pomVersion = '1.0.0-SNAPSHOT'
 
 android {
     compileSdkVersion 29
@@ -37,4 +41,24 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.1.0'
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: NEXUS_REPOSITORY_URL) {
+                authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+            }
+            pom.project {
+                version pomVersion//版本好
+                artifactId pomName//名字
+                groupId POM_GROUPID//域名
+                packaging POM_PACKAGING//后缀
+                description 'maven_pom_description'//描述
+                //com.yangqing.qrcode:1.0.0-SNAPSHOT:1.0.0-SNAPSHOT
+                //  域名 ： 名字：版本号
+            }
+        }
+    }
 }

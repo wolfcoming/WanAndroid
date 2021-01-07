@@ -6,6 +6,22 @@ buildscript {
         jcenter()
         maven { url "https://jitpack.io" }
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        //本地maven仓库
+        mavenCentral()
+        maven{
+            url 'http://localhost:8081/repository/wananzhuo_releases/'
+            credentials{
+                username 'admin'
+                password 'admin123'
+            }
+        }
+        maven{
+            url 'http://localhost:8081/repository/wananzhuo_snapshot/'
+            credentials{
+                username 'admin'
+                password 'admin123'
+            }
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.1'
@@ -25,6 +41,22 @@ allprojects {
         jcenter()
         maven { url "https://jitpack.io" }
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        //本地maven仓库
+        mavenCentral()
+        maven{
+            url 'http://localhost:8081/repository/wananzhuo_releases/'
+            credentials{
+                username 'admin'
+                password 'admin123'
+            }
+        }
+        maven{
+            url 'http://localhost:8081/repository/wananzhuo_snapshot/'
+            credentials{
+                username 'admin'
+                password 'admin123'
+            }
+        }
     }
 }
 
