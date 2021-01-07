@@ -39,21 +39,18 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         articleAdapter = HomeArticleListAdapter(articleList)
         mHomeRv.adapter = articleAdapter
         mSmartRefresh.setOnRefreshListener {
-            currentPage = 0
-            mPresenter?.getHomeData(currentPage, true)
-
+            getData(true)
         }
 
         mSmartRefresh.setOnLoadMoreListener {
-            currentPage++
-            mPresenter?.getHomeData(currentPage, false)
+            getData(false)
         }
 
         multiply.setErrorViewClickListener {
-            initData()
+            getData(true)
         }
         multiply.setEmptyViewClickListener {
-            initData()
+            getData(true)
         }
         mTitleBar.leftClickListener {
             RxPermissions(this)
@@ -83,6 +80,7 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
             startActivity(Intent(activity, SearchActivity::class.java))
         }
     }
+
 
     override fun initData() {
 
@@ -154,7 +152,7 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onLoginEvent(loginEvent: LoginEvent) {
         if (isDetached) return
-        initData()
+        getData(true)
     }
 
 
@@ -162,8 +160,15 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         super.onVisible(isFirstVisible)
         if (isFirstVisible) {
             multiply.showLoadingView()
-            mPresenter?.getHomeData(currentPage, true)
+            getData(true)
         }
+    }
+
+    fun getData(fresh: Boolean) {
+        if (fresh) {
+            currentPage = 0
+        } else currentPage++
+        mPresenter?.getHomeData(currentPage, fresh)
     }
 }
 

@@ -27,7 +27,7 @@ class SearchPresenter : MvpPresenter<ISearchView>() {
         WanApiService.getWanApi().search(pageIndex, words)
             .threadSwitchAndBindLifeCycle(baseView)
             .commonSubscribe({
-                baseView?.showArticleList(it.data!!.datas as ArrayList<ArticleEntity>)
+                baseView?.showArticleList(it.data!!)
             }) {
                 baseView?.getArticleListFailed(it.message!!)
             }
@@ -41,7 +41,7 @@ class SearchPresenter : MvpPresenter<ISearchView>() {
                     .insertSearch(SearchHistory(name, System.currentTimeMillis()))
                 AppDatabase.instance.searchHistoryDao().autoDelete(SEARCHHISTORY_MAX_COUNT)
             }.start()
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
 
@@ -49,6 +49,17 @@ class SearchPresenter : MvpPresenter<ISearchView>() {
 
     fun getAllSearchHistory() {
         Observable.create<List<String>> {
+            val historySearch = AppDatabase.instance.searchHistoryDao().getHistorySearch()
+            it.onNext(historySearch.map { it.name })
+        }.threadSwitch()
+            .subscribe {
+                baseView?.showHistoryInput(it)
+            }
+    }
+
+    fun clearSearchHistory() {
+        Observable.create<List<String>> {
+            AppDatabase.instance.searchHistoryDao().delete()
             val historySearch = AppDatabase.instance.searchHistoryDao().getHistorySearch()
             it.onNext(historySearch.map { it.name })
         }.threadSwitch()

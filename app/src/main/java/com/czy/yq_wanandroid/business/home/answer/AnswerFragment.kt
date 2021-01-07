@@ -6,9 +6,12 @@ import com.czy.lib_base.net.ApiException
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
 import com.czy.business_base.entity.ArticleEntity
+import com.czy.business_base.event.LoginEvent
 import com.infoholdcity.basearchitecture.self_extends.log
 import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.fragment_answer.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class AnswerFragment : MvpFragment<AnswerPresenter>(), IAnswerView {
     var curPage = 0
@@ -21,22 +24,20 @@ class AnswerFragment : MvpFragment<AnswerPresenter>(), IAnswerView {
     override fun initView() {
         changNormalTopView(context!!, mTitleBar)
         mSmartRefresh.setOnLoadMoreListener {
-            curPage = 0
-            mPresenter?.getAnswerList(curPage, true)
+            getData(true)
         }
         mSmartRefresh.setOnLoadMoreListener {
-            curPage++
-            mPresenter?.getAnswerList(curPage, false)
+            getData(false)
         }
         mAnswerRv.layoutManager = LinearLayoutManager(context)
         mAdapter = HomeArticleListAdapter(datas)
         mAnswerRv.adapter = mAdapter
 
         multiply.setErrorViewClickListener {
-            initData()
+            getData(true)
         }
         multiply.setEmptyViewClickListener {
-            initData()
+            getData(true)
         }
     }
 
@@ -71,19 +72,31 @@ class AnswerFragment : MvpFragment<AnswerPresenter>(), IAnswerView {
     }
 
     override fun getDataFaile(e: ApiException, fresh: Boolean) {
-        "wendang".log()
         toast(e.message!!)
         if (fresh) multiply.showErrorView(e.message!!)
         mSmartRefresh.finishRefresh(false)
         mSmartRefresh.finishLoadMore(false)
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onLoginEvent(loginEvent: LoginEvent) {
+        if (isDetached) return
+        getData(true)
+    }
+
+
     override fun onVisible(ifFirstVisiable: Boolean) {
         super.onVisible(ifFirstVisiable)
         if (ifFirstVisiable) {
             multiply.showLoadingView()
-            mPresenter?.getAnswerList(curPage, true)
+            getData(true)
         }
     }
 
+    fun getData(fresh: Boolean) {
+        if (fresh) {
+            curPage = 0
+        } else curPage++
+        mPresenter?.getAnswerList(curPage, fresh)
+    }
 }
