@@ -6,6 +6,5 @@ include ':lib_ui'
 include ':lib_net'
 include ':bus_webview'
 include ':lib_base'
-include ':systemlearn'
 include ':app'
 rootProject.name = "yq_wanAndroid"

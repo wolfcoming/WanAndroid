@@ -93,7 +93,7 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
     }
 
     override fun showHistoryInput(list: List<String>) {
-        flHistory.addData(list as ArrayList<String>){
+        flHistory.addData(list as ArrayList<String>) {
             currentWords = list[it]
             etSearch.setText(currentWords)
             getContentData(true)
@@ -113,7 +113,7 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
         multiply.showContentView()
         if (result.over) {
             mSmartRefresh.finishLoadMoreWithNoMoreData()
-        } else{
+        } else {
             mSmartRefresh.finishRefresh()
             mSmartRefresh.finishLoadMore()
         }
@@ -134,7 +134,7 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
     fun getContentData(fresh: Boolean) {
         showContentView(true)
         isFresh = fresh
-        if (fresh) 0 else pageIndex++
+        if (fresh) pageIndex = 0 else pageIndex++
         if (isFresh) {
             multiply.showLoadingView()
         }

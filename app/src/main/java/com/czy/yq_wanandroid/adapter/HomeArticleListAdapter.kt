@@ -10,10 +10,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.czy.lib_base.ArouterConfig
-import com.czy.yq_wanandroid.R
 import com.czy.business_base.api.WanApiService
 import com.czy.business_base.entity.ArticleEntity
+import com.czy.lib_base.ArouterConfig
+import com.czy.yq_wanandroid.R
 import com.yangqing.record.ext.commonSubscribe
 import com.yangqing.record.ext.threadSwitch
 
@@ -32,7 +32,8 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
 
     override fun onBindViewHolder(holder: ArticleListViewHolder, position: Int) {
         val item = datas[position]
-        holder.tvTitle.text = this.datas[position].title
+
+        holder.tvTitle.text = Html.fromHtml(this.datas[position].title)
         holder.ll_new.visibility = if (item.fresh) View.VISIBLE else View.GONE
         holder.ll_top.visibility = if (item.top) View.VISIBLE else View.GONE
         holder.tv_author.text = if (item.author.isEmpty()) {

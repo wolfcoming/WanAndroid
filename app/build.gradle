@@ -42,6 +42,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    repositories{
+        flatDir{
+            dirs 'libs'
+        }
+    }
 }
 
 dependencies {
