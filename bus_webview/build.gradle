@@ -45,4 +45,5 @@ dependencies {
     api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     implementation project(path: ':business_base')
     kapt 'com.alibaba:arouter-compiler:1.5.1'
+    api "androidx.webkit:webkit:1.2.0"
 }

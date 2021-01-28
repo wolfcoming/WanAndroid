@@ -20,8 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="1dp" />
 
-    <com.tencent.smtt.sdk.WebView
-        android:id="@+id/mWebview"
+
+    <com.czy.lib_webview.WebContainer
+        android:id="@+id/mWebContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

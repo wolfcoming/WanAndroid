@@ -2,11 +2,11 @@ package com.example.bus_login
 
 import android.content.Context
 import android.content.Intent
-import com.czy.yq_wanandroid.business.login.LoginActivity
 import com.czy.business_base.entity.UserInfo
 import com.czy.business_base.event.LoginEvent
 import com.czy.lib_base.flowResult.FlowResult
 import com.czy.lib_base.utils.ContentWrapperUtils
+import com.czy.yq_wanandroid.business.login.LoginActivity
 
 class UserManage {
     companion object {

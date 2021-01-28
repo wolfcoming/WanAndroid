@@ -5,13 +5,13 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.czy.business_base.entity.ArticleEntity
+import com.czy.business_base.entity.ArticleList
+import com.czy.business_base.entity.HotKey
 import com.czy.lib_base.mvpbase.MvpActivity
 import com.czy.lib_base.utils.KeyboardUtils
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
-import com.czy.business_base.entity.ArticleEntity
-import com.czy.business_base.entity.ArticleList
-import com.czy.business_base.entity.HotKey
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
