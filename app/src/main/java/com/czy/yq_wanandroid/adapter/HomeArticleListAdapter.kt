@@ -1,6 +1,7 @@
 package com.czy.yq_wanandroid.adapter
 
 import android.content.Context
+import android.content.DialogInterface
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,13 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
+import com.czy.business_base.ArouterConfig
 import com.czy.business_base.api.WanApiService
 import com.czy.business_base.entity.ArticleEntity
-import com.czy.business_base.ArouterConfig
+import com.czy.lib_base.utils.SettingUtils
 import com.czy.yq_wanandroid.R
 import com.yangqing.record.ext.commonSubscribe
 import com.yangqing.record.ext.threadSwitch
@@ -61,6 +64,21 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
                 .withString("title", item.title)
                 .withString("url", item.link)
                 .navigation()
+        }
+
+        holder.itemView.setOnLongClickListener {
+            AlertDialog.Builder(holder.itemView.context)
+                .setItems(arrayOf("浏览器打开","复制URL"), object :DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        if(which == 0){
+                            SettingUtils.openSystemBrower(holder.itemView.context,item.link)
+                        }else if (which == 1){
+                            SettingUtils.copyContentToClipboard(holder.itemView.context,item.link)
+                        }
+                    }
+
+                }).show()
+            return@setOnLongClickListener true
         }
     }
 

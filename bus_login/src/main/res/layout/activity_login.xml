@@ -45,6 +45,7 @@
 
 
         <ImageView
+            android:background="#8e8e8e"
             android:id="@+id/ivTest"
             android:layout_width="200dp"
             android:layout_height="200dp"/>

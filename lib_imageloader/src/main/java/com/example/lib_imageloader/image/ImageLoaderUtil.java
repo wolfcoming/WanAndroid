@@ -43,6 +43,14 @@ public class ImageLoaderUtil {
         return mInstance;
     }
 
+    public void loadImage(String url, ImageView imageView) {
+        mStrategy.loadImage(url, imageView);
+    }
+
+    public void loadImageWithAppCxt(String url, ImageView imageView) {
+        mStrategy.loadImageWithAppCxt(url,imageView);
+    }
+
     /**
      * 统一使用App context
      * 可能带来的问题：http://stackoverflow.com/questions/31964737/glide-image-loading-with-application-context
@@ -71,13 +79,9 @@ public class ImageLoaderUtil {
         mStrategy.loadCircleBorderImage(url, placeholder, imageView, borderWidth, borderColor, heightPX,widthPX);
     }
 
-    public void loadImage(String url, ImageView imageView) {
-        mStrategy.loadImage(url, imageView);
-    }
 
-    public void loadImageWithAppCxt(String url, ImageView imageView) {
-        mStrategy.loadImageWithAppCxt(url,imageView);
-    }
+
+
 
     public void loadImageWithProgress(String url, ImageView imageView, ProgressLoadListener listener) {
         mStrategy.loadImageWithProgress(url,imageView,listener);

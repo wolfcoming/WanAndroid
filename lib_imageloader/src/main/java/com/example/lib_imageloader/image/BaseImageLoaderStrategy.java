@@ -21,7 +21,7 @@ public interface BaseImageLoaderStrategy {
 
     void loadCircleBorderImage(String url, int placeholder, ImageView imageView,float borderWidth, int borderColor);
 
-    void loadCircleBorderImage(String url, int placeholder, ImageView imageView,float borderWidth, int borderColor, int heightPx, int widthPx);
+//    void loadCircleBorderImage(String url, int placeholder, ImageView imageView,float borderWidth, int borderColor, int heightPx, int widthPx);
 
     void loadGifImage(String url, int placeholder, ImageView imageView);
 

@@ -7,11 +7,17 @@ import androidx.annotation.Nullable;
 
 import com.czy.yq_wanandroid.R;
 
+import java.util.concurrent.Executors;
+
 public class TestActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+        Executors.newFixedThreadPool(4);
+        Executors.newSingleThreadExecutor();
+        Executors.newCachedThreadPool();
+        Executors.newScheduledThreadPool(10);
     }
 
 
