@@ -1,6 +1,6 @@
 package com.czy.business_base.entity
 
-import com.czy.lib_base.net.entity.BaseEntity
+import com.czy.business_base.net.entity.BaseEntity
 
 data class ArticleEntity(
     val apkLink: String,

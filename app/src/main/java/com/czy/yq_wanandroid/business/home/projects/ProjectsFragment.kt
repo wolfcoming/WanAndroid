@@ -2,7 +2,7 @@ package com.czy.yq_wanandroid.business.home.projects
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.czy.business_base.entity.ProjectEntity
-import com.czy.lib_base.mvpbase.MvpFragment
+import com.czy.business_base.mvpbase.MvpFragment
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.ProjectsAdapter
 import kotlinx.android.synthetic.main.fragment_projects.*

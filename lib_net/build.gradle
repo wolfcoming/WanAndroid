@@ -54,4 +54,6 @@ dependencies {
     api 'com.google.code.gson:gson:2.8.6'
 
     api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'//持久化存储cookie
+
+    implementation project(path: ':lib_base')
 }

@@ -1,7 +1,7 @@
 package com.czy.yq_wanandroid.service
 
 import com.czy.business_base.service.AppService
-import com.czy.lib_base.Constants.READHISTORY_MAX_COUNT
+import com.czy.business_base.Constants.READHISTORY_MAX_COUNT
 import com.czy.yq_wanandroid.room.AppDatabase
 import com.czy.yq_wanandroid.room.entity.ReadHistory
 

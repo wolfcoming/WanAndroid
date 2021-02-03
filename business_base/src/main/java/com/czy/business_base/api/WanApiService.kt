@@ -1,7 +1,7 @@
 package com.czy.business_base.api
 
-import com.czy.lib_base.net.convert.CustomGsonConverterFactory
-import com.czy.lib_base.net.interceptor.NetInterceptor
+import com.czy.business_base.net.convert.CustomGsonConverterFactory
+import com.czy.business_base.net.interceptor.NetInterceptor
 import com.infoholdcity.basearchitecture.self_extends.log
 import okhttp3.Cookie
 import okhttp3.CookieJar

@@ -1,7 +1,7 @@
 package com.czy.business_base.api
 
 import com.czy.business_base.entity.*
-import com.czy.lib_base.net.entity.BaseResult
+import com.czy.business_base.net.entity.BaseResult
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.czy.business_base.entity.ArticleEntity
-import com.czy.lib_base.mvpbase.MvpActivity
+import com.czy.business_base.mvpbase.MvpActivity
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
 import com.yangqing.record.ext.toast

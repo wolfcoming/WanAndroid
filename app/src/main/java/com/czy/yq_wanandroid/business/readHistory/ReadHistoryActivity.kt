@@ -2,7 +2,7 @@ package com.czy.yq_wanandroid.business.readHistory
 
 import android.os.Handler
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.czy.lib_base.mvpbase.MvpActivity
+import com.czy.business_base.mvpbase.MvpActivity
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.ReadHistoryAdapter
 import com.czy.yq_wanandroid.room.entity.ReadHistory

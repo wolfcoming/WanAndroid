@@ -1,6 +1,7 @@
 package com.czy.lib_base.utils
 
-import com.infoholdcity.basearchitecture.self_extends.log
+import com.czy.lib_base.ext.log
+
 
 class LauncherTime {
 

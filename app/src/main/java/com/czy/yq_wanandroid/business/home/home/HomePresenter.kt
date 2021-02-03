@@ -4,8 +4,8 @@ import com.czy.business_base.api.WanApiService
 import com.czy.business_base.entity.ArticleEntity
 import com.czy.business_base.entity.ArticleList
 import com.czy.business_base.entity.Banner
-import com.czy.lib_base.mvpbase.MvpPresenter
-import com.czy.lib_base.net.entity.BaseResult
+import com.czy.business_base.mvpbase.MvpPresenter
+import com.czy.business_base.net.entity.BaseResult
 import com.yangqing.record.ext.commonSubscribe
 import com.yangqing.record.ext.threadSwitchAndBindLifeCycle
 import io.reactivex.rxjava3.core.Observable
