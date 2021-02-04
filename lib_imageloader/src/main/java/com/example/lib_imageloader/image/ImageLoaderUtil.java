@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.example.lib_imageloader.image.glide.GlideImageLoaderStrategy;
-import com.example.lib_imageloader.image.listener.ImageSaveListener;
+import com.example.lib_imageloader.image.listener.ProgressLoadListener;
 import com.example.lib_imageloader.image.listener.SourceReadyListener;
 
 
@@ -51,17 +51,15 @@ public class ImageLoaderUtil {
         mStrategy.loadImageWithAppCxt(url,imageView);
     }
 
-    /**
-     * 统一使用App context
-     * 可能带来的问题：http://stackoverflow.com/questions/31964737/glide-image-loading-with-application-context
-     *
-     * @param url
-     * @param placeholder
-     * @param imageView
-     */
+
     public void loadImage(String url, int placeholder, ImageView imageView) {
         mStrategy.loadImage(imageView.getContext(), url, placeholder, imageView);
     }
+
+    public void loadImageWithRadius(String url, int placeholder, ImageView imageView,float radius) {
+        mStrategy.loadImage(url, placeholder, imageView,radius);
+    }
+
 
     public void loadGifImage(String url, int placeholder, ImageView imageView) {
         mStrategy.loadGifImage(url, placeholder, imageView);
@@ -75,9 +73,9 @@ public class ImageLoaderUtil {
         mStrategy.loadCircleBorderImage(url, placeholder, imageView, borderWidth, borderColor);
     }
 
-    public void loadCircleBorderImage(String url, int placeholder, ImageView imageView, float borderWidth, int borderColor, int heightPX,int widthPX) {
-        mStrategy.loadCircleBorderImage(url, placeholder, imageView, borderWidth, borderColor, heightPX,widthPX);
-    }
+//    public void loadCircleBorderImage(String url, int placeholder, ImageView imageView, float borderWidth, int borderColor, int heightPX,int widthPX) {
+//        mStrategy.loadCircleBorderImage(url, placeholder, imageView, borderWidth, borderColor, heightPX,widthPX);
+//    }
 
 
 
@@ -85,10 +83,6 @@ public class ImageLoaderUtil {
 
     public void loadImageWithProgress(String url, ImageView imageView, ProgressLoadListener listener) {
         mStrategy.loadImageWithProgress(url,imageView,listener);
-    }
-
-    public void loadGifWithPrepareCall(String url, ImageView imageView, SourceReadyListener listener) {
-        mStrategy.loadGifWithPrepareCall(url,imageView,listener);
     }
 
     public void loadImageWithPrepareCall(String url, ImageView imageView,int placeholder, SourceReadyListener listener) {
@@ -150,7 +144,4 @@ public class ImageLoaderUtil {
         return mStrategy.getCacheSize(context);
     }
 
-    public void saveImage(Context context, String url, String savePath, String saveFileName, ImageSaveListener listener) {
-        mStrategy.saveImage(context, url, savePath, saveFileName, listener);
-    }
 }

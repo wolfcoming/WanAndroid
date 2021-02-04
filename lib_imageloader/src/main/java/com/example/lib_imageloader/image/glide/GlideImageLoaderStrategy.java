@@ -1,16 +1,23 @@
 package com.example.lib_imageloader.image.glide;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.czy.lib_base.utils.file.FileUtils;
 import com.example.lib_imageloader.image.BaseImageLoaderStrategy;
-import com.example.lib_imageloader.image.ProgressLoadListener;
-import com.example.lib_imageloader.image.listener.ImageSaveListener;
+import com.example.lib_imageloader.image.listener.ProgressLoadListener;
 import com.example.lib_imageloader.image.listener.SourceReadyListener;
 
 public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
@@ -34,12 +41,17 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
 
     @Override
     public void loadImage(String url, int placeholder, ImageView imageView) {
-        loadNormal(imageView.getContext(), url, placeholder, imageView);
+        loadNormal(imageView.getContext(), url, placeholder, imageView, 0);
+    }
+
+    @Override
+    public void loadImage(String url, int placeholder, ImageView imageView, float radius) {
+        loadNormal(imageView.getContext(), url, placeholder, imageView, radius);
     }
 
     @Override
     public void loadImage(Context context, String url, int placeholder, ImageView imageView) {
-        loadNormal(context, url, placeholder, imageView);
+        loadNormal(context, url, placeholder, imageView, 0);
     }
 
 
@@ -66,70 +78,43 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
 
     @Override
     public void loadImageWithProgress(String url, final ImageView imageView, final ProgressLoadListener listener) {
-//        Glide.with(imageView.getContext()).using(new ProgressModelLoader(new ProgressUIListener() {
-//            @Override
-//            public void update(final int bytesRead, final int contentLength) {
-//                imageView.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        listener.update(bytesRead, contentLength);
-//                    }
-//                });
-//            }
-//        })).load(url).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.SOURCE).
-//                listener(new RequestListener<String, GlideDrawable>() {
-//                    @Override
-//                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-//                        listener.onException();
-//                        return false;
-//                    }
-//
-//                    @Override
-//                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-//                        listener.onResourceReady();
-//                        return false;
-//                    }
-//                }).into(imageView);
-    }
+        //TODO 进度未实现
+        Glide.with(imageView.getContext()).load(url)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        listener.onException();
+                        return false;
+                    }
 
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        listener.onResourceReady();
+                        return false;
+                    }
 
-    @Override
-    public void loadGifWithPrepareCall(String url, ImageView imageView, final SourceReadyListener listener) {
-//        Glide.with(imageView.getContext()).load(url).asGif()
-//                .skipMemoryCache(true)
-//                .diskCacheStrategy(DiskCacheStrategy.SOURCE).
-//                listener(new RequestListener<String, GifDrawable>() {
-//                    @Override
-//                    public boolean onException(Exception e, String model, Target<GifDrawable> target, boolean isFirstResource) {
-//                        return false;
-//                    }
-//
-//                    @Override
-//                    public boolean onResourceReady(GifDrawable resource, String model, Target<GifDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-//                        listener.onResourceReady(resource.getIntrinsicWidth(), resource.getIntrinsicHeight());
-//                        return false;
-//                    }
-//                }).into(imageView);
+                })
+                .into(imageView);
     }
 
     @Override
     public void loadImageWithPrepareCall(String url, ImageView imageView, int placeholder, final SourceReadyListener listener) {
-//        Glide.with(imageView.getContext()).load(url)
-//                .skipMemoryCache(true)
-//                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-//                .placeholder(placeholder)
-//                .listener(new RequestListener<String, GlideDrawable>() {
-//                    @Override
-//                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-//                        return false;
-//                    }
-//
-//                    @Override
-//                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-//                        listener.onResourceReady(resource.getIntrinsicWidth(), resource.getIntrinsicHeight());
-//                        return false;
-//                    }
-//                }).into(imageView);
+        Glide.with(imageView.getContext()).load(url)
+                .placeholder(placeholder)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        listener.onResourceReady(resource.getIntrinsicWidth(), resource.getIntrinsicHeight());
+                        return false;
+                    }
+
+                })
+                .into(imageView);
     }
 
     @Override
@@ -169,33 +154,38 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
     @Override
     public String getCacheSize(Context context) {
         try {
-            String size = FileUtils.getSize(Glide.getPhotoCacheDir(context.getApplicationContext()));
-            return size;
+            return FileUtils.getSize(Glide.getPhotoCacheDir(context.getApplicationContext()));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
     }
 
-    @Override
-    public void saveImage(Context context, String url, String savePath, String saveFileName, ImageSaveListener listener) {
-
-    }
-
     /**
      * load image with Glide
      */
-    private void loadNormal(final Context ctx, final String url, int placeholder, ImageView imageView) {
-        Glide.with(ctx).load(url)
-                .placeholder(placeholder)
-                .into(imageView);
+    private void loadNormal(final Context ctx, final String url, int placeholder, ImageView imageView, float radius) {
+        if(radius>0){
+            Glide.with(ctx).load(url)
+                    .placeholder(placeholder)
+                    .transform(new RoundedCorners((int) radius))
+                    .into(imageView);
+        }else {
+            Glide.with(ctx).load(url)
+                    .placeholder(placeholder)
+                    .into(imageView);
+        }
     }
 
     /**
      * load image with Glide
      */
     private void loadGif(final Context ctx, String url, int placeholder, ImageView imageView) {
-
+        Glide.with(ctx)
+                .asGif()
+                .load(url)
+                .placeholder(placeholder)
+                .into(imageView);
     }
 
 }

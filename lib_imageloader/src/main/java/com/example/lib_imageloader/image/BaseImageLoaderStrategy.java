@@ -3,7 +3,7 @@ package com.example.lib_imageloader.image;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.example.lib_imageloader.image.listener.ImageSaveListener;
+import com.example.lib_imageloader.image.listener.ProgressLoadListener;
 import com.example.lib_imageloader.image.listener.SourceReadyListener;
 
 public interface BaseImageLoaderStrategy {
@@ -14,6 +14,8 @@ public interface BaseImageLoaderStrategy {
     void loadImageWithAppCxt(String url, ImageView imageView);
 
     void loadImage(String url, int placeholder, ImageView imageView);
+
+    void loadImage(String url, int placeholder, ImageView imageView,float radius);
 
     void loadImage(Context context, String url, int placeholder, ImageView imageView);
 
@@ -29,8 +31,6 @@ public interface BaseImageLoaderStrategy {
 
     void loadImageWithPrepareCall(String url, ImageView imageView, int placeholder, SourceReadyListener listener);
 
-    void loadGifWithPrepareCall(String url, ImageView imageView, SourceReadyListener listener);
-
     //清除硬盘缓存
     void clearImageDiskCache(final Context context);
 
@@ -42,7 +42,5 @@ public interface BaseImageLoaderStrategy {
 
     //获取缓存大小
     String getCacheSize(Context context);
-
-    void saveImage(Context context, String url, String savePath, String saveFileName, ImageSaveListener listener);
 
 }

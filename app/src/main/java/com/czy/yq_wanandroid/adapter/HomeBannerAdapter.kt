@@ -5,7 +5,7 @@ import android.widget.ImageView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.czy.business_base.entity.Banner
-import com.example.lib_imageloader.image.ImageLoaderManager
+import com.example.lib_imageloader.image.ImageLoaderUtil
 import com.youth.banner.adapter.BannerAdapter
 
 class HomeBannerAdapter(datas: List<Banner>) :
@@ -24,7 +24,7 @@ class HomeBannerAdapter(datas: List<Banner>) :
     }
 
     override fun onBindView(holder: BannerViewHolder, data: Banner, position: Int, size: Int) {
-        ImageLoaderManager.getInstance().displayImageForView(holder.imageView,this.mDatas[position].imagePath)
+        ImageLoaderUtil.getInstance().loadImage(this.mDatas[position].imagePath,holder.imageView)
     }
 
     class BannerViewHolder(@param:NonNull var imageView: ImageView) :

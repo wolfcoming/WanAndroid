@@ -1,4 +1,4 @@
-package com.example.lib_imageloader.image;
+package com.example.lib_imageloader.image.listener;
 
 public interface ProgressLoadListener {
 
