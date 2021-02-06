@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.example.lib_imageloader.image.glide.GlideImageLoaderStrategy;
-import com.example.lib_imageloader.image.listener.ProgressLoadListener;
+import com.example.lib_imageloader.image.listener.ProgressListener;
 import com.example.lib_imageloader.image.listener.SourceReadyListener;
 
 
@@ -81,7 +81,7 @@ public class ImageLoaderUtil {
 
 
 
-    public void loadImageWithProgress(String url, ImageView imageView, ProgressLoadListener listener) {
+    public void loadImageWithProgress(String url, ImageView imageView, ProgressListener listener) {
         mStrategy.loadImageWithProgress(url,imageView,listener);
     }
 

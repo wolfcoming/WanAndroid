@@ -3,7 +3,7 @@ package com.example.lib_imageloader.image;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.example.lib_imageloader.image.listener.ProgressLoadListener;
+import com.example.lib_imageloader.image.listener.ProgressListener;
 import com.example.lib_imageloader.image.listener.SourceReadyListener;
 
 public interface BaseImageLoaderStrategy {
@@ -27,7 +27,7 @@ public interface BaseImageLoaderStrategy {
 
     void loadGifImage(String url, int placeholder, ImageView imageView);
 
-    void loadImageWithProgress(String url, ImageView imageView, ProgressLoadListener listener);
+    void loadImageWithProgress(String url, ImageView imageView, ProgressListener listener);
 
     void loadImageWithPrepareCall(String url, ImageView imageView, int placeholder, SourceReadyListener listener);
 

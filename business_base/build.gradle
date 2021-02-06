@@ -52,4 +52,6 @@ dependencies {
     api  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
 
     api 'com.github.tbruyelle:rxpermissions:0.12'
+
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 }

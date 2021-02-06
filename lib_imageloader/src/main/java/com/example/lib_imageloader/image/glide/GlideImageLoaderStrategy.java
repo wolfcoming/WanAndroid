@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
@@ -14,10 +15,12 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.czy.lib_base.utils.file.FileUtils;
 import com.example.lib_imageloader.image.BaseImageLoaderStrategy;
-import com.example.lib_imageloader.image.listener.ProgressLoadListener;
+import com.example.lib_imageloader.image.listener.ProgressListener;
 import com.example.lib_imageloader.image.listener.SourceReadyListener;
 
 public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
@@ -77,24 +80,36 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadImageWithProgress(String url, final ImageView imageView, final ProgressLoadListener listener) {
-        //TODO 进度未实现
-        Glide.with(imageView.getContext()).load(url)
-                .listener(new RequestListener<Drawable>() {
+    public void loadImageWithProgress(String url, final ImageView imageView, final ProgressListener listener) {
+        ProgressInterceptor.addListener(url, listener);
+        GlideApp.with(imageView.getContext())
+                .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(new DrawableImageViewTarget(imageView){
                     @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        listener.onException();
-                        return false;
+                    public void onLoadStarted(@Nullable Drawable placeholder) {
+                        super.onLoadStarted(placeholder);
+//                        imageView.setImageResource(R.color.color_646464);
+                    }
+
+
+                    @Override
+                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                        super.onLoadFailed(errorDrawable);
+                        ProgressInterceptor.LISTENER_MAP.get(url).onLoadFailed();
+//                        imageView.setImageResource(R.color.color_transparent);
                     }
 
                     @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        listener.onResourceReady();
-                        return false;
-                    }
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<
+                                                ? super Drawable> transition) {
+                        super.onResourceReady(resource, transition);
 
-                })
-                .into(imageView);
+                        ProgressInterceptor.removeListener(url);
+
+                    }
+                });
     }
 
     @Override
