@@ -1,13 +1,16 @@
 package com.czy.yq_wanandroid.business.home.home
 
-import com.czy.business_base.api.WanApiService
+import com.czy.business_base.api.Transformer
+import com.czy.business_base.api.WanApi
+import com.czy.lib_net.CommonApiService
 import com.czy.business_base.entity.ArticleEntity
 import com.czy.business_base.entity.ArticleList
 import com.czy.business_base.entity.Banner
 import com.czy.business_base.mvpbase.MvpPresenter
 import com.czy.business_base.net.entity.BaseResult
-import com.yangqing.record.ext.commonSubscribe
-import com.yangqing.record.ext.threadSwitchAndBindLifeCycle
+import com.czy.business_base.ext.commonSubscribe
+import com.czy.business_base.ext.threadSwitchAndBindLifeCycle
+import com.czy.lib_net.ApiException
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.functions.Function3
 
@@ -19,9 +22,9 @@ class HomePresenter : MvpPresenter<IHomeView>() {
         } else page
         if (pageNumber == 0) {
             Observable.zip(
-                WanApiService.getWanApi().getTopArticle(),
-                WanApiService.getWanApi().getHomeArticle(pageNumber),
-                WanApiService.getWanApi().getHomeBanner(),
+                CommonApiService.getRequest(WanApi::class.java).getTopArticle(),
+                CommonApiService.getRequest(WanApi::class.java).getHomeArticle(pageNumber),
+                CommonApiService.getRequest(WanApi::class.java).getHomeBanner(),
                 Function3<BaseResult<List<ArticleEntity>>,
                         BaseResult<ArticleList<ArticleEntity>>,
                         BaseResult<List<Banner>>,
@@ -42,18 +45,19 @@ class HomePresenter : MvpPresenter<IHomeView>() {
                     map.put("banner", bannerList.data!!)
                     map
                 })
-                .threadSwitchAndBindLifeCycle(baseView)
-                .commonSubscribe({
+                .compose(Transformer.threadSwitchAndBindLifeCycle(baseView))
+                .compose(Transformer.serverCodeDeal())
+                .subscribe({
                     val list: ArrayList<ArticleEntity> =
                         it.get("article") as ArrayList<ArticleEntity>
                     val bannerList: ArrayList<Banner> = it.get("banner") as ArrayList<Banner>
 
                     baseView?.showData(list, bannerList, fresh)
                 }, {
-                    baseView?.getDataFail(it,fresh)
+                    baseView?.getDataFail(it as ApiException,fresh)
                 })
         } else {
-            WanApiService.getWanApi().getHomeArticle(pageNumber)
+            CommonApiService.getRequest(WanApi::class.java).getHomeArticle(pageNumber)
                 .threadSwitchAndBindLifeCycle(baseView)
                 .commonSubscribe({
                     baseView?.showData(it.data?.datas,null,fresh)

@@ -13,12 +13,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
-import com.czy.business_base.api.WanApiService
+import com.czy.business_base.api.Transformer
+import com.czy.business_base.api.WanApi
+import com.czy.lib_net.CommonApiService
 import com.czy.business_base.entity.ArticleEntity
 import com.czy.lib_base.utils.SettingUtils
 import com.czy.yq_wanandroid.R
-import com.yangqing.record.ext.commonSubscribe
-import com.yangqing.record.ext.threadSwitch
 
 class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.ArticleListViewHolder> {
     private var datas: ArrayList<ArticleEntity>
@@ -88,18 +88,19 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
      */
     private fun dealCollect(item: ArticleEntity, position: Int, context: Context) {
         if (!item.collect) {
-            WanApiService.getWanApi().collectArticle(item.id)
-                .threadSwitch()
-                .commonSubscribe({
+            CommonApiService.getRequest(WanApi::class.java).collectArticle(item.id)
+                .compose(Transformer.threadSwitch())
+                .compose(Transformer.serverCodeDeal())
+                 .subscribe({
                     item.collect = true
                     notifyItemChanged(position)
                 }, {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 })
         } else {
-            WanApiService.getWanApi().unCollectArticle(item.id)
-                .threadSwitch()
-                .commonSubscribe({
+            CommonApiService.getRequest(WanApi::class.java).unCollectArticle(item.id)
+                .compose(Transformer.threadSwitch())
+                .subscribe({
                     item.collect = false
                     notifyItemChanged(position)
                 }, {

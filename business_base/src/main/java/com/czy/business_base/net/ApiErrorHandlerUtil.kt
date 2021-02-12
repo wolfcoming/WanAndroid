@@ -1,12 +1,10 @@
 package com.czy.business_base.net
 
-import com.alibaba.android.arouter.launcher.ARouter
-import com.czy.business_base.ArouterConfig
 import com.czy.business_base.Constants
 import com.czy.business_base.net.entity.BaseResult
-import com.czy.business_base.provider.IErrorCodeInterceptProvider
 import com.czy.lib_base.utils.ContentWrapperUtils
 import com.czy.lib_base.utils.NetUtils
+import com.czy.lib_net.ApiException
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import org.json.JSONException
@@ -37,10 +35,6 @@ object ApiErrorHandlerUtil {
     fun <T> throwApiException(result: T) {
         if (result is BaseResult<*>) {
             if (result.errorCode != Constants.API_SUCCESS_CODE) {
-                val provider: IErrorCodeInterceptProvider =
-                    ARouter.getInstance().build(ArouterConfig.errorCodeProcess)
-                        .navigation() as IErrorCodeInterceptProvider
-                provider.processErrorCode(result.errorCode, onGetMsg(result.errorCode))
                 throw ApiException(result.errorCode, result.errorMsg)
             }
         }
@@ -74,7 +68,7 @@ object ApiErrorHandlerUtil {
      * @param e Throwable
      * @return 错误码
      */
-    fun onGetCode(e: Throwable?): Int {
+    private fun onGetCode(e: Throwable?): Int {
         return if (!NetUtils.isConnected(ContentWrapperUtils.mContext)) {
             Code.NET
         } else {
@@ -99,7 +93,7 @@ object ApiErrorHandlerUtil {
      * @param code 错误码
      * @return 错误信息
      */
-    fun onGetMsg(code: Int): String {
+    private fun onGetMsg(code: Int): String {
         return when (code) {
             Code.NET -> "网络连接失败，请检查网络设置"
             Code.TIMEOUT -> "网络状况不稳定，请稍后重试"

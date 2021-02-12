@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.czy.business_base.net.convert;
+package com.czy.lib_net.convert;
 
-import com.czy.business_base.net.ApiErrorHandlerUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.TypeAdapter;
@@ -44,7 +43,7 @@ final class CustomGsonResponseBodyConverter<T> implements Converter<ResponseBody
       if (jsonReader.peek() != JsonToken.END_DOCUMENT) {
         throw new JsonIOException("JSON document was not fully consumed.");
       }
-      ApiErrorHandlerUtil.INSTANCE.throwApiException(result);
+//      ApiErrorHandlerUtil.INSTANCE.throwApiException(result);
       return result;
     } finally {
       value.close();

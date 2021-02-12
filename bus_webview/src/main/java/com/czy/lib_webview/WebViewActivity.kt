@@ -9,7 +9,6 @@ import com.czy.business_base.ArouterConfig
 import com.czy.business_base.BaseActivity
 import com.example.lib_imageloader.image.ImageShowActivity
 import com.infoholdcity.basearchitecture.self_extends.log
-import com.yangqing.record.ext.toast
 import kotlinx.android.synthetic.main.activity_webview.*
 
 
@@ -50,7 +49,7 @@ class WebViewActivity : BaseActivity() {
 
 
     override fun initData() {
-
+        mWebHolder.addJavaScript()
     }
 
 

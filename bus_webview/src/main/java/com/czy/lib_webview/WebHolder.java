@@ -23,6 +23,7 @@ import androidx.annotation.RequiresApi;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
 
+import com.czy.lib_webview.js.JsInteration;
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebSettingsExtension;
 import com.tencent.smtt.export.external.interfaces.IX5WebSettings;
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
@@ -567,4 +568,11 @@ public class WebHolder {
                                            @Nullable Map<String, String> reqHeaders,
                                            @Nullable String reqMethod);
     }
+
+
+
+    public void addJavaScript(){
+        mWebView.addJavascriptInterface(new JsInteration(mWebView),"androidHandler");
+    }
+
 }

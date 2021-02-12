@@ -11,7 +11,7 @@ import com.czy.lib_ui.SideslipLayout
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.room.AppDatabase
 import com.czy.yq_wanandroid.room.entity.ReadHistory
-import com.yangqing.record.ext.threadSwitch
+import com.czy.business_base.ext.threadSwitch
 import io.reactivex.rxjava3.core.Observable
 
 open class ReadHistoryAdapter : RecyclerView.Adapter<ReadHistoryAdapter.ReadHistoryViewHolder> {

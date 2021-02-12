@@ -2,9 +2,11 @@ package com.czy.business_base.api
 
 import com.czy.business_base.entity.*
 import com.czy.business_base.net.entity.BaseResult
+import com.czy.lib_net.annotation.BaseUrl
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
+@BaseUrl("https://www.wanandroid.com")
 interface WanApi {
 
     //首页banner

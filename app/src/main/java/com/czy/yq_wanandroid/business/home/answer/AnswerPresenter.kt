@@ -1,13 +1,14 @@
 package com.czy.yq_wanandroid.business.home.answer
 
-import com.czy.business_base.api.WanApiService
+import com.czy.business_base.api.WanApi
+import com.czy.business_base.ext.commonSubscribe
+import com.czy.business_base.ext.threadSwitchAndBindLifeCycle
+import com.czy.lib_net.CommonApiService
 import com.czy.business_base.mvpbase.MvpPresenter
-import com.yangqing.record.ext.commonSubscribe
-import com.yangqing.record.ext.threadSwitchAndBindLifeCycle
 
 class AnswerPresenter : MvpPresenter<IAnswerView>() {
     fun getAnswerList(page: Int, fresh: Boolean) {
-        WanApiService.getWanApi().getAnswerList(page)
+        CommonApiService.getRequest(WanApi::class.java).getAnswerList(page)
             .threadSwitchAndBindLifeCycle(baseView)
             .commonSubscribe({
                 baseView?.showAnswerList(it.data?.datas!!, fresh)

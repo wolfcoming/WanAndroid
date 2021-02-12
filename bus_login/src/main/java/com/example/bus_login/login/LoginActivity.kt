@@ -11,7 +11,7 @@ import com.example.bus_login.UserManage
 import com.example.lib_imageloader.image.ImageLoaderUtil
 import com.example.lib_imageloader.image.listener.ProgressListener
 import com.infoholdcity.basearchitecture.self_extends.log
-import com.yangqing.record.ext.toast
+import com.czy.business_base.ext.toast
 import kotlinx.android.synthetic.main.activity_login.*
 
 @Route(path = ArouterConfig.login)

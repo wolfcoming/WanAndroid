@@ -1,11 +1,11 @@
-package com.yangqing.record.ext
+package com.czy.business_base.ext
 
 import android.app.Activity
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.czy.business_base.mvpbase.IView
 import com.czy.business_base.net.ApiErrorHandlerUtil
-import com.czy.business_base.net.ApiException
+import com.czy.lib_net.ApiException
 import com.infoholdcity.basearchitecture.self_extends.log
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -21,6 +21,8 @@ fun Fragment.toast(msg: String) {
     Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
 }
 
+
+
 //rxjava 线程切换扩展
 fun <T> Observable<T>.threadSwitch(): Observable<T> {
     return this.subscribeOn(Schedulers.io())
@@ -34,6 +36,7 @@ fun <T> Observable<T>.threadSwitchAndBindLifeCycle(view: IView?): Observable<T> 
         .compose(view?.bindLifecycleEvent())
 }
 
+// <editor-fold defaultstate="collapsed" desc="rxjava 扩展处理错误码，建议使用 Transformer 类中的功能">
 // rxjava 统一错误处理扩展
 fun <T> Observable<T>.commonSubscribe(
     onNext: (reult: T) -> Unit,
@@ -43,7 +46,6 @@ fun <T> Observable<T>.commonSubscribe(
     return this.subscribe(
         {
             "onNext".log()
-            //此处也可以做 统一错误码异常处理（缺点是 无法解决java代码调用问题）
             onNext(it)
         },
         {
@@ -83,6 +85,8 @@ fun <T> Observable<T>.commonSubscribe(
     onStart()
     return this.commonSubscribe(onNext, onError, onComplete)
 }
+
+// </editor-fold>
 
 
 

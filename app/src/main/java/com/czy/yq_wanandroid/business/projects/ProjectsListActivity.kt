@@ -7,7 +7,7 @@ import com.czy.business_base.entity.ArticleEntity
 import com.czy.business_base.mvpbase.MvpActivity
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
-import com.yangqing.record.ext.toast
+import com.czy.business_base.ext.toast
 import kotlinx.android.synthetic.main.activity_project_list.*
 
 class ProjectsListActivity : MvpActivity<IProjectsListPresenter>(), IProjectsList {

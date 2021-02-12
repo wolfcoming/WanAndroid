@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.czy.business_base.net.convert;
+package com.czy.lib_net.convert;
 
 import android.util.Log;
 
-import com.czy.business_base.net.ApiErrorHandlerUtil;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
@@ -30,7 +29,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 
-public final class CustomGsonConverterFactory extends Converter.Factory {
+public class CustomGsonConverterFactory extends Converter.Factory {
     public static CustomGsonConverterFactory create() {
         return create(new Gson());
     }
@@ -53,7 +52,7 @@ public final class CustomGsonConverterFactory extends Converter.Factory {
             Log.e("YYYYY", "想要的数据类型为String类型是，直接将ResponseBody 转成String字符串返回 " );
             return (Converter<ResponseBody, String>) value -> {
                 String result = value.string();
-                ApiErrorHandlerUtil.INSTANCE.throwApiException(result);
+//                ApiErrorHandlerUtil.INSTANCE.throwApiException(result);
                 return result;
             };
         }

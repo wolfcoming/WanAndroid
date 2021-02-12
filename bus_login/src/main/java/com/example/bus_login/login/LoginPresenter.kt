@@ -1,14 +1,15 @@
 package com.czy.yq_wanandroid.business.login
 
-import com.czy.business_base.api.WanApiService
+import com.czy.business_base.api.WanApi
+import com.czy.business_base.ext.commonSubscribe
+import com.czy.business_base.ext.threadSwitchAndBindLifeCycle
+import com.czy.lib_net.CommonApiService
 import com.czy.business_base.mvpbase.MvpPresenter
-import com.yangqing.record.ext.commonSubscribe
-import com.yangqing.record.ext.threadSwitchAndBindLifeCycle
 
 class LoginPresenter : MvpPresenter<ILoginView>() {
 
     fun login(username: String, psw: String) {
-        WanApiService.getWanApi().login(username, psw)
+        CommonApiService.getRequest(WanApi::class.java).login(username, psw)
 //            .delay(3,TimeUnit.SECONDS)
             .threadSwitchAndBindLifeCycle(baseView)
             .commonSubscribe({

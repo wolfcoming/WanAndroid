@@ -14,7 +14,7 @@ import com.czy.yq_wanandroid.business.home.answer.AnswerFragment
 import com.czy.yq_wanandroid.business.home.home.HomeFragment
 import com.czy.yq_wanandroid.business.home.mine.MineFragment
 import com.czy.yq_wanandroid.business.home.projects.ProjectsFragment
-import com.yangqing.record.ext.toast
+import com.czy.business_base.ext.toast
 import kotlinx.android.synthetic.main.activity_main2.*
 
 

@@ -1,4 +1,4 @@
-package com.czy.business_base.net
+package com.czy.lib_net
 
 open class ApiException(val code: Int, message: String) : Exception(message) {
 

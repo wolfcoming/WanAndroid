@@ -10,14 +10,14 @@ import com.czy.business_base.event.LoginEvent
 import com.czy.business_base.ArouterConfig
 import com.czy.business_base.flowResult.FlowResult
 import com.czy.business_base.mvpbase.MvpFragment
-import com.czy.business_base.net.ApiException
+import com.czy.lib_net.ApiException
 import com.czy.lib_qrcode.app.CaptureActivity
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
 import com.czy.yq_wanandroid.adapter.HomeBannerAdapter
 import com.czy.yq_wanandroid.business.search.SearchActivity
 import com.tbruyelle.rxpermissions3.RxPermissions
-import com.yangqing.record.ext.toast
+import com.czy.business_base.ext.toast
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.greenrobot.eventbus.Subscribe
@@ -53,6 +53,13 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
             getData(true)
         }
         mTitleBar.leftClickListener {
+            if(true){
+                ARouter.getInstance().build(ArouterConfig.webviewPath)
+                    .withString("url", "http://192.168.0.101:8080/")
+                    .withString("title", "http://192.168.0.101:8080/")
+                    .navigation()
+                return@leftClickListener
+            }
             RxPermissions(this)
                 .request(Manifest.permission.CAMERA)
                 .subscribe {
@@ -62,7 +69,7 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
                             .addResultListener {
                                 val result = it.getStringExtra("SCAN_RESULT")
                                 result?.let {
-                                    if (result.startsWith("http")) {
+                                    if (result.trim().startsWith("http")) {
                                         ARouter.getInstance().build(ArouterConfig.webviewPath)
                                             .withString("url", result)
                                             .withString("title", result)

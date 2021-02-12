@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.czy.yq_wanandroid.R;
 
+import java.util.HashMap;
 import java.util.concurrent.Executors;
 
 public class TestActivity extends Activity {
@@ -22,6 +23,10 @@ public class TestActivity extends Activity {
 
 
     public void test(){
+
+        Class<TestActivity> testActivityClass = TestActivity.class;
+        HashMap<Class<?>,Object> classHashMap = new HashMap<>();
+        classHashMap.put(testActivityClass,new TestActivity() );
     }
 
 }

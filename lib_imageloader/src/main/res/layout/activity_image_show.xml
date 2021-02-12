@@ -2,13 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@android:color/black"
     android:orientation="vertical">
 
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/ivShow"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
+    <com.example.lib_imageloader.image.MyViewDragHelper
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/ivShow"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.example.lib_imageloader.image.MyViewDragHelper>
+
 </LinearLayout>
