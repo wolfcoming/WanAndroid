@@ -23,10 +23,10 @@
 
     </com.czy.lib_ui.SideslipLayout>
 
-    <Button
-        android:id="@+id/testBtn"
-        android:layout_marginTop="20dp"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

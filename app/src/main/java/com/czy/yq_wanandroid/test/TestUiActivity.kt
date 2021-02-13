@@ -10,8 +10,5 @@ class TestUiActivity:Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
 
-        testBtn.setOnClickListener {
-            slide.scrollBy(20,0)
-        }
     }
 }

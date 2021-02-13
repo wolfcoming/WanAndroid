@@ -30,25 +30,24 @@
 
         </activity>
         <activity android:name=".business.projects.ProjectsListActivity" />
-        <activity android:name=".business.login.LoginActivity" />
         <activity android:name=".business.readHistory.ReadHistoryActivity" />
         <activity android:name=".test.TestUiActivity" >
 
         </activity>
         <activity android:name=".test.TestActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-        <activity android:name=".business.collect.CollectArticleActivity" />
-        <activity android:name=".business.MainActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".business.collect.CollectArticleActivity" />
+        <activity android:name=".business.MainActivity2">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".business.SplashActivity" >
 
