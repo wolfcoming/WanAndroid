@@ -1,9 +1,10 @@
 package com.czy.yq_wanandroid.business.login
 
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.czy.business_base.ArouterConfig
 import com.czy.business_base.entity.UserInfo
 import com.czy.business_base.event.LoginEvent
-import com.czy.business_base.ArouterConfig
+import com.czy.business_base.ext.toast
 import com.czy.business_base.mvpbase.MvpActivity
 import com.czy.lib_base.utils.BarUtils
 import com.example.bus_login.R
@@ -11,7 +12,6 @@ import com.example.bus_login.UserManage
 import com.example.lib_imageloader.image.ImageLoaderUtil
 import com.example.lib_imageloader.image.listener.ProgressListener
 import com.infoholdcity.basearchitecture.self_extends.log
-import com.czy.business_base.ext.toast
 import kotlinx.android.synthetic.main.activity_login.*
 
 @Route(path = ArouterConfig.login)

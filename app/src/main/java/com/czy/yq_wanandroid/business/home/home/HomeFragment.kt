@@ -4,10 +4,11 @@ import android.Manifest
 import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
+import com.czy.business_base.ArouterConfig
 import com.czy.business_base.entity.ArticleEntity
 import com.czy.business_base.entity.Banner
 import com.czy.business_base.event.LoginEvent
-import com.czy.business_base.ArouterConfig
+import com.czy.business_base.ext.toast
 import com.czy.business_base.flowResult.FlowResult
 import com.czy.business_base.mvpbase.MvpFragment
 import com.czy.lib_net.ApiException
@@ -17,7 +18,6 @@ import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
 import com.czy.yq_wanandroid.adapter.HomeBannerAdapter
 import com.czy.yq_wanandroid.business.search.SearchActivity
 import com.tbruyelle.rxpermissions3.RxPermissions
-import com.czy.business_base.ext.toast
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.greenrobot.eventbus.Subscribe

@@ -6,12 +6,8 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import com.czy.lib_base.utils.display.DisplayInfoUtils
-import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ImmersionBar
-import com.gyf.immersionbar.OnBarListener
-import com.gyf.immersionbar.OnKeyboardListener
 import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus

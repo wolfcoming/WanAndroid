@@ -2,15 +2,15 @@ package com.czy.yq_wanandroid.business.home.home
 
 import com.czy.business_base.api.Transformer
 import com.czy.business_base.api.WanApi
-import com.czy.lib_net.CommonApiService
 import com.czy.business_base.entity.ArticleEntity
 import com.czy.business_base.entity.ArticleList
 import com.czy.business_base.entity.Banner
-import com.czy.business_base.mvpbase.MvpPresenter
-import com.czy.business_base.net.entity.BaseResult
 import com.czy.business_base.ext.commonSubscribe
 import com.czy.business_base.ext.threadSwitchAndBindLifeCycle
+import com.czy.business_base.mvpbase.MvpPresenter
+import com.czy.business_base.net.entity.BaseResult
 import com.czy.lib_net.ApiException
+import com.czy.lib_net.CommonApiService
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.functions.Function3
 

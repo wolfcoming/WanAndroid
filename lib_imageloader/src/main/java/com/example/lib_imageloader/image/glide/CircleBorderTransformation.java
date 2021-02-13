@@ -13,8 +13,6 @@ import com.bumptech.glide.util.Util;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 
-import static com.bumptech.glide.load.Key.CHARSET;
-
 public class CircleBorderTransformation extends BitmapTransformation {
     // The version of this transformation, incremented to correct an error in a previous version.
     // See #455.

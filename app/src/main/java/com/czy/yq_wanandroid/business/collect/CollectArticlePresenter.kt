@@ -1,10 +1,10 @@
 package com.czy.yq_wanandroid.business.collect
 
 import com.czy.business_base.api.WanApi
-import com.czy.lib_net.CommonApiService
-import com.czy.business_base.mvpbase.MvpPresenter
 import com.czy.business_base.ext.commonSubscribe
 import com.czy.business_base.ext.threadSwitchAndBindLifeCycle
+import com.czy.business_base.mvpbase.MvpPresenter
+import com.czy.lib_net.CommonApiService
 
 class CollectArticlePresenter : MvpPresenter<ICollectArticleView>() {
     fun getCollectArticleData(page: Int) {

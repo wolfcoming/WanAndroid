@@ -3,11 +3,11 @@ package com.czy.yq_wanandroid.business.home.mine
 import android.content.Intent
 import android.view.View
 import com.alibaba.android.arouter.launcher.ARouter
+import com.czy.business_base.ArouterConfig
+import com.czy.business_base.LazyFragment
 import com.czy.business_base.entity.UserInfo
 import com.czy.business_base.event.LoginEvent
 import com.czy.business_base.service.ServiceFactory
-import com.czy.business_base.ArouterConfig
-import com.czy.business_base.LazyFragment
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.business.collect.CollectArticleActivity
 import com.czy.yq_wanandroid.business.readHistory.ReadHistoryActivity

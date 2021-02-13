@@ -15,9 +15,9 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
 import com.czy.business_base.api.Transformer
 import com.czy.business_base.api.WanApi
-import com.czy.lib_net.CommonApiService
 import com.czy.business_base.entity.ArticleEntity
 import com.czy.lib_base.utils.SettingUtils
+import com.czy.lib_net.CommonApiService
 import com.czy.yq_wanandroid.R
 
 class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.ArticleListViewHolder> {

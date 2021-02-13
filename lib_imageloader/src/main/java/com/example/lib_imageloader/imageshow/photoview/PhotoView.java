@@ -15,6 +15,8 @@
  *******************************************************************************/
 package com.example.lib_imageloader.imageshow.photoview;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -26,12 +28,15 @@ import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Scroller;
+
+import androidx.appcompat.widget.AppCompatImageView;
+
+import com.czy.lib_base.utils.display.DisplayInfoUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
-import androidx.appcompat.widget.AppCompatImageView;
 
 /**
  * A zoomable ImageView. See {@link PhotoViewAttacher} for most of the details on how the zooming
@@ -144,39 +149,61 @@ public class PhotoView extends AppCompatImageView {
 
     public void exit() {
 
-        Matrix m = new Matrix();
-
-        m.postScale(((float) mImgSize[0] / getWidth()), ((float) mImgSize[1] / getHeight()));
-
-        ObjectAnimator scaleOa = ObjectAnimator.ofFloat(this, "scale", attacher.getScale(m));
-
-        ObjectAnimator xOa = ObjectAnimator.ofFloat(this, "translationX", mExitLocation[0] - getWidth() / 2 + getScrollX());
-        ObjectAnimator yOa = ObjectAnimator.ofFloat(this, "translationY", mExitLocation[1] - getHeight() / 2 + getScrollY());
-
-        AnimatorSet set = new AnimatorSet();
-        set.setDuration(250);
-        set.playTogether(scaleOa, xOa, yOa);
-
-
-        if (getRootView().getBackground().getAlpha() > 0) {
-            ValueAnimator bgVa = ValueAnimator.ofInt(getRootView().getBackground().getAlpha(), 0);
-            bgVa.setDuration(250);
-            bgVa.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        if (mImgSize[0] != 0 && mExitLocation[0] != 0) {
+            //缩放移动到指定位置动画
+            Matrix m = new Matrix();
+            m.postScale(((float) mImgSize[0] / getWidth()), ((float) mImgSize[1] / getHeight()));
+            ObjectAnimator scaleOa = ObjectAnimator.ofFloat(this, "scale", attacher.getScale(m));
+            ObjectAnimator xOa = ObjectAnimator.ofFloat(this, "translationX", mExitLocation[0] - getWidth() / 2 + getScrollX());
+            ObjectAnimator yOa = ObjectAnimator.ofFloat(this, "translationY", mExitLocation[1] - getHeight() / 2 + getScrollY());
+            AnimatorSet set = new AnimatorSet();
+            set.setDuration(250);
+            set.playTogether(scaleOa, xOa, yOa);
+            set.start();
+            //背景色变化动画
+            if (getRootView().getBackground().getAlpha() > 0) {
+                ValueAnimator bgVa = ValueAnimator.ofInt(getRootView().getBackground().getAlpha(), 0);
+                bgVa.setDuration(250);
+                bgVa.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        getRootView().getBackground().setAlpha((Integer) animation.getAnimatedValue());
+                    }
+                });
+                bgVa.start();
+            }
+            new Timer().schedule(new TimerTask() {
                 @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    getRootView().getBackground().setAlpha((Integer) animation.getAnimatedValue());
+                public void run() {
+                    mExitListener.exit();
+                }
+            }, 270);
+        } else {
+            if (getRootView().getBackground().getAlpha() > 0) {
+                ValueAnimator bgVa = ValueAnimator.ofInt(getRootView().getBackground().getAlpha(), 0);
+                bgVa.setDuration(200);
+                bgVa.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        getRootView().getBackground().setAlpha((Integer) animation.getAnimatedValue());
+                    }
+                });
+                bgVa.start();
+            }
+
+            View photoView = ((ViewGroup) getRootView()).getChildAt(0);
+            ObjectAnimator translationY = ObjectAnimator.ofFloat(getRootView(), "translationY", DisplayInfoUtils.getInstance().getHeightPixels() - photoView.getY());
+            translationY.setDuration(200);
+            translationY.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation, boolean isReverse) {
+                    mExitListener.exit();
                 }
             });
-            bgVa.start();
+            translationY.start();
         }
-        set.start();
 
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                mExitListener.exit();
-            }
-        }, 270);
+
     }
 
     public void setRootView(View rootView) {

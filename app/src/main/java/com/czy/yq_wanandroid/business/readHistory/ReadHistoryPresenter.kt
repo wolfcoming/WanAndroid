@@ -1,10 +1,10 @@
 package com.czy.yq_wanandroid.business.readHistory
 
+import com.czy.business_base.ext.threadSwitch
 import com.czy.business_base.mvpbase.MvpPresenter
 import com.czy.yq_wanandroid.room.AppDatabase
 import com.czy.yq_wanandroid.room.entity.ReadHistory
 import com.infoholdcity.basearchitecture.self_extends.log
-import com.czy.business_base.ext.threadSwitch
 import io.reactivex.rxjava3.core.Observable
 
 class ReadHistoryPresenter : MvpPresenter<IReadHistoryView>() {

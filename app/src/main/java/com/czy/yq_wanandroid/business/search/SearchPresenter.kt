@@ -1,14 +1,14 @@
 package com.czy.yq_wanandroid.business.search
 
-import com.czy.lib_net.CommonApiService
 import com.czy.business_base.Constants.SEARCHHISTORY_MAX_COUNT
 import com.czy.business_base.api.WanApi
 import com.czy.business_base.ext.commonSubscribe
-import com.czy.business_base.mvpbase.MvpPresenter
-import com.czy.yq_wanandroid.room.AppDatabase
-import com.czy.yq_wanandroid.room.entity.SearchHistory
 import com.czy.business_base.ext.threadSwitch
 import com.czy.business_base.ext.threadSwitchAndBindLifeCycle
+import com.czy.business_base.mvpbase.MvpPresenter
+import com.czy.lib_net.CommonApiService
+import com.czy.yq_wanandroid.room.AppDatabase
+import com.czy.yq_wanandroid.room.entity.SearchHistory
 import io.reactivex.rxjava3.core.Observable
 
 class SearchPresenter : MvpPresenter<ISearchView>() {

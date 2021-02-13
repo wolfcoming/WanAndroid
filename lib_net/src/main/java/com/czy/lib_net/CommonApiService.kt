@@ -2,6 +2,7 @@ package com.czy.lib_net
 
 import com.czy.lib_net.annotation.BaseUrl
 import com.czy.lib_net.annotation.TimeOut
+import com.czy.lib_net.convert.CustomGsonConverterFactory
 import com.infoholdcity.basearchitecture.self_extends.log
 import okhttp3.Cookie
 import okhttp3.CookieJar
@@ -12,9 +13,6 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
-import kotlin.collections.List
-import kotlin.collections.MutableList
-import com.czy.lib_net.convert.CustomGsonConverterFactory
 
 class CommonApiService {
     companion object {

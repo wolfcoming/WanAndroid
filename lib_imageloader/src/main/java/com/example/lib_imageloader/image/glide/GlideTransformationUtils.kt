@@ -4,7 +4,6 @@ import android.graphics.*
 import android.os.Build
 import androidx.annotation.ColorInt
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
-import com.bumptech.glide.load.resource.bitmap.TransformationUtils
 import com.bumptech.glide.util.Synthetic
 import java.util.*
 import java.util.concurrent.TimeUnit

@@ -1,12 +1,13 @@
 package com.czy.lib_webview
 
-import android.content.Intent
 import android.view.KeyEvent
 import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
+import android.widget.ImageView
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.czy.business_base.service.ServiceFactory
 import com.czy.business_base.ArouterConfig
 import com.czy.business_base.BaseActivity
+import com.czy.business_base.service.ServiceFactory
+import com.example.lib_imageloader.image.ImageLoaderUtil
 import com.infoholdcity.basearchitecture.self_extends.log
 import com.wanglu.photoviewerlibrary.PhotoViewer
 import kotlinx.android.synthetic.main.activity_webview.*
@@ -36,11 +37,13 @@ class WebViewActivity : BaseActivity() {
             }
         mWebHolder.setOnLongClickHitTestResult {
             if (HitResult.Type.IMAGE_TYPE == it.getType()) {
-//                val result = it.getResult()
-//                val intent = Intent(WebViewActivity@ this, ImageShowActivity::class.java)
-//                intent.putExtra("url", result)
-//                startActivity(intent)
-//                PhotoViewer.setClickSingleImg(url,)
+                val result = it.getResult()
+                PhotoViewer.setClickSingleImg(result)
+                    .setShowImageViewInterface(object : PhotoViewer.ShowImageViewInterface {
+                        override fun show(iv: ImageView, url: String) {
+                            ImageLoaderUtil.getInstance().loadImage(url, iv)
+                        }
+                    }).start(this)
                 return@setOnLongClickHitTestResult true
             }
             return@setOnLongClickHitTestResult false

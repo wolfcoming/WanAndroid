@@ -7,11 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
+import com.czy.business_base.ext.threadSwitch
 import com.czy.lib_ui.SideslipLayout
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.room.AppDatabase
 import com.czy.yq_wanandroid.room.entity.ReadHistory
-import com.czy.business_base.ext.threadSwitch
 import io.reactivex.rxjava3.core.Observable
 
 open class ReadHistoryAdapter : RecyclerView.Adapter<ReadHistoryAdapter.ReadHistoryViewHolder> {

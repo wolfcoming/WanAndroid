@@ -65,6 +65,9 @@ class PhotoViewerFragment : BaseLazyFragment() {
         // 循环查看是否添加上了图片
         Thread(Runnable {
             while (true) {
+                if(mIv == null){
+                    break
+                }
                 if (mIv.drawable != null) {
                     activity!!.runOnUiThread {
                         loading.visibility = View.GONE
@@ -131,8 +134,10 @@ class PhotoViewerFragment : BaseLazyFragment() {
         mIv.setOnViewDragListener { dx, dy ->
 
             mIv.scrollBy((-dx).toInt(), (-dy).toInt())  // 移动图像
-            alpha -= dy * 0.01f
+
+            alpha -= dy * 0.001f
             intAlpha -= (dy * 0.5).toInt()
+
             if (alpha > 1) alpha = 1f
             else if (alpha < 0) alpha = 0f
             if (intAlpha < 0) intAlpha = 0
