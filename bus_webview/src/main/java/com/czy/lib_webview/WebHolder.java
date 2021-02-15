@@ -10,6 +10,8 @@ import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,18 +25,27 @@ import androidx.annotation.RequiresApi;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
 
-import com.czy.lib_webview.js.JsInteration;
+import com.czy.lib_base.utils.file.FileUtils;
+import com.czy.lib_webview.jsApi.JSGetVersion;
+import com.czy.lib_webview.jsBridge.CallbackRes;
+import com.czy.lib_webview.jsBridge.InvokeFunction;
+import com.czy.lib_webview.jsBridge.InvokeParams;
+import com.czy.lib_webview.jsBridge.JSBridgeApi;
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebSettingsExtension;
 import com.tencent.smtt.export.external.interfaces.IX5WebSettings;
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
 import com.tencent.smtt.sdk.CookieManager;
 import com.tencent.smtt.sdk.QbSdk;
+import com.tencent.smtt.sdk.ValueCallback;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -59,6 +70,8 @@ public class WebHolder {
     private boolean isProgressShown = false;
 
     ProgressBar mProgressBar;
+    private boolean handleCreateFunctionFinished;//js桥是否注入完成
+
     public static WebHolder with(Activity activity, WebContainer container, ProgressBar progressBar) {
         return new WebHolder(activity, container, progressBar);
     }
@@ -151,6 +164,16 @@ public class WebHolder {
             ext.setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY);
         }
         nightMode(activity);
+
+        initJs();
+
+    }
+
+    private void initJs() {
+        InvokeFunction invokeFunction  = new InvokeFunction(mWebView);
+        invokeFunction.addJSApi(new JSGetVersion());
+        mWebView.addJavascriptInterface(invokeFunction, "JSBridge");
+
     }
 
     private void nightMode(Activity activity) {
@@ -504,6 +527,9 @@ public class WebHolder {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            if(!handleCreateFunctionFinished){
+                handleBridgeCallback(view);
+            }
             if (mOnPageTitleCallback != null) {
                 mOnPageTitleCallback.onReceivedTitle(getUrl());
             }
@@ -521,7 +547,32 @@ public class WebHolder {
             if (mOnPageLoadCallback != null) {
                 mOnPageLoadCallback.onPageFinished();
             }
+            handleBridgeCallback(view);
         }
+
+        private void handleBridgeCallback(final WebView webView) {
+            webView.evaluateJavascript("javascript:window.BROSJSBridge", new ValueCallback<String>() {
+                @Override
+                public void onReceiveValue(String s) {
+                    Log.d("WWWWWW", "WebView -- BROSJSBridge -- onReceiveValue  "+s);
+                    if ("null".equals(s)) {
+                        webView.evaluateJavascript("javascript:" + FileUtils.getAssetsStr(webView.getContext(), "BROSJSBridge.js"), new ValueCallback<String>() {
+                            @Override
+                            public void onReceiveValue(String s) {
+                                webView.evaluateJavascript("javascript:handleCreateFunction()", new ValueCallback<String>() {
+                                    @Override
+                                    public void onReceiveValue(String s) {
+                                        Log.d("WWWWWW", "WebView -- BROSJSBridge -- 注入完成");
+                                        handleCreateFunctionFinished = true;
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
 
         @Override
         public void doUpdateVisitedHistory(WebView view, String url, boolean isReload) {
@@ -572,7 +623,6 @@ public class WebHolder {
 
 
     public void addJavaScript(){
-        mWebView.addJavascriptInterface(new JsInteration(mWebView),"androidHandler");
     }
 
 }

@@ -53,7 +53,6 @@ class WebViewActivity : BaseActivity() {
 
 
     override fun initData() {
-        mWebHolder.addJavaScript()
     }
 
 

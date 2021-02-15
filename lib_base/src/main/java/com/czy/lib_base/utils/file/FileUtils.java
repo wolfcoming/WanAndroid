@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.StatFs;
@@ -1471,5 +1472,33 @@ public final class FileUtils {
 
     public interface OnReplaceListener {
         boolean onReplace(File srcFile, File destFile);
+    }
+
+
+    /**
+     * 从assets目录下获取文件内容
+     * @param context
+     * @param fileName
+     * @return
+     */
+    public static String getAssetsStr(Context context, String fileName) {
+        String json = "";
+        try {
+            AssetManager s = context.getAssets();
+            try {
+                InputStream is = s.open(fileName);
+                byte[] buffer = new byte[is.available()];
+                is.read(buffer);
+                json = new String(buffer, "utf-8");
+                is.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        System.out.println(json);
+        return json;
     }
 }
