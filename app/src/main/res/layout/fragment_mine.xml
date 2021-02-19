@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:background="@color/common_light_gray" />
+                android:background="@color/text_second" />
         </androidx.cardview.widget.CardView>
 
 
@@ -35,7 +35,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:text="点击登录"
-            android:textColor="@color/basic_ui_action_bar_text"
+            android:textColor="@color/text_second"
             android:textSize="@dimen/text_headline" />
 
     </RelativeLayout>
@@ -74,7 +74,7 @@
             android:rotation="180"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_back"
-            app:tint="@color/common_gray" />
+            app:tint="@color/text_second" />
 
     </LinearLayout>
 
@@ -112,7 +112,7 @@
             android:rotation="180"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_back"
-            app:tint="@color/common_gray" />
+            app:tint="@color/text_second" />
 
     </LinearLayout>
 
@@ -151,8 +151,47 @@
             android:rotation="180"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_back"
-            app:tint="@color/common_gray" />
+            app:tint="@color/text_second" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_system"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_press_color_surface"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_exit"
+            app:tint="@color/common_blue" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="系统设置"
+            android:textColor="@color/text_surface"
+            android:textSize="@dimen/text_content" />
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:rotation="180"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back"
+            app:tint="@color/text_second" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

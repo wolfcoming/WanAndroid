@@ -119,7 +119,7 @@ public class WebHolder {
         activity.getWindow().setFormat(PixelFormat.TRANSLUCENT);
         mActivity = activity;
         mWebContainer = container;
-        mWebContainer.setBackgroundResource(R.color.surface);
+        mWebContainer.setBackgroundResource(R.color.white);
         if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
             QbSdk.forceSysWebView();
         } else {

@@ -10,6 +10,7 @@ import com.czy.business_base.ArouterConfig
 import com.czy.business_base.BaseActivity
 import com.czy.business_base.ext.toast
 import com.czy.business_base.sp.SpHelpUtils
+import com.czy.lib_base.ext.log
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.business.home.answer.AnswerFragment
 import com.czy.yq_wanandroid.business.home.home.HomeFragment
@@ -70,9 +71,6 @@ class MainActivity2 : BaseActivity() {
     }
 
     override fun initData() {
-//        ImageLoaderManager.getInstance().displayImageForViewGroup(mBottomNav,"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1353138978,364163918&fm=26&gp=0.jpg")
-        SpHelpUtils.put("home","111")
-        toast(SpHelpUtils.getString("home"))
     }
 
     class ViewPagerFragmentStateAdapter(

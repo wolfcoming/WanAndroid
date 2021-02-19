@@ -9,6 +9,7 @@ import com.czy.business_base.entity.UserInfo
 import com.czy.business_base.event.LoginEvent
 import com.czy.business_base.service.ServiceFactory
 import com.czy.yq_wanandroid.R
+import com.czy.yq_wanandroid.business.SettingActivity
 import com.czy.yq_wanandroid.business.collect.CollectArticleActivity
 import com.czy.yq_wanandroid.business.readHistory.ReadHistoryActivity
 import kotlinx.android.synthetic.main.fragment_mine.*
@@ -37,6 +38,9 @@ class MineFragment : LazyFragment() {
         }
         ll_exit.setOnClickListener {
             ServiceFactory.getUserService().exitLogin()
+        }
+        ll_system.setOnClickListener {
+            startActivity(Intent(context, SettingActivity::class.java))
         }
     }
 

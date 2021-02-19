@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.czy.lib_ui.CustomTitleBar
+        android:id="@+id/mTitleBar"
+        app:left="@drawable/ic_back"
+        app:leftType="icon"
+        android:layout_width="match_parent"
+        android:background="@color/common_blue"
+        app:title="系统设置"
+        android:layout_height="@dimen/title_bar_height"/>
+    <LinearLayout
+        android:id="@+id/ll_history"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_press_color_surface"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_collect"
+            app:tint="@color/common_blue" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="深色模式"
+            android:textColor="@color/text_surface"
+            android:textSize="@dimen/text_content" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_dark_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>

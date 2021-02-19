@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="2020-11-23 09:08:58"
-            android:textColor="@color/common_gray" />
+            android:textColor="@color/text_second" />
     </LinearLayout>
     <TextView
         android:text="删除"
