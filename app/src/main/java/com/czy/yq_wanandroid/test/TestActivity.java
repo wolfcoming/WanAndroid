@@ -20,25 +20,7 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        String url =
-                "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1819216937,2118754409&fm=26&gp=0.jpg";
-        RecyclerView recyclerView = findViewById(R.id.recycyle);
-//        recyclerView.setLayoutManager(new GridLayoutManager(this,4));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new TestRvAdapter(this,recyclerView));
-        findViewById(R.id.btnTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PhotoViewer.INSTANCE.setClickSingleImg(url,null)
-                        .setShowImageViewInterface(new PhotoViewer.ShowImageViewInterface() {
-                            @Override
-                            public void show(@NotNull ImageView iv, @NotNull String url) {
-                                ImageLoaderUtil.getInstance().loadImage(url,iv);
-                            }
-                        })
-                        .start(TestActivity.this);
-            }
-        });
+
     }
 
 

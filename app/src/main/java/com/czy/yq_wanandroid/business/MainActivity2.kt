@@ -8,14 +8,12 @@ import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.czy.business_base.ArouterConfig
 import com.czy.business_base.BaseActivity
-import com.czy.business_base.ext.toast
-import com.czy.business_base.sp.SpHelpUtils
-import com.czy.lib_base.ext.log
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.business.home.answer.AnswerFragment
 import com.czy.yq_wanandroid.business.home.home.HomeFragment
 import com.czy.yq_wanandroid.business.home.mine.MineFragment
 import com.czy.yq_wanandroid.business.home.projects.ProjectsFragment
+import com.example.lib_imageloader.image.ImageLoaderUtil
 import kotlinx.android.synthetic.main.activity_main2.*
 
 

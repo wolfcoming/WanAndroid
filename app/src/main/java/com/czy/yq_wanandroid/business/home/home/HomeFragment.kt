@@ -55,8 +55,8 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         mTitleBar.leftClickListener {
             if(true){
                 ARouter.getInstance().build(ArouterConfig.webviewPath)
-                    .withString("url", "http://192.168.31.212:8080/#/yunzhengtong")
-                    .withString("title", "http://192.168.31.212:8080/#/yunzhengtong")
+                    .withString("url", "http://192.168.0.101:8080/#/jsAndroidCall")
+                    .withString("title", "http://192.168.0.101:8080/#/yunzhengtong")
                     .navigation()
                 return@leftClickListener
             }

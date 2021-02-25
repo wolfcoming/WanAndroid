@@ -4,35 +4,5 @@
     android:layout_height="match_parent">
 
 
-    <Button
-        android:id="@+id/btnTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <com.czy.lib_ui.SideslipLayout
-        android:visibility="gone"
-        android:id="@+id/slide"
-        android:layout_marginTop="100dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:background="@color/text_second"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"/>
-
-        <TextView
-            android:background="@color/common_blue"
-            android:layout_width="100dp"
-            android:layout_height="140dp"/>
-
-    </com.czy.lib_ui.SideslipLayout>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycyle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
 </LinearLayout>

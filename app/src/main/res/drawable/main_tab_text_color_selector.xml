@@ -3,6 +3,6 @@
     <!-- 选中 -->
     <item android:state_checked="true" android:color="@color/common_blue"/>
     <!-- 非选中 -->
-    <item android:state_checked="false" android:color="@color/black"/>
+    <item android:state_checked="false" android:color="@color/common_black"/>
 
 </selector>

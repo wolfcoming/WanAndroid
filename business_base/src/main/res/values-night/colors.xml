@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--    通用的蓝色 【标题，我的背景】-->
     <color name="common_blue">#010F53</color>
+    <color name="common_white">#181818</color>
+    <color name="common_black">#FFFFFF</color>
 
-    <!--    item相关颜色-->
-    <!--    item背景颜色-->
-    <color name="ripple_dark">#6C6B6B</color>
-    <color name="ripple_light">#6C6B6B</color>
+
+    <color name="ripple_dark">#0773a3f5</color>
+    <color name="ripple_light">#0773a3f5</color>
+
     <!--通用颜色-->
     <color name="main">#73a3f5</color>
     <color name="main_alpha">#9973a3f5</color>
