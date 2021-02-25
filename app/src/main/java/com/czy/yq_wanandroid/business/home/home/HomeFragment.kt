@@ -11,6 +11,8 @@ import com.czy.business_base.event.LoginEvent
 import com.czy.business_base.ext.toast
 import com.czy.business_base.flowResult.FlowResult
 import com.czy.business_base.mvpbase.MvpFragment
+import com.czy.lib_log.HiLog
+import com.czy.lib_log.HiLogConfig
 import com.czy.lib_net.ApiException
 import com.czy.lib_qrcode.app.CaptureActivity
 import com.czy.yq_wanandroid.R
@@ -54,10 +56,12 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         }
         mTitleBar.leftClickListener {
             if(true){
-                ARouter.getInstance().build(ArouterConfig.webviewPath)
-                    .withString("url", "http://192.168.0.101:8080/#/jsAndroidCall")
-                    .withString("title", "http://192.168.0.101:8080/#/yunzhengtong")
-                    .navigation()
+//                ARouter.getInstance().build(ArouterConfig.webviewPath)
+//                    .withString("url", "http://192.168.0.101:8080/#/jsAndroidCall")
+//                    .withString("title", "http://192.168.0.101:8080/#/yunzhengtong")
+//                    .navigation()
+
+                HiLog.e("打印日志了")
                 return@leftClickListener
             }
             RxPermissions(this)

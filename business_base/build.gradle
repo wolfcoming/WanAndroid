@@ -38,6 +38,7 @@ dependencies {
     api project(path: ':lib_ui')
     api project(path: ':lib_imageloader')
     api project(path: ':lib_qrcode')
+    api project(path: ':lib_log')
 
     api 'org.greenrobot:eventbus:3.2.0'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
