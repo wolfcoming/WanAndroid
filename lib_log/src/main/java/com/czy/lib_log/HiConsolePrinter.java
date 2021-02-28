@@ -10,6 +10,7 @@ public class HiConsolePrinter implements HiLogPrinter {
 
     @Override
     public void print(@NonNull HiLogConfig config, int level, String tag, @NonNull String printString) {
+        Log.println(level, tag, printString);
         int len = printString.length();
         int countOfSub = len / MAX_LEN;
         if (countOfSub > 0) {

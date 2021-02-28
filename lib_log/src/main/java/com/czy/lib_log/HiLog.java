@@ -5,12 +5,23 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author yangqing
  * @time 2/25/21 5:37 PM
  * @describe 打印堆信息，文件输出，模拟控制台
  */
 public class HiLog {
+
+    private static final String HI_LOG_PACKAGE;
+
+    static {
+        String className = HiLog.class.getName();
+        HI_LOG_PACKAGE = className.substring(0, className.lastIndexOf(".") + 1);
+    }
+
     public static void v(Object... objects) {
         log(HiLogType.V, objects);
     }
@@ -60,17 +71,39 @@ public class HiLog {
     }
 
     public static void log(HiLogConfig hiLogConfig, @HiLogType.TYPE int type, String tag, Object... objects) {
-        if(!hiLogConfig.enable()){
+        if (!hiLogConfig.enable()) {
             return;
         }
         StringBuilder sb = new StringBuilder();
-        String body = parseBody(objects,hiLogConfig);
+        if (hiLogConfig.includeThread()) {
+            String threadInfo = hiLogConfig.HI_THREAD_FORMATTER.format(Thread.currentThread());
+            sb.append(threadInfo).append("\n");
+        }
+
+        if (hiLogConfig.stackTraceDepth() > 0) {
+            //打印指定深度的堆栈信息（ 过滤掉log日志相关的方法栈信息）
+            StackTraceElement[] croppedRealStackTrack = HiStackTraceUtil.getCroppedRealStackTrack(new Throwable().getStackTrace(), HI_LOG_PACKAGE, hiLogConfig.stackTraceDepth());
+            String stackTrace = hiLogConfig.HI_STACK_TRACE_FORMATTER.format(croppedRealStackTrack);
+            sb.append(stackTrace).append("\n");
+        }
+
+        String body = parseBody(objects, hiLogConfig);
         sb.append(body);
-        Log.println(type, tag, sb.toString());
+        List<HiLogPrinter> printers = hiLogConfig.printers() != null ? Arrays.asList(hiLogConfig.printers()) : HiLogManager.getInstance().getPrinters();
+        if (printers == null) {
+            return;
+        }
+        for (HiLogPrinter printer : printers) {
+            printer.print(hiLogConfig, type, tag, sb.toString());
+        }
+//        Log.println(type, tag, sb.toString());
     }
 
     private static String parseBody(@NonNull Object[] contents, @NonNull HiLogConfig config) {
         StringBuilder sb = new StringBuilder();
+        if (config.injectJsonParser() != null) {
+            return config.injectJsonParser().toJson(contents);
+        }
         for (Object o : contents) {
             sb.append(o.toString()).append(";");
         }

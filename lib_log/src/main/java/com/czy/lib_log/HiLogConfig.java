@@ -1,7 +1,9 @@
 package com.czy.lib_log;
 
+import java.util.Objects;
+
 public abstract class HiLogConfig {
-    static int MAX_LEN = 512;
+    static int MAX_LEN =50;
     static HiThreadFormatter HI_THREAD_FORMATTER = new HiThreadFormatter();
     static HiStackTraceFormatter HI_STACK_TRACE_FORMATTER = new HiStackTraceFormatter();
 
