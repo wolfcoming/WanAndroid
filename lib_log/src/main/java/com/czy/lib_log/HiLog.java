@@ -1,12 +1,16 @@
 package com.czy.lib_log;
 
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
-import java.util.Arrays;
+import com.czy.lib_log.printer.HiLogPrinter;
+import com.czy.lib_log.utils.HiStackTraceUtil;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+
+import static com.czy.lib_log.HiLogConfig.CACHE_MAX;
 
 /**
  * @author yangqing
@@ -46,6 +50,15 @@ public class HiLog {
         log(HiLogType.D, tag, objects);
     }
 
+
+    public static void w(Object... objects) {
+        log(HiLogType.W, objects);
+    }
+
+    public static void wt(String tag, Object... objects) {
+        log(HiLogType.W, tag, objects);
+    }
+
     public static void e(Object... objects) {
         log(HiLogType.E, objects);
     }
@@ -69,7 +82,8 @@ public class HiLog {
     public static void log(@HiLogType.TYPE int type, @NonNull String tag, Object... contents) {
         log(HiLogManager.getInstance().getConfig(), type, tag, contents);
     }
-
+    //记录需要在可视化控制台打印的历史信息
+    public static ArrayList<HiLogMo> historyLogs = new ArrayList<>();
     public static void log(HiLogConfig hiLogConfig, @HiLogType.TYPE int type, String tag, Object... objects) {
         if (!hiLogConfig.enable()) {
             return;
@@ -89,14 +103,22 @@ public class HiLog {
 
         String body = parseBody(objects, hiLogConfig);
         sb.append(body);
-        List<HiLogPrinter> printers = hiLogConfig.printers() != null ? Arrays.asList(hiLogConfig.printers()) : HiLogManager.getInstance().getPrinters();
+        List<HiLogPrinter> printers =HiLogManager.getInstance().getPrinters();
         if (printers == null) {
             return;
         }
-        for (HiLogPrinter printer : printers) {
-            printer.print(hiLogConfig, type, tag, sb.toString());
+        String msg = sb.toString();
+
+        HiLogMo hiLogMo = new HiLogMo(System.currentTimeMillis(), type, tag, msg);
+        historyLogs.add(hiLogMo);
+        if(historyLogs.size()>CACHE_MAX){
+            //只保留CACHE_MAX 条（TODO 是否有效率更高的方式?)
+            historyLogs.remove(0);
         }
-//        Log.println(type, tag, sb.toString());
+
+        for (HiLogPrinter printer : printers) {
+            printer.print(hiLogConfig, type, tag, msg);
+        }
     }
 
     private static String parseBody(@NonNull Object[] contents, @NonNull HiLogConfig config) {

@@ -2,6 +2,8 @@ package com.czy.lib_log;
 
 import androidx.annotation.NonNull;
 
+import com.czy.lib_log.printer.HiLogPrinter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

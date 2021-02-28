@@ -1,8 +1,8 @@
-package com.czy.lib_log;
+package com.czy.lib_log.format;
 
 public class HiThreadFormatter implements HiLogFormatter<Thread> {
     @Override
     public String format(Thread data) {
-        return "\n Thread:" + data.getName();
+        return "线程信息：Thread:" + data.getName();
     }
 }

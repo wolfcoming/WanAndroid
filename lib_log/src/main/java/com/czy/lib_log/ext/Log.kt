@@ -3,6 +3,7 @@ package com.infoholdcity.basearchitecture.self_extends
 
 import android.text.TextUtils
 import android.util.Log
+import com.czy.lib_log.HiLog
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -362,12 +363,18 @@ class Klog private constructor() {
 
         private fun printSubLog(type: Int, tag: String, msg: String) {
             when (type) {
-                Log.VERBOSE -> Log.v(tag, msg)
-                Log.DEBUG -> Log.d(tag, msg)
-                Log.INFO -> Log.i(tag, msg)
-                Log.WARN -> Log.w(tag, msg)
-                Log.ERROR -> Log.e(tag, msg)
-                Log.ASSERT -> Log.wtf(tag, msg)
+//                Log.VERBOSE -> Log.v(tag, msg)
+//                Log.DEBUG -> Log.d(tag, msg)
+//                Log.INFO -> Log.i(tag, msg)
+//                Log.WARN -> Log.w(tag, msg)
+//                Log.ERROR -> Log.e(tag, msg)
+//                Log.ASSERT -> Log.wtf(tag, msg)
+                Log.VERBOSE -> HiLog.vt(tag,msg)
+                Log.DEBUG -> HiLog.dt(tag, msg)
+                Log.INFO -> HiLog.it(tag, msg)
+                Log.WARN -> HiLog.wt(tag, msg)
+                Log.ERROR -> HiLog.et(tag, msg)
+                Log.ASSERT -> HiLog.at(tag, msg)
             }
         }
 

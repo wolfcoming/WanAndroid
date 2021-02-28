@@ -23,6 +23,7 @@ class CommonApiService {
             return OkHttpClient.Builder()
                 .connectTimeout(timeout, TimeUnit.SECONDS)
                 .readTimeout(timeout, TimeUnit.SECONDS)
+                .addInterceptor(LoggingInterceptor())
 //                .addInterceptor(NetInterceptor())
 //                .cookieJar(
 ////                    PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.mContext))

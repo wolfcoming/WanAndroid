@@ -227,7 +227,8 @@ public class TaskDispatcher {
             }
 
             if (mNeedWaitCount.get() > 0) {
-                mCountDownLatch.await(WAITTIME, TimeUnit.MILLISECONDS);
+//                mCountDownLatch.await(WAITTIME, TimeUnit.MILLISECONDS);
+                mCountDownLatch.await();
             }
         } catch (InterruptedException e) {
         }

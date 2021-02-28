@@ -9,20 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import com.czy.business_base.sp.SpHelpUtils
 import com.czy.lib_base.utils.display.DisplayInfoUtils
+import com.czy.lib_log.HiLogManager
+import com.czy.lib_log.printer.HiViewPrinter
 import com.gyf.immersionbar.ImmersionBar
 import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus
+import java.lang.ref.WeakReference
 
 
 abstract class BaseActivity : RxAppCompatActivity() {
+    lateinit var viewPrinter:HiViewPrinter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         "${this.javaClass.simpleName}:  onCreate".log()
-//        val boolean = SpHelpUtils.getBoolean("darkMode", false)
-//        if(boolean){
-//            window.decorView.setBackgroundColor(Color.parseColor("#8e8e8e"))
-//        }
+
         immerbar()
         if (isRegisterEventBus()) {
             EventBus.getDefault().register(this)
@@ -31,6 +32,8 @@ abstract class BaseActivity : RxAppCompatActivity() {
         initViewBefore()
         initView()
         initData()
+        viewPrinter = HiViewPrinter(this)
+        HiLogManager.getInstance().addPrinter(viewPrinter)
     }
 
     var immersionBar:ImmersionBar?=null
@@ -114,6 +117,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
 
     override fun onDestroy() {
+        HiLogManager.getInstance().removePrinter(viewPrinter)
         if (isRegisterEventBus()) {
             EventBus.getDefault().unregister(this)
         }

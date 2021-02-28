@@ -56,4 +56,5 @@ dependencies {
     api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'//持久化存储cookie
 
     implementation project(path: ':lib_base')
+    implementation project(path: ':lib_log')
 }

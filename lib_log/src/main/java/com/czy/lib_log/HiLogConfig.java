@@ -1,9 +1,12 @@
 package com.czy.lib_log;
 
-import java.util.Objects;
+
+import com.czy.lib_log.format.HiStackTraceFormatter;
+import com.czy.lib_log.format.HiThreadFormatter;
 
 public abstract class HiLogConfig {
-    static int MAX_LEN =50;
+    public static int MAX_LEN =500;
+    public static int CACHE_MAX = 200;//缓存的日志数量
     static HiThreadFormatter HI_THREAD_FORMATTER = new HiThreadFormatter();
     static HiStackTraceFormatter HI_STACK_TRACE_FORMATTER = new HiStackTraceFormatter();
 
@@ -22,15 +25,11 @@ public abstract class HiLogConfig {
      * @describe 是否包含线程信息
      */
     public boolean includeThread() {
-        return false;
+        return true;
     }
 
     public int stackTraceDepth() {
         return 5;
-    }
-
-    public HiLogPrinter[] printers() {
-        return null;
     }
 
     /**
