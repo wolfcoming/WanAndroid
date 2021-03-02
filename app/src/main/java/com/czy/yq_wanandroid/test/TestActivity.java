@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.czy.lib_ui.refresh.HiRefreshLayout;
+import com.czy.lib_ui.refresh.HiTextOverView;
 import com.czy.yq_wanandroid.R;
 import com.example.lib_imageloader.image.ImageLoaderUtil;
 import com.wanglu.photoviewerlibrary.PhotoViewer;
@@ -20,7 +22,8 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-
+        HiRefreshLayout hiRefreshLayout = findViewById(R.id.refresh);
+        hiRefreshLayout.setRefreshOverView(new HiTextOverView(this));
     }
 
 
