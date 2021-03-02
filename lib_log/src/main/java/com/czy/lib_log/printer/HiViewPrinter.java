@@ -74,7 +74,7 @@ public class HiViewPrinter implements HiLogPrinter {
      */
     public void showLogView(FrameLayout rootView) {
         FrameLayout.LayoutParams params =
-                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) DisplayInfoUtils.getInstance().dp2px(320));
+                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) DisplayInfoUtils.getInstance().getHeightPixels()*3/4);
         params.gravity = Gravity.BOTTOM;
 
         //创建logView
@@ -110,10 +110,15 @@ public class HiViewPrinter implements HiLogPrinter {
 
     @Override
     public void print(@NonNull HiLogConfig config, int level, String tag, @NonNull String printString) {
-        // 将log展示添加到recycleView
-        adapter.addItem(new HiLogMo(System.currentTimeMillis(), level, tag, printString));
-        // 滚动到对应的位置
-        recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                // 将log展示添加到recycleView
+                adapter.addItem(new HiLogMo(System.currentTimeMillis(), level, tag, printString));
+                // 滚动到对应的位置
+                recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
+            }
+        });
     }
 
     private static class LogAdapter extends RecyclerView.Adapter<LogViewHolder> {
