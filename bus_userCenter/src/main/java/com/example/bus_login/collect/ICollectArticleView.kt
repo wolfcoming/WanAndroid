@@ -1,4 +1,4 @@
-package com.czy.yq_wanandroid.business.collect
+package com.example.bus_login.collect
 
 import com.czy.business_base.entity.ArticleEntity
 import com.czy.business_base.mvpbase.IView

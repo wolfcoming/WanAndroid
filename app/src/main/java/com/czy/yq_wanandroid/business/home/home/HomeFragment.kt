@@ -12,13 +12,10 @@ import com.czy.business_base.ext.toast
 import com.czy.business_base.flowResult.FlowResult
 import com.czy.business_base.mvpbase.MvpFragment
 import com.czy.lib_log.HiLog
-import com.czy.lib_log.HiLogConfig
-import com.czy.lib_log.HiLogManager
-import com.czy.lib_log.printer.HiViewPrinter
 import com.czy.lib_net.ApiException
 import com.czy.lib_qrcode.app.CaptureActivity
 import com.czy.yq_wanandroid.R
-import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
+import com.czy.business_base.adapter.CommonArticleListAdapter
 import com.czy.yq_wanandroid.adapter.HomeBannerAdapter
 import com.czy.yq_wanandroid.business.search.SearchActivity
 import com.tbruyelle.rxpermissions3.RxPermissions
@@ -31,17 +28,17 @@ import org.greenrobot.eventbus.ThreadMode
 class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
     var currentPage: Int = 0
     var articleList = ArrayList<ArticleEntity>()
-    lateinit var articleAdapter: HomeArticleListAdapter
+    lateinit var articleAdapter: CommonArticleListAdapter
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
     }
 
     var temp = 0
     override fun initView() {
-
         changNormalTopView(activity, mTitleBar)
         mHomeRv.layoutManager = LinearLayoutManager(context)
-        articleAdapter = HomeArticleListAdapter(articleList)
+        articleAdapter =
+            CommonArticleListAdapter(articleList)
         mHomeRv.adapter = articleAdapter
         mSmartRefresh.setOnRefreshListener {
             getData(true)

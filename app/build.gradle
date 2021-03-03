@@ -55,7 +55,7 @@ dependencies {
 
     implementation project(path: ':business_base')
     runtimeOnly project(path: ':bus_webview')//runtimeOnly 在编译期间是无法使用该模块代码的
-    runtimeOnly project(path: ':bus_login')//runtimeOnly 在编译期间是无法使用该模块代码的
+    runtimeOnly project(path: ':bus_userCenter')//runtimeOnly 在编译期间是无法使用该模块代码的
 
     kapt 'com.alibaba:arouter-compiler:1.5.1'
     def room_version = "2.2.5"

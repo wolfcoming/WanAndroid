@@ -10,7 +10,6 @@ import com.czy.business_base.event.LoginEvent
 import com.czy.business_base.service.ServiceFactory
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.business.SettingActivity
-import com.czy.yq_wanandroid.business.collect.CollectArticleActivity
 import com.czy.yq_wanandroid.business.readHistory.ReadHistoryActivity
 import kotlinx.android.synthetic.main.fragment_mine.*
 import org.greenrobot.eventbus.Subscribe
@@ -29,9 +28,11 @@ class MineFragment : LazyFragment() {
         }
 
         ll_collect.setOnClickListener {
-            ServiceFactory.getUserService().checkLogin(context!!) {
-                startActivity(Intent(context, CollectArticleActivity::class.java))
-            }
+            //换成拦截器来主动拦截
+//            ServiceFactory.getUserService().checkLogin(context!!) {
+//                  ARouter.getInstance().build(ArouterConfig.collectPage).navigation()
+//            }
+            ARouter.getInstance().build(ArouterConfig.collectPage).navigation()
         }
         ll_history.setOnClickListener {
             startActivity(Intent(context, ReadHistoryActivity::class.java))

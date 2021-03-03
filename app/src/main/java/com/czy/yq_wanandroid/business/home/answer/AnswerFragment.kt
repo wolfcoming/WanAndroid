@@ -7,7 +7,7 @@ import com.czy.business_base.ext.toast
 import com.czy.business_base.mvpbase.MvpFragment
 import com.czy.lib_net.ApiException
 import com.czy.yq_wanandroid.R
-import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
+import com.czy.business_base.adapter.CommonArticleListAdapter
 import kotlinx.android.synthetic.main.fragment_answer.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -19,7 +19,7 @@ class AnswerFragment : MvpFragment<AnswerPresenter>(), IAnswerView {
     }
 
     val datas = ArrayList<ArticleEntity>()
-    lateinit var mAdapter: HomeArticleListAdapter
+    lateinit var mAdapter: CommonArticleListAdapter
     override fun initView() {
         changNormalTopView(context!!, mTitleBar)
         mSmartRefresh.setOnLoadMoreListener {
@@ -29,7 +29,7 @@ class AnswerFragment : MvpFragment<AnswerPresenter>(), IAnswerView {
             getData(false)
         }
         mAnswerRv.layoutManager = LinearLayoutManager(context)
-        mAdapter = HomeArticleListAdapter(datas)
+        mAdapter = CommonArticleListAdapter(datas)
         mAnswerRv.adapter = mAdapter
 
         multiply.setErrorViewClickListener {

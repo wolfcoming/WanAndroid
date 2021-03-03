@@ -1,4 +1,4 @@
-package com.czy.yq_wanandroid.adapter
+package com.czy.business_base.adapter
 
 import android.content.Context
 import android.content.DialogInterface
@@ -13,14 +13,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
+import com.czy.business_base.R
 import com.czy.business_base.api.Transformer
 import com.czy.business_base.api.WanApi
 import com.czy.business_base.entity.ArticleEntity
 import com.czy.lib_base.utils.SettingUtils
 import com.czy.lib_net.CommonApiService
-import com.czy.yq_wanandroid.R
 
-class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.ArticleListViewHolder> {
+class CommonArticleListAdapter : RecyclerView.Adapter<CommonArticleListAdapter.ArticleListViewHolder> {
     private var datas: ArrayList<ArticleEntity>
 
     constructor(data: ArrayList<ArticleEntity>) {
@@ -30,7 +30,9 @@ class HomeArticleListAdapter : RecyclerView.Adapter<HomeArticleListAdapter.Artic
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleListViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.rv_item_article, parent, false)
-        return ArticleListViewHolder(view)
+        return ArticleListViewHolder(
+            view
+        )
     }
 
     override fun onBindViewHolder(holder: ArticleListViewHolder, position: Int) {

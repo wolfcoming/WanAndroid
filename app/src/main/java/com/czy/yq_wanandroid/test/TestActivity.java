@@ -24,6 +24,8 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
         HiRefreshLayout hiRefreshLayout = findViewById(R.id.refresh);
         hiRefreshLayout.setRefreshOverView(new HiTextOverView(this));
+        int a = 1;
+        int  b = a<<1;
     }
 
 
