@@ -5,7 +5,6 @@ import com.czy.lib_webview.jsBridge.InvokeParams
 import com.czy.lib_webview.jsBridge.JSBridgeApi
 import com.tencent.smtt.sdk.WebView
 import org.json.JSONObject
-import java.lang.Exception
 
 abstract class JSBaseBridgeApi : JSBridgeApi() {
     lateinit var paramJSON: JSONObject

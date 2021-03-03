@@ -1,7 +1,6 @@
 package com.czy.lib_webview.jsBridge;
 
 import com.google.gson.Gson;
-import com.tencent.smtt.sdk.WebView;
 
 public class CallbackRes {
     public static final String SUCCESS_CODE = "1";

@@ -4,7 +4,6 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import com.czy.business_base.BaseActivity
 import com.czy.business_base.sp.SpHelpUtils
-import com.czy.business_base.sp.SpUtils
 import com.czy.yq_wanandroid.R
 import kotlinx.android.synthetic.main.activity_setting.*
 

@@ -2,6 +2,7 @@ package com.czy.yq_wanandroid.business.home.home
 
 import android.Manifest
 import android.content.Intent
+import android.os.Handler
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
@@ -12,9 +13,6 @@ import com.czy.business_base.ext.toast
 import com.czy.business_base.flowResult.FlowResult
 import com.czy.business_base.mvpbase.MvpFragment
 import com.czy.lib_log.HiLog
-import com.czy.lib_log.HiLogConfig
-import com.czy.lib_log.HiLogManager
-import com.czy.lib_log.printer.HiViewPrinter
 import com.czy.lib_net.ApiException
 import com.czy.lib_qrcode.app.CaptureActivity
 import com.czy.yq_wanandroid.R
@@ -64,8 +62,10 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
 //                    .withString("title", "http://192.168.0.101:8080/#/yunzhengtong")
 //                    .navigation()
 
-
-                HiLog.it("YYYYYY","01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789")
+                showLoading()
+                Handler().postDelayed({
+                    hideLoading()
+                }, 3000)
 
                 return@leftClickListener
             }

@@ -149,8 +149,8 @@ abstract class BaseFragment : RxFragment() {
             loadingDialog = LoadingDialog.Builder(context!!)
                 .setLoadingMsg("加载中...")
                 .setCanCancel(false)
-                .setDemines(0.1f)
-                .build()
+                .setDemines(.3f)
+                .show()
         }
         loadingDialog?.let {
             if (!it.isShowing) {

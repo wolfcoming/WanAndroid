@@ -10,7 +10,6 @@ import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -27,10 +26,7 @@ import androidx.webkit.WebViewFeature;
 
 import com.czy.lib_base.utils.file.FileUtils;
 import com.czy.lib_webview.jsApi.JSGetVersion;
-import com.czy.lib_webview.jsBridge.CallbackRes;
 import com.czy.lib_webview.jsBridge.InvokeFunction;
-import com.czy.lib_webview.jsBridge.InvokeParams;
-import com.czy.lib_webview.jsBridge.JSBridgeApi;
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebSettingsExtension;
 import com.tencent.smtt.export.external.interfaces.IX5WebSettings;
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
@@ -43,9 +39,6 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.Map;
 
 /**

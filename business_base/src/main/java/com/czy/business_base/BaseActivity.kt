@@ -2,12 +2,10 @@ package com.czy.business_base
 
 import android.content.Context
 import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import com.czy.business_base.sp.SpHelpUtils
 import com.czy.lib_base.utils.display.DisplayInfoUtils
 import com.czy.lib_log.HiLogManager
 import com.czy.lib_log.printer.HiViewPrinter
@@ -15,7 +13,6 @@ import com.gyf.immersionbar.ImmersionBar
 import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus
-import java.lang.ref.WeakReference
 
 
 abstract class BaseActivity : RxAppCompatActivity() {
@@ -78,8 +75,8 @@ abstract class BaseActivity : RxAppCompatActivity() {
             loadingDialog = LoadingDialog.Builder(this)
                 .setLoadingMsg("加载中...")
                 .setCanCancel(false)
-                .setDemines(0f)
-                .build()
+                .setDemines(.3f)
+                .show()
         }
         loadingDialog?.let {
             if (!it.isShowing) {

@@ -2,7 +2,6 @@ package com.czy.lib_ui
 
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.Color
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ViewGroup

@@ -13,7 +13,6 @@ import com.czy.yq_wanandroid.business.home.answer.AnswerFragment
 import com.czy.yq_wanandroid.business.home.home.HomeFragment
 import com.czy.yq_wanandroid.business.home.mine.MineFragment
 import com.czy.yq_wanandroid.business.home.projects.ProjectsFragment
-import com.example.lib_imageloader.image.ImageLoaderUtil
 import kotlinx.android.synthetic.main.activity_main2.*
 
 

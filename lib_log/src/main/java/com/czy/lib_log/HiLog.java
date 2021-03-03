@@ -7,7 +7,6 @@ import com.czy.lib_log.printer.HiLogPrinter;
 import com.czy.lib_log.utils.HiStackTraceUtil;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import static com.czy.lib_log.HiLogConfig.CACHE_MAX;

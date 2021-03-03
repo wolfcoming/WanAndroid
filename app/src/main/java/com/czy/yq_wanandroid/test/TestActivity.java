@@ -1,30 +1,30 @@
 package com.czy.yq_wanandroid.test;
 
-import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.czy.lib_ui.refresh.HiRefreshLayout;
-import com.czy.lib_ui.refresh.HiTextOverView;
+import com.czy.business_base.BaseActivity;
+import com.czy.lib_ui.RotatingRing;
 import com.czy.yq_wanandroid.R;
-import com.example.lib_imageloader.image.ImageLoaderUtil;
-import com.wanglu.photoviewerlibrary.PhotoViewer;
 
-import org.jetbrains.annotations.NotNull;
+public class TestActivity extends BaseActivity {
 
-public class TestActivity extends AppCompatActivity {
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
-        HiRefreshLayout hiRefreshLayout = findViewById(R.id.refresh);
-        hiRefreshLayout.setRefreshOverView(new HiTextOverView(this));
+    public int getLayoutId() {
+        return R.layout.activity_test;
     }
 
+    @Override
+    public void initView() {
+        findViewById(R.id.btn).setOnClickListener(v -> {
+            RotatingRing rotatingRing = findViewById(R.id.ring);
+            RotatingRing rotatingRing2 = findViewById(R.id.ring);
+            rotatingRing2.startAnimal();
+        });
+    }
 
+    @Override
+    public void initData() {
+
+    }
 }

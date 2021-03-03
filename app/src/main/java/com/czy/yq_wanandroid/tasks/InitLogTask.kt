@@ -1,6 +1,7 @@
 package com.czy.yq_wanandroid.tasks
 
 import com.czy.lib_log.HiLogConfig
+import com.czy.lib_log.HiLogConfig.JsonParser
 import com.czy.lib_log.HiLogManager
 import com.czy.lib_log.printer.HiConsolePrinter
 import com.czy.lib_log.printer.HiFilePrinter
@@ -16,7 +17,7 @@ class InitLogTask:Task() {
             }
 
             override fun includeThread(): Boolean {
-                return true
+                return false
             }
 
             override fun stackTraceDepth(): Int {

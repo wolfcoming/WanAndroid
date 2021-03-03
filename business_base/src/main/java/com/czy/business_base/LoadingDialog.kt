@@ -3,15 +3,42 @@ package com.czy.business_base
 import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.WindowManager
 import android.widget.TextView
-import com.czy.lib_base.R
+import com.czy.lib_ui.RotatingRing
 
-class LoadingDialog(context: Context) : Dialog(context) {
+class LoadingDialog(context: Context, themeResId: Int) : Dialog(context, themeResId) {
+
+    lateinit var rotatingRing: RotatingRing
+    fun setBuilder(builder: Builder) {
+        val view = LayoutInflater.from(context).inflate(R.layout.dialog_progress, null)
+        setContentView(view)
+        val tvMessage = view.findViewById<TextView>(R.id.tv_msg)
+        rotatingRing = view.findViewById<RotatingRing>(R.id.pb)
+        tvMessage.text = builder.mMsg
+        setCancelable(builder.mCancle)
+        if (builder.dimens == 0f) {
+            //解决 对话框引起的状态栏文字颜色变白问题
+            window!!.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        }
+        window?.setDimAmount(builder.dimens)
+    }
+
+    override fun show() {
+        rotatingRing.startAnimal()
+        super.show()
+    }
+
+    override fun dismiss() {
+        rotatingRing.startAnimal()
+        super.dismiss()
+    }
+
     open class Builder(context: Context) {
-        private var mCancle: Boolean = true
-        private var mMsg: String = "加载中。。"
-        private var mContext = context
-        private var dimens: Float = 0.4f
+        var mCancle: Boolean = true
+        var mMsg: String = "加载中。。"
+        var mContext = context
+        var dimens: Float = 0.4f
 
         fun setLoadingMsg(msg: String): Builder {
             this.mMsg = msg
@@ -28,16 +55,16 @@ class LoadingDialog(context: Context) : Dialog(context) {
             return this
         }
 
-        fun build(): LoadingDialog {
-            val loadingDialog = LoadingDialog(mContext)
-            val view = LayoutInflater.from(mContext).inflate(R.layout.dialog_progress, null)
-            loadingDialog.setContentView(view)
-            val tvMessage = view.findViewById<TextView>(R.id.tv_msg)
-            tvMessage.text = mMsg
-            loadingDialog.setCancelable(mCancle)
-            loadingDialog.window?.setDimAmount(dimens)
-            return loadingDialog
+        fun show(): LoadingDialog {
+            val create = create()
+            create.show()
+            return create
         }
 
+        fun create(): LoadingDialog {
+            val loadingDialog = LoadingDialog(mContext, R.style.myDialog_with_dimAmount)
+            loadingDialog.setBuilder(this)
+            return loadingDialog
+        }
     }
 }
