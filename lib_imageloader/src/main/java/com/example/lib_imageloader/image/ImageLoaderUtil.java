@@ -7,6 +7,8 @@ import com.example.lib_imageloader.image.glide.GlideImageLoaderStrategy;
 import com.example.lib_imageloader.image.listener.ProgressListener;
 import com.example.lib_imageloader.image.listener.SourceReadyListener;
 
+import java.lang.ref.WeakReference;
+
 
 /**
  * Created by soulrelay on 2016/10/11 13:42.

@@ -30,7 +30,7 @@ class LoadingDialog(context: Context, themeResId: Int) : Dialog(context, themeRe
     }
 
     override fun dismiss() {
-        rotatingRing.startAnimal()
+        rotatingRing.stopAnimal()
         super.dismiss()
     }
 

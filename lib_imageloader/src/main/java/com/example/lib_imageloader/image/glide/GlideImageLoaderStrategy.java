@@ -23,6 +23,8 @@ import com.example.lib_imageloader.image.BaseImageLoaderStrategy;
 import com.example.lib_imageloader.image.listener.ProgressListener;
 import com.example.lib_imageloader.image.listener.SourceReadyListener;
 
+import java.lang.ref.WeakReference;
+
 public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
 
     @Override
@@ -81,7 +83,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
 
     @Override
     public void loadImageWithProgress(String url, final ImageView imageView, final ProgressListener listener) {
-        ProgressInterceptor.addListener(url, listener);
+        ProgressInterceptor.addListener(url, new WeakReference<ProgressListener>(listener));
         GlideApp.with(imageView.getContext())
                 .load(url)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -97,15 +99,16 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
                     @Override
                     public void onLoadFailed(@Nullable Drawable errorDrawable) {
                         super.onLoadFailed(errorDrawable);
-                        ProgressInterceptor.LISTENER_MAP.get(url).onLoadFailed();
-//                        imageView.setImageResource(R.color.color_transparent);
+                        ProgressListener progressListener = ProgressInterceptor.LISTENER_MAP.get(url).get();
+                        if(progressListener!=null){
+                            progressListener.onLoadFailed();
+                        }
                     }
 
                     @Override
                     public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<
                                                 ? super Drawable> transition) {
                         super.onResourceReady(resource, transition);
-
                         ProgressInterceptor.removeListener(url);
 
                     }

@@ -39,22 +39,7 @@ class LoginActivity : MvpActivity<LoginPresenter>(), ILoginView {
     override fun initData() {
         btnTestIv.setOnClickListener {
             ImageLoaderUtil.getInstance().clearImageAllCache(LoginActivity@ this)
-
-//            val url =
-//                "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2317977391,2413939729&fm=26&gp=0.jpg"
-//            ImageLoaderUtil.getInstance().loadCircleBorderImage(url, R.drawable.icon_empty, ivTest,18f,Color.RED)
-
-
             val url = "https://f.sinaimg.cn/tech/transform/318/w204h114/20210203/b3a0-kirmait4650058.gif"
-//            ImageLoaderUtil.getInstance().loadGifImage(url, R.drawable.icon_empty, ivTest)
-//            ImageLoaderUtil.getInstance().loadImageWithPrepareCall(url, ivTest, R.drawable.icon_empty, object :SourceReadyListener{
-//                override fun onResourceReady(width: Int, height: Int) {
-//                    "onResourceReady $width  $height".log()
-//                }
-//
-//
-//            })
-//            ImageLoaderUtil.getInstance().loadImageWithRadius(url,R.drawable.icon_empty, ivTest,10f)
             ImageLoaderUtil.getInstance()
                 .loadImageWithProgress(url, ivTest, object :
                     ProgressListener {
@@ -69,7 +54,6 @@ class LoginActivity : MvpActivity<LoginPresenter>(), ILoginView {
                         }
 
                     }
-
                 })
         }
     }
