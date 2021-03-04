@@ -11,7 +11,7 @@ import com.czy.business_base.entity.HotKey
 import com.czy.business_base.mvpbase.MvpActivity
 import com.czy.lib_base.utils.KeyboardUtils
 import com.czy.yq_wanandroid.R
-import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
+import com.czy.business_base.adapter.CommonArticleListAdapter
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
@@ -31,7 +31,8 @@ class SearchActivity : MvpActivity<SearchPresenter>(), ISearchView {
     override fun initView() {
         changNormalTopView(this, mTitleBar)
         mSearchRv.layoutManager = LinearLayoutManager(this)
-        mSearchRv.adapter = HomeArticleListAdapter(datas)
+        mSearchRv.adapter =
+            CommonArticleListAdapter(datas)
 
         mSmartRefresh.setOnLoadMoreListener {
             getContentData(false)

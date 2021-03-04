@@ -6,7 +6,14 @@ object ArouterConfig {
     //app模块
     const val mainActivity: String = "/app/mainActivity"
     //登录模块
-    const val login: String = "/login/loginActivity"
+    const val login: String = "/userCenter/loginActivity"
+
+    //收藏页面
+    const val collectPage = "/userCenter/collectPage"
+
+
+    //拦截器--登录拦截
+    const val intercept_login = 1
 
     //网络请求错误码处理
     const val errorCodeProcess:String = "/intercept/errorCode"

@@ -7,7 +7,7 @@ import com.czy.business_base.entity.ArticleEntity
 import com.czy.business_base.ext.toast
 import com.czy.business_base.mvpbase.MvpActivity
 import com.czy.yq_wanandroid.R
-import com.czy.yq_wanandroid.adapter.HomeArticleListAdapter
+import com.czy.business_base.adapter.CommonArticleListAdapter
 import kotlinx.android.synthetic.main.activity_project_list.*
 
 class ProjectsListActivity : MvpActivity<IProjectsListPresenter>(), IProjectsList {
@@ -39,7 +39,8 @@ class ProjectsListActivity : MvpActivity<IProjectsListPresenter>(), IProjectsLis
         mTitleBar.setTitle(title)
         cid = intent.getIntExtra("cid", 0)
         mProjectListRv.layoutManager = LinearLayoutManager(this)
-        val mAdapter = HomeArticleListAdapter(datas)
+        val mAdapter =
+            CommonArticleListAdapter(datas)
         mProjectListRv.adapter = mAdapter
         mSmartRefresh.setOnLoadMoreListener {
             fresh = false
