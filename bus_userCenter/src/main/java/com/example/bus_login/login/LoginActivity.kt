@@ -1,6 +1,8 @@
 package com.czy.yq_wanandroid.business.login
 
+import android.text.TextUtils
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
 import com.czy.business_base.entity.UserInfo
 import com.czy.business_base.event.LoginEvent
@@ -28,7 +30,7 @@ class LoginActivity : MvpActivity<LoginPresenter>(), ILoginView {
     override fun initView() {
         etName.setText("yangqing1121")
         etPsw.setText("yangqing971121")
-        BarUtils.setNavBarLightMode(this,false)
+        BarUtils.setNavBarLightMode(this, false)
         btnLogin.setOnClickListener {
             var name = etName.text?.trim().toString()
             var psw = etPsw.text?.trim().toString()
@@ -39,7 +41,8 @@ class LoginActivity : MvpActivity<LoginPresenter>(), ILoginView {
     override fun initData() {
         btnTestIv.setOnClickListener {
             ImageLoaderUtil.getInstance().clearImageAllCache(LoginActivity@ this)
-            val url = "https://f.sinaimg.cn/tech/transform/318/w204h114/20210203/b3a0-kirmait4650058.gif"
+            val url =
+                "https://f.sinaimg.cn/tech/transform/318/w204h114/20210203/b3a0-kirmait4650058.gif"
             ImageLoaderUtil.getInstance()
                 .loadImageWithProgress(url, ivTest, object :
                     ProgressListener {
@@ -48,7 +51,7 @@ class LoginActivity : MvpActivity<LoginPresenter>(), ILoginView {
                     }
 
                     override fun onLoadProgress(isDone: Boolean, progress: Int) {
-                       "progress: $progress".log()
+                        "progress: $progress".log()
                         runOnUiThread {
                             btnTestIv.setText(progress.toString())
                         }
@@ -60,8 +63,13 @@ class LoginActivity : MvpActivity<LoginPresenter>(), ILoginView {
 
     override fun loginSuccess(userInfo: UserInfo) {
         UserManage.setUserInfo(userInfo)
-        setResult(RESULT_OK)
         LoginEvent(true).notifyEvent()
+        val targetPath = intent.getStringExtra("targetPath")//登录后需要跳转的目标页面
+        if (!TextUtils.isEmpty(targetPath)) {
+            ARouter.getInstance().build(targetPath).navigation()
+        } else {
+            setResult(RESULT_OK)
+        }
         finish()
     }
 

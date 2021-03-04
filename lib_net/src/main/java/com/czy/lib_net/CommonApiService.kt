@@ -18,17 +18,18 @@ class CommonApiService {
     companion object {
         private var TIMEOUT: Long = 8 * 1000
         private var BASEURL = ""
-
+        var cookieManage:CookieManage? = null
         fun initOkHttp(timeout: Long = TIMEOUT): OkHttpClient {
+            cookieManage = CookieManage()
             return OkHttpClient.Builder()
                 .connectTimeout(timeout, TimeUnit.SECONDS)
                 .readTimeout(timeout, TimeUnit.SECONDS)
                 .addInterceptor(LoggingInterceptor())
 //                .addInterceptor(NetInterceptor())
-//                .cookieJar(
-////                    PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.mContext))
-//                    CookieManage()
-//                )
+                .cookieJar(
+//                    PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.mContext))
+                    cookieManage!!
+                )
 //                    .cache(Cache(App.mContext.cacheDir, 10 * 1024 * 1024))
                 .build()
         }

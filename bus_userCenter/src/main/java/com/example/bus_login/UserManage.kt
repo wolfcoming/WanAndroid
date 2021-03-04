@@ -6,6 +6,7 @@ import com.czy.business_base.entity.UserInfo
 import com.czy.business_base.event.LoginEvent
 import com.czy.business_base.flowResult.FlowResult
 import com.czy.lib_base.utils.ContentWrapperUtils
+import com.czy.lib_net.CommonApiService
 import com.czy.yq_wanandroid.business.login.LoginActivity
 
 class UserManage {
@@ -26,6 +27,8 @@ class UserManage {
         fun exitLogin() {
             userInfo = null
             LoginEvent(false).notifyEvent()
+            //清楚cookie信息
+            CommonApiService.cookieManage?.cache?.clear()
         }
 
         /**

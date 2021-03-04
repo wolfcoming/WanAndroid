@@ -16,6 +16,13 @@ android {
         versionName "1.0"
 
         consumerProguardFiles "consumer-rules.pro"
+        //ARouter配置
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+            generateStubs = true
+        }
     }
 
     buildTypes {
@@ -44,7 +51,7 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
     api 'com.trello.rxlifecycle4:rxlifecycle-components:4.0.1'
     api 'com.alibaba:arouter-api:1.5.1'
-
+    kapt 'com.alibaba:arouter-compiler:1.5.1'
 
     api 'com.tencent.bugly:crashreport:3.2.422'
     api 'com.tencent.bugly:nativecrashreport:3.7.5'

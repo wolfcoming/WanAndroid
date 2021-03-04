@@ -3,6 +3,7 @@ package com.example.lib_imageloader.image.glide;
 import com.example.lib_imageloader.image.listener.ProgressListener;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
@@ -22,7 +23,10 @@ public class ProgressResponseBody extends ResponseBody {
 
     public ProgressResponseBody(String url, ResponseBody responseBody) {
         this.responseBody = responseBody;
-        listener = ProgressInterceptor.LISTENER_MAP.get(url).get();
+        WeakReference<ProgressListener> progressListenerWeakReference = ProgressInterceptor.LISTENER_MAP.get(url);
+        if(progressListenerWeakReference!=null){
+            listener = progressListenerWeakReference.get();
+        }
     }
 
     @Override
