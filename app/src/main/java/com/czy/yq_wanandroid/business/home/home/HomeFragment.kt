@@ -24,6 +24,7 @@ import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.lang.NullPointerException
 
 
 class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
@@ -67,8 +68,8 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
 //                    hideLoading()
 //                }, 3000)
 
-                ARouter.getInstance().build("/login/sss").navigation()
-
+//                ARouter.getInstance().build("/login/sss").navigation()
+                throw NullPointerException("自定义崩溃")
 
                 return@leftClickListener
             }
