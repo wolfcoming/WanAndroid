@@ -5,6 +5,7 @@ object ArouterConfig {
 
     //app模块
     const val mainActivity: String = "/app/mainActivity"
+
     //登录模块
     const val login: String = "/userCenter/loginActivity"
 
@@ -15,6 +16,9 @@ object ArouterConfig {
     //拦截器--登录拦截
     const val intercept_login = 1
 
+    //降级界面
+    const val lost_page = "/lost/lost_page"
+
     //网络请求错误码处理
-    const val errorCodeProcess:String = "/intercept/errorCode"
+    const val errorCodeProcess: String = "/intercept/errorCode"
 }

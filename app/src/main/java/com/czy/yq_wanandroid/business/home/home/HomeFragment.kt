@@ -62,10 +62,13 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
 //                    .withString("title", "http://192.168.0.101:8080/#/yunzhengtong")
 //                    .navigation()
 
-                showLoading()
-                Handler().postDelayed({
-                    hideLoading()
-                }, 3000)
+//                showLoading()
+//                Handler().postDelayed({
+//                    hideLoading()
+//                }, 3000)
+
+                ARouter.getInstance().build("/login/sss").navigation()
+
 
                 return@leftClickListener
             }
