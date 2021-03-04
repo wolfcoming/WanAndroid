@@ -3,6 +3,7 @@ package com.czy.yq_wanandroid.business.home.home
 import android.Manifest
 import android.content.Intent
 import android.os.Handler
+import android.os.SystemClock
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
@@ -17,6 +18,7 @@ import com.czy.lib_net.ApiException
 import com.czy.lib_qrcode.app.CaptureActivity
 import com.czy.yq_wanandroid.R
 import com.czy.business_base.adapter.CommonArticleListAdapter
+import com.czy.lib_base.utils.executor.HiExecutor
 import com.czy.yq_wanandroid.adapter.HomeBannerAdapter
 import com.czy.yq_wanandroid.business.search.SearchActivity
 import com.tbruyelle.rxpermissions3.RxPermissions
@@ -69,8 +71,23 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
 //                }, 3000)
 
 //                ARouter.getInstance().build("/login/sss").navigation()
-                throw NullPointerException("自定义崩溃")
+                for(i in 0..10){
+                    HiExecutor.execute(i, Runnable {
+                        SystemClock.sleep((1000))
+                    })
+                }
 
+//                HiExecutor.execute(0, object : HiExecutor.Callable<String>() {
+//                    override fun onBackgroud(): String {
+//                        SystemClock.sleep(3000)
+//                        return "终于计算出来结果啦"
+//                    }
+//
+//                    override fun onCompleted(t: String) {
+//                        toast(t)
+//                    }
+//
+//                })
                 return@leftClickListener
             }
             RxPermissions(this)
@@ -96,8 +113,15 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
                     }
                 }
         }
+        var pause = true
         mTitleBar.rightClickListener {
-            startActivity(Intent(activity, SearchActivity::class.java))
+            if(pause){
+                HiExecutor.pause()
+            }else{
+                HiExecutor.resume()
+            }
+
+//            startActivity(Intent(activity, SearchActivity::class.java))
         }
     }
 

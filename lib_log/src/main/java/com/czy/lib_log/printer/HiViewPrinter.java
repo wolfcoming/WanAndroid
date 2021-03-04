@@ -81,12 +81,16 @@ public class HiViewPrinter implements HiLogPrinter {
         logView.setClickable(true);
         logView.setOrientation(LinearLayout.VERTICAL);
         logView.setBackgroundColor(Color.BLACK);
+
+        FrameLayout.LayoutParams logViewParam =
+                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        logViewParam.topMargin = 10;
+        logViewParam.bottomMargin = 10;
         //1. logView的关闭按钮
         TextView closeView = new TextView(rootView.getContext());
         closeView.setGravity(Gravity.CENTER);
-        FrameLayout.LayoutParams logViewParam =
-                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         logView.addView(closeView, logViewParam);
+        logView.setPadding(10,10,10,10);
         closeView.setText("Close");
         closeView.setBackgroundColor(Color.GRAY);
         closeView.setOnClickListener(new View.OnClickListener() {
@@ -96,11 +100,33 @@ public class HiViewPrinter implements HiLogPrinter {
                 rootView.removeView(logView);
             }
         });
-        //2. logView的显示内容
+
+
+        //2. 清空按钮
+        TextView clearView = new TextView(rootView.getContext());
+        clearView.setGravity(Gravity.CENTER);
+        logView.addView(clearView, logViewParam);
+        clearView.setText("清空控制台");
+        clearView.setPadding(10,10,10,10);
+        clearView.setBackgroundColor(Color.GRAY);
+        clearView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.getLogs().clear();
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        //3. logView的显示内容
         logView.addView(recyclerView);
+        LinearLayout.LayoutParams recyclerViewLayoutParams = (LinearLayout.LayoutParams) recyclerView.getLayoutParams();
+        recyclerViewLayoutParams.weight = 1;
+        recyclerView.setLayoutParams(recyclerViewLayoutParams);
         int px = (int) DisplayInfoUtils.getInstance().dp2px(10);
         recyclerView.setPadding(px,px,px,3*px);
         recyclerView.scrollToPosition(adapter.getItemCount() -1);
+
+
 
         rootView.addView(logView, params);
     }
@@ -130,6 +156,10 @@ public class HiViewPrinter implements HiLogPrinter {
         void addAll(List<HiLogMo> datas){
             logs.addAll(datas);
             notifyDataSetChanged();
+        }
+
+        public List<HiLogMo> getLogs() {
+            return logs;
         }
 
         @NonNull
