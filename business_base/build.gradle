@@ -62,4 +62,6 @@ dependencies {
     api 'com.github.tbruyelle:rxpermissions:0.12'
 
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+
+    implementation 'com.tencent:mmkv-static:1.2.7'
 }

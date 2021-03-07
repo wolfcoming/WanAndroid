@@ -1,9 +1,6 @@
 package com.czy.business_base.intercept;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.os.Handler;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Interceptor;

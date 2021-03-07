@@ -1,9 +1,11 @@
 package com.czy.yq_wanandroid.business
 
 import android.content.res.Configuration
+import android.os.Handler
 import androidx.appcompat.app.AppCompatDelegate
 import com.czy.business_base.BaseActivity
-import com.czy.business_base.sp.SpHelpUtils
+import com.czy.business_base.MyActivityManager
+import com.czy.business_base.dataSave.DataSaveProxy
 import com.czy.yq_wanandroid.R
 import kotlinx.android.synthetic.main.activity_setting.*
 
@@ -27,12 +29,17 @@ class SettingActivity : BaseActivity() {
 
     override fun initData() {
         sw_dark_mode.setOnCheckedChangeListener { buttonView, isChecked ->
-            SpHelpUtils.put("darkMode",isChecked)
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+            DataSaveProxy.getInstance().put("darkMode", isChecked)
+            Handler().postDelayed({
+                MyActivityManager.getActivityManager().reStartApp(this)
+            },200)
+
+
+//            if (isChecked) {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//            } else {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//            }
         }
     }
 }

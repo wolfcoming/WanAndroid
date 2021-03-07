@@ -21,4 +21,8 @@ object ArouterConfig {
 
     //网络请求错误码处理
     const val errorCodeProcess: String = "/intercept/errorCode"
+
+
+    //测试总入口
+    const val test_entry:String = "/test/test_entry"
 }

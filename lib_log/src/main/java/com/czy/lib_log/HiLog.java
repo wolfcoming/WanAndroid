@@ -75,6 +75,7 @@ public class HiLog {
     }
 
     public static void log(@HiLogType.TYPE int type, Object... contents) {
+        if(HiLogManager.getInstance()==null) return;//日志模块还未加载
         log(type, HiLogManager.getInstance().getConfig().getGlobalTag(), contents);
     }
 

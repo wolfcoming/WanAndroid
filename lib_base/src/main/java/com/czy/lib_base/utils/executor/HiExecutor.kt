@@ -22,20 +22,21 @@ object HiExecutor {
     private var lock: ReentrantLock = ReentrantLock()
     private var pauseCondition: Condition
     private val mainHandler = Handler(Looper.getMainLooper());
-
+    var blockingQueue:PriorityBlockingQueue<Runnable>? = null;
     init {
         pauseCondition = lock.newCondition()
 
         val cpuCount = Runtime.getRuntime().availableProcessors()
         val corePoolSize = cpuCount + 1
         val maxPoolSize = cpuCount * 2 + 1
-        val blockingQueue: PriorityBlockingQueue<out Runnable> = PriorityBlockingQueue()
+        blockingQueue= PriorityBlockingQueue()
         val keepAliveTime = 30L
         val unit = TimeUnit.SECONDS
 
         val seq = AtomicLong()
         val threadFactory = ThreadFactory {
             val thread = Thread(it)
+//            Executors.newCachedThreadPool()
             //hi-executor-0
             thread.name = "hi-executor-" + seq.getAndIncrement()
             return@ThreadFactory thread
@@ -50,6 +51,7 @@ object HiExecutor {
             threadFactory
         ) {
             override fun beforeExecute(t: Thread?, r: Runnable?) {
+//                Log.e(TAG,"blockingQueue.size: beforeExecute -- "+HiExecutor.blockingQueue?.size)
                 if (isPaused) {
                     lock.lock()
                     try {
@@ -63,6 +65,7 @@ object HiExecutor {
             override fun afterExecute(r: Runnable?, t: Throwable?) {
                 //监控线程池耗时任务,线程创建数量,正在运行的数量
                 Log.e(TAG, "已执行完的任务的优先级是：" + (r as PriorityRunnable).priority)
+                Log.e(TAG,"blockingQueue.size: afterExecute:队列剩余数 -- "+HiExecutor.blockingQueue?.size)
             }
         }
     }
@@ -70,11 +73,13 @@ object HiExecutor {
     @JvmOverloads
     fun execute(@IntRange(from = 0, to = 10) priority: Int = 0, runnable: Runnable) {
         hiExecutor.execute(PriorityRunnable(priority, runnable))
+        Log.e(TAG,"blockingQueue.size: "+HiExecutor.blockingQueue?.size)
     }
 
     @JvmOverloads
     fun execute(@IntRange(from = 0, to = 10) priority: Int = 0, runnable: Callable<*>) {
         hiExecutor.execute(PriorityRunnable(priority, runnable))
+        Log.e(TAG,"blockingQueue.size: "+HiExecutor.blockingQueue?.size)
     }
 
     abstract class Callable<T> : Runnable {
@@ -106,9 +111,7 @@ object HiExecutor {
 
             runnable.run()
         }
-
     }
-
 
     fun pause() {
         lock.lock()

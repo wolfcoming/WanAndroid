@@ -2,31 +2,28 @@ package com.czy.yq_wanandroid.business.home.home
 
 import android.Manifest
 import android.content.Intent
-import android.os.Handler
 import android.os.SystemClock
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
+import com.czy.business_base.adapter.CommonArticleListAdapter
 import com.czy.business_base.entity.ArticleEntity
 import com.czy.business_base.entity.Banner
 import com.czy.business_base.event.LoginEvent
 import com.czy.business_base.ext.toast
 import com.czy.business_base.flowResult.FlowResult
 import com.czy.business_base.mvpbase.MvpFragment
-import com.czy.lib_log.HiLog
+import com.czy.lib_base.utils.executor.HiExecutor
 import com.czy.lib_net.ApiException
 import com.czy.lib_qrcode.app.CaptureActivity
 import com.czy.yq_wanandroid.R
-import com.czy.business_base.adapter.CommonArticleListAdapter
-import com.czy.lib_base.utils.executor.HiExecutor
 import com.czy.yq_wanandroid.adapter.HomeBannerAdapter
-import com.czy.yq_wanandroid.business.search.SearchActivity
+import com.infoholdcity.basearchitecture.self_extends.log
 import com.tbruyelle.rxpermissions3.RxPermissions
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.lang.NullPointerException
 
 
 class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
@@ -71,11 +68,13 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
 //                }, 3000)
 
 //                ARouter.getInstance().build("/login/sss").navigation()
-                for(i in 0..10){
+                for(i in 0..24){
                     HiExecutor.execute(i, Runnable {
-                        SystemClock.sleep((1000))
+//                        SystemClock.sleep(((2000 - i*100).toLong()))
+                        SystemClock.sleep(1000)
                     })
                 }
+                HiExecutor.blockingQueue?.size?.log()
 
 //                HiExecutor.execute(0, object : HiExecutor.Callable<String>() {
 //                    override fun onBackgroud(): String {
@@ -120,6 +119,7 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
             }else{
                 HiExecutor.resume()
             }
+            pause=!pause
 
 //            startActivity(Intent(activity, SearchActivity::class.java))
         }

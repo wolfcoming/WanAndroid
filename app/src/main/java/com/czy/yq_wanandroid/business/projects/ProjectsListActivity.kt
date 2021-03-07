@@ -3,11 +3,11 @@ package com.czy.yq_wanandroid.business.projects
 import android.content.Context
 import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.czy.business_base.adapter.CommonArticleListAdapter
 import com.czy.business_base.entity.ArticleEntity
 import com.czy.business_base.ext.toast
 import com.czy.business_base.mvpbase.MvpActivity
 import com.czy.yq_wanandroid.R
-import com.czy.business_base.adapter.CommonArticleListAdapter
 import kotlinx.android.synthetic.main.activity_project_list.*
 
 class ProjectsListActivity : MvpActivity<IProjectsListPresenter>(), IProjectsList {

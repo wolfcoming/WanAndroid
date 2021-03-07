@@ -1,3 +1,4 @@
+include ':test_model'
 include ':lib_log'
 include ':bus_userCenter'
 include ':lib_qrcode'

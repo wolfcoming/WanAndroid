@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
 import com.czy.business_base.BaseActivity
 import com.czy.yq_wanandroid.R
@@ -39,7 +40,10 @@ class MainActivity2 : BaseActivity() {
             var position = when (it.itemId) {
                 R.id.main_home -> 0
                 R.id.main_answer -> 1
-                R.id.main_project -> 2
+                R.id.main_project -> {
+                    ARouter.getInstance().build(ArouterConfig.test_entry).navigation()
+                    return@setOnNavigationItemSelectedListener false
+                }
                 R.id.main_mine -> 3
                 else -> -1
             }

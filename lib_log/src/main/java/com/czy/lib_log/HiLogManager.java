@@ -14,6 +14,9 @@ public class HiLogManager {
     private List<HiLogPrinter> printers = new ArrayList<>();
 
     private HiLogManager(HiLogConfig config, HiLogPrinter[] printers) {
+        if(config == null){
+            config = new HiLogConfig() {};
+        }
         this.config = config;
         this.printers.addAll(Arrays.asList(printers));
     }

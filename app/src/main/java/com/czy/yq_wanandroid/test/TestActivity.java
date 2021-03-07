@@ -1,7 +1,5 @@
 package com.czy.yq_wanandroid.test;
 
-import android.view.View;
-
 import com.czy.business_base.BaseActivity;
 import com.czy.lib_ui.RotatingRing;
 import com.czy.yq_wanandroid.R;

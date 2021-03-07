@@ -1,10 +1,9 @@
 package com.czy.yq_wanandroid.business.search
 
 import com.czy.business_base.Constants.SEARCHHISTORY_MAX_COUNT
+import com.czy.business_base.api.Transformer
 import com.czy.business_base.api.WanApi
-import com.czy.business_base.ext.commonSubscribe
 import com.czy.business_base.ext.threadSwitch
-import com.czy.business_base.ext.threadSwitchAndBindLifeCycle
 import com.czy.business_base.mvpbase.MvpPresenter
 import com.czy.lib_net.CommonApiService
 import com.czy.yq_wanandroid.room.AppDatabase
@@ -15,8 +14,9 @@ class SearchPresenter : MvpPresenter<ISearchView>() {
 
     fun getHotKey() {
         CommonApiService.getRequest(WanApi::class.java).getHotKeys()
-            .threadSwitchAndBindLifeCycle(baseView)
-            .commonSubscribe({
+            .compose(Transformer.threadSwitchAndBindLifeCycle(baseView))
+            .compose(Transformer.serverCodeDeal())
+            .subscribe({
                 baseView?.showHotKeys(it.data!!)
             }) {
                 baseView?.getHotKeysFailed(it.message!!)
@@ -25,8 +25,9 @@ class SearchPresenter : MvpPresenter<ISearchView>() {
 
     fun searchArticle(pageIndex: Int, words: String) {
         CommonApiService.getRequest(WanApi::class.java).search(pageIndex, words)
-            .threadSwitchAndBindLifeCycle(baseView)
-            .commonSubscribe({
+            .compose(Transformer.threadSwitchAndBindLifeCycle(baseView))
+            .compose(Transformer.serverCodeDeal())
+            .subscribe({
                 baseView?.showArticleList(it.data!!)
             }) {
                 baseView?.getArticleListFailed(it.message!!)

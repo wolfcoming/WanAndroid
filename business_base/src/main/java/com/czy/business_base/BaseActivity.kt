@@ -19,6 +19,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
     lateinit var viewPrinter:HiViewPrinter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MyActivityManager.getActivityManager().pushActivity(this)
         "${this.javaClass.simpleName}:  onCreate".log()
 
         immerbar()
@@ -114,6 +115,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
 
     override fun onDestroy() {
+        MyActivityManager.getActivityManager().popActivity(this)
         HiLogManager.getInstance().removePrinter(viewPrinter)
         if (isRegisterEventBus()) {
             EventBus.getDefault().unregister(this)
