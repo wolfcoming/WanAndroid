@@ -10,8 +10,8 @@ public class DataSaveProxy implements IDataSave{
 
     private IDataSave dataSave;
     private DataSaveProxy(){
-        dataSave = new SpDataSave();//建议一个应用只使用一种存储方式，这里不暴露切换代理对象方法
-//        dataSave = new MmkvDataSave();//建议一个应用只使用一种存储方式，这里不暴露切换代理对象方法
+//        dataSave = new SpDataSave();//建议一个应用只使用一种存储方式，这里不暴露切换代理对象方法
+        dataSave = new MmkvDataSave();//建议一个应用只使用一种存储方式，这里不暴露切换代理对象方法
     }
 
     public static DataSaveProxy getInstance(){

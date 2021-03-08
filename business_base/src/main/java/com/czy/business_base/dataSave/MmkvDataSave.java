@@ -5,7 +5,12 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.czy.lib_log.HiLog;
+import com.getkeepsafe.relinker.ReLinker;
 import com.tencent.mmkv.MMKV;
+
+import java.io.File;
+
+import static com.tencent.mmkv.MMKV.SINGLE_PROCESS_MODE;
 
 class MmkvDataSave implements IDataSave{
 
@@ -13,9 +18,15 @@ class MmkvDataSave implements IDataSave{
 
     @Override
     public void init(Context context, String storePath) {
-        String rootDir = MMKV.initialize(storePath);
+        String dir = context.getFilesDir().getAbsoluteFile()+ File.separator+storePath;
+        String rootDir = MMKV.initialize(dir, new MMKV.LibLoader() {
+            @Override
+            public void loadLibrary(String s) {
+                ReLinker.loadLibrary(context, s);
+            }
+        });
         HiLog.e(rootDir);
-        mmkv = MMKV.defaultMMKV();
+        mmkv = MMKV.defaultMMKV(SINGLE_PROCESS_MODE,"123456");
     }
 
     @Override
