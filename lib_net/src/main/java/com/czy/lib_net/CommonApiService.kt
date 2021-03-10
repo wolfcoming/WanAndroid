@@ -4,10 +4,7 @@ import com.czy.lib_net.annotation.BaseUrl
 import com.czy.lib_net.annotation.TimeOut
 import com.czy.lib_net.convert.CustomGsonConverterFactory
 import com.infoholdcity.basearchitecture.self_extends.log
-import okhttp3.Cookie
-import okhttp3.CookieJar
-import okhttp3.HttpUrl
-import okhttp3.OkHttpClient
+import okhttp3.*
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import java.util.*
@@ -18,19 +15,25 @@ class CommonApiService {
     companion object {
         private var TIMEOUT: Long = 8 * 1000
         private var BASEURL = ""
-        var cookieManage:CookieManage? = null
+        var cookieManage: CookieManage? = null
+        val interceptors = ArrayList<Interceptor>()
+        val netInterceptors = ArrayList<Interceptor>()
         fun initOkHttp(timeout: Long = TIMEOUT): OkHttpClient {
             cookieManage = CookieManage()
-            return OkHttpClient.Builder()
+            val builder = OkHttpClient.Builder()
                 .connectTimeout(timeout, TimeUnit.SECONDS)
                 .readTimeout(timeout, TimeUnit.SECONDS)
-                .addInterceptor(LoggingInterceptor())
-//                .addInterceptor(NetInterceptor())
-                .cookieJar(
-//                    PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.mContext))
-                    cookieManage!!
-                )
-//                    .cache(Cache(App.mContext.cacheDir, 10 * 1024 * 1024))
+
+            for (interceptor in interceptors) {
+                builder.addInterceptor(interceptor)
+            }
+
+            for (netInterceptor in netInterceptors) {
+                builder.addNetworkInterceptor(netInterceptor)
+            }
+
+            return builder.addInterceptor(LoggingInterceptor())
+                .cookieJar(cookieManage!!)
                 .build()
         }
 

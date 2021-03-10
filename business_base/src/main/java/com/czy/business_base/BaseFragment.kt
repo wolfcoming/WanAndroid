@@ -119,6 +119,22 @@ abstract class BaseFragment : RxFragment() {
     }
 
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        "${this::class.java.simpleName} ${
+            Thread.currentThread()
+                .getStackTrace()[2].getMethodName()
+        }".log("QQQQQQ")
+    }
+
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        "${this::class.java.simpleName} ${
+            Thread.currentThread()
+                .getStackTrace()[2].getMethodName()
+        } hidden: $hidden".log("QQQQQQ")
+    }
     open fun changNormalTopView(context: Context?, topView: View?) {
         if (context == null || topView == null || Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return
@@ -166,6 +182,7 @@ abstract class BaseFragment : RxFragment() {
             }
         }
     }
+
 
 
 }

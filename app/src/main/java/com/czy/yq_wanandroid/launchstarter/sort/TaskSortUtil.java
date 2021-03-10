@@ -2,10 +2,10 @@ package com.czy.yq_wanandroid.launchstarter.sort;
 
 
 import android.os.Build;
-import android.util.ArraySet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.collection.ArraySet;
 
 import com.czy.yq_wanandroid.launchstarter.task.Task;
 import com.czy.yq_wanandroid.launchstarter.utils.DispatcherLog;
@@ -24,11 +24,9 @@ public class TaskSortUtil {
      *
      * @return
      */
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public static synchronized List<Task> getSortResult(List<Task> originTasks,
                                                         List<Class<? extends Task>> clsLaunchTasks) {
         long makeTime = System.currentTimeMillis();
-
         Set<Integer> dependSet = new ArraySet<>();
         Graph graph = new Graph(originTasks.size());
         for (int i = 0; i < originTasks.size(); i++) {
@@ -98,7 +96,6 @@ public class TaskSortUtil {
      * 获取任务在任务列表中的index
      *
      * @param originTasks
-     * @param taskName
      * @return
      */
     private static int getIndexOfTask(List<Task> originTasks,

@@ -10,7 +10,6 @@ public class DispatcherLog {
         if (!sDebug) {
             return;
         }
-        Log.i("QQQQQQQ",msg);
     }
 
     public static boolean isDebug() {

@@ -10,12 +10,6 @@ open abstract class LazyFragment : BaseFragment() {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-
-        "${this::class.java.simpleName} ${
-            Thread.currentThread()
-                .getStackTrace()[2].getMethodName()
-        }".log("QQQQQQ")
-
         if (mViewCreated) {
             if (isVisibleToUser && !mUserVisible) {
                 dispatchUserVisibleHint(true)
@@ -27,10 +21,6 @@ open abstract class LazyFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        "${this::class.java.simpleName} ${
-            Thread.currentThread()
-                .getStackTrace()[2].getMethodName()
-        }".log("QQQQQQ")
         if (!isHidden && userVisibleHint) {
             dispatchUserVisibleHint(true)
         }
@@ -38,11 +28,6 @@ open abstract class LazyFragment : BaseFragment() {
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        "${this::class.java.simpleName} ${
-            Thread.currentThread()
-                .getStackTrace()[2].getMethodName()
-        }".log("QQQQQQ")
-
         if (hidden) {
             dispatchUserVisibleHint(false)
         } else {
@@ -51,11 +36,6 @@ open abstract class LazyFragment : BaseFragment() {
     }
 
     private fun dispatchUserVisibleHint(visible: Boolean) {
-        "${this::class.java.simpleName} ${
-            Thread.currentThread()
-                .getStackTrace()[2].getMethodName()
-        }".log("QQQQQQ")
-
         if (visible && !isParentVisible()) {
             return
         }
@@ -97,11 +77,6 @@ open abstract class LazyFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        "${this::class.java.simpleName} ${
-            Thread.currentThread()
-                .getStackTrace()[2].getMethodName()
-        }".log("QQQQQQ")
-
         if (!mIsFirstVisible&&!mUserVisible ) {
             if (!isHidden && userVisibleHint) {
                 dispatchUserVisibleHint(true)
@@ -111,11 +86,6 @@ open abstract class LazyFragment : BaseFragment() {
 
     override fun onPause() {
         super.onPause()
-        "${this::class.java.simpleName} ${
-            Thread.currentThread()
-                .getStackTrace()[2].getMethodName()
-        }".log("QQQQQQ")
-
         if (userVisibleHint&&mUserVisible) {
             dispatchUserVisibleHint(false)
         }

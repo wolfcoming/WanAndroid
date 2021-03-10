@@ -1,5 +1,6 @@
 package com.czy.yq_wanandroid.business
 
+import android.view.ViewGroup
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -85,6 +86,10 @@ class MainActivity2 : BaseActivity() {
 
         override fun getItem(position: Int): Fragment {
             return fragments[position]
+        }
+
+        override fun instantiateItem(container: ViewGroup, position: Int): Any {
+            return super.instantiateItem(container, position)
         }
 
     }
