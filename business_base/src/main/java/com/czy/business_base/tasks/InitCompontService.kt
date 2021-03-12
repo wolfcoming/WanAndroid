@@ -1,7 +1,7 @@
-package com.czy.yq_wanandroid.tasks
+package com.czy.business_base.tasks
 
+import com.czy.business_base.launchstarter.task.Task
 import com.czy.business_base.service.BaseServiceInit
-import com.czy.yq_wanandroid.launchstarter.task.Task
 
 /**
  * 初始化个组件服务

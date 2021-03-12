@@ -1,6 +1,6 @@
-package com.czy.yq_wanandroid.tasks
+package com.czy.business_base.tasks
 
-import com.czy.yq_wanandroid.launchstarter.task.Task
+import com.czy.business_base.launchstarter.task.Task
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout

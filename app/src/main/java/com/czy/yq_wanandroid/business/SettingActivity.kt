@@ -2,7 +2,6 @@ package com.czy.yq_wanandroid.business
 
 import android.content.res.Configuration
 import android.os.Handler
-import androidx.appcompat.app.AppCompatDelegate
 import com.czy.business_base.BaseActivity
 import com.czy.business_base.MyActivityManager
 import com.czy.business_base.dataSave.DataSaveProxy

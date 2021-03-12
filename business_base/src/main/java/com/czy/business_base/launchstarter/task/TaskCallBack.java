@@ -1,4 +1,4 @@
-package com.czy.yq_wanandroid.launchstarter.task;
+package com.czy.business_base.launchstarter.task;
 
 public interface TaskCallBack {
 

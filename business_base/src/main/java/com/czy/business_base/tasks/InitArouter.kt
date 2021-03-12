@@ -1,9 +1,9 @@
-package com.czy.yq_wanandroid.tasks
+package com.czy.business_base.tasks
 
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
-import com.czy.yq_wanandroid.BuildConfig
-import com.czy.yq_wanandroid.launchstarter.task.Task
+import com.czy.business_base.BuildConfig
+import com.czy.business_base.launchstarter.task.Task
 
 class InitArouter : Task() {
     override fun needWait(): Boolean {

@@ -1,7 +1,7 @@
-package com.czy.yq_wanandroid.launchstarter.stat;
+package com.czy.business_base.launchstarter.stat;
 
 
-import com.czy.yq_wanandroid.launchstarter.utils.DispatcherLog;
+import com.czy.business_base.launchstarter.utils.DispatcherLog;
 
 import java.util.ArrayList;
 import java.util.List;

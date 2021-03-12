@@ -1,7 +1,5 @@
 package com.czy.lib_net;
 
-import com.czy.lib_log.HiLog;
-
 import java.io.IOException;
 
 import okhttp3.Interceptor;

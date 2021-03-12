@@ -1,10 +1,10 @@
-package com.czy.yq_wanandroid.launchstarter.task;
+package com.czy.business_base.launchstarter.task;
 
 import android.content.Context;
 import android.os.Process;
 
-import com.czy.yq_wanandroid.launchstarter.TaskDispatcher;
-import com.czy.yq_wanandroid.launchstarter.utils.DispatcherExecutor;
+import com.czy.business_base.launchstarter.TaskDispatcher;
+import com.czy.business_base.launchstarter.utils.DispatcherExecutor;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;

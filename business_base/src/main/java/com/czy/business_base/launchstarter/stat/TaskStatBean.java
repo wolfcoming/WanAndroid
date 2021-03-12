@@ -1,4 +1,4 @@
-package com.czy.yq_wanandroid.launchstarter.stat;
+package com.czy.business_base.launchstarter.stat;
 
 class TaskStatBean {
 

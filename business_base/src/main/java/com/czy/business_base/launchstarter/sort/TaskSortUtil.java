@@ -1,14 +1,11 @@
-package com.czy.yq_wanandroid.launchstarter.sort;
+package com.czy.business_base.launchstarter.sort;
 
-
-import android.os.Build;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.collection.ArraySet;
 
-import com.czy.yq_wanandroid.launchstarter.task.Task;
-import com.czy.yq_wanandroid.launchstarter.utils.DispatcherLog;
+import com.czy.business_base.launchstarter.task.Task;
+import com.czy.business_base.launchstarter.utils.DispatcherLog;
 
 import java.util.ArrayList;
 import java.util.List;

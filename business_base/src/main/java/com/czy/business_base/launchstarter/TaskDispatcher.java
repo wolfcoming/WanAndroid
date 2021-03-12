@@ -1,4 +1,4 @@
-package com.czy.yq_wanandroid.launchstarter;
+package com.czy.business_base.launchstarter;
 
 import android.content.Context;
 import android.os.Looper;
@@ -6,12 +6,12 @@ import android.util.Log;
 
 import androidx.annotation.UiThread;
 
-import com.czy.yq_wanandroid.launchstarter.sort.TaskSortUtil;
-import com.czy.yq_wanandroid.launchstarter.stat.TaskStat;
-import com.czy.yq_wanandroid.launchstarter.task.DispatchRunnable;
-import com.czy.yq_wanandroid.launchstarter.task.Task;
-import com.czy.yq_wanandroid.launchstarter.task.TaskCallBack;
-import com.czy.yq_wanandroid.launchstarter.utils.DispatcherLog;
+import com.czy.business_base.launchstarter.sort.TaskSortUtil;
+import com.czy.business_base.launchstarter.stat.TaskStat;
+import com.czy.business_base.launchstarter.task.DispatchRunnable;
+import com.czy.business_base.launchstarter.task.Task;
+import com.czy.business_base.launchstarter.task.TaskCallBack;
+import com.czy.business_base.launchstarter.utils.DispatcherLog;
 import com.example.lib_imageloader.image.Utils;
 
 import java.util.ArrayList;

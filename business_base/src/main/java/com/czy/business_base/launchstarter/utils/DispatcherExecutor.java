@@ -1,4 +1,4 @@
-package com.czy.yq_wanandroid.launchstarter.utils;
+package com.czy.business_base.launchstarter.utils;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;

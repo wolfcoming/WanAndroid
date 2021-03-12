@@ -1,13 +1,13 @@
-package com.czy.yq_wanandroid.launchstarter.task;
+package com.czy.business_base.launchstarter.task;
 
 import android.os.Looper;
 import android.os.Process;
 
 import androidx.core.os.TraceCompat;
 
-import com.czy.yq_wanandroid.launchstarter.TaskDispatcher;
-import com.czy.yq_wanandroid.launchstarter.stat.TaskStat;
-import com.czy.yq_wanandroid.launchstarter.utils.DispatcherLog;
+import com.czy.business_base.launchstarter.TaskDispatcher;
+import com.czy.business_base.launchstarter.stat.TaskStat;
+import com.czy.business_base.launchstarter.utils.DispatcherLog;
 
 /**
  * 任务真正执行的地方
@@ -20,7 +20,7 @@ public class DispatchRunnable implements Runnable {
     public DispatchRunnable(Task task) {
         this.mTask = task;
     }
-    public DispatchRunnable(Task task,TaskDispatcher dispatcher) {
+    public DispatchRunnable(Task task, TaskDispatcher dispatcher) {
         this.mTask = task;
         this.mTaskDispatcher = dispatcher;
     }

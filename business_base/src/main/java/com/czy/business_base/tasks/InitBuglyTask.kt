@@ -1,7 +1,7 @@
-package com.czy.yq_wanandroid.tasks
+package com.czy.business_base.tasks
 
-import com.czy.yq_wanandroid.base.CrashHandler
-import com.czy.yq_wanandroid.launchstarter.task.Task
+import com.czy.business_base.CrashHandler
+import com.czy.business_base.launchstarter.task.Task
 import com.tencent.bugly.crashreport.CrashReport
 
 class InitBuglyTask :Task() {

@@ -1,8 +1,7 @@
-package com.czy.yq_wanandroid.base;
+package com.czy.business_base;
 
 import android.content.Context;
 
-import com.czy.business_base.MyActivityManager;
 import com.czy.lib_base.utils.file.FileIOUtils;
 
 import java.io.File;

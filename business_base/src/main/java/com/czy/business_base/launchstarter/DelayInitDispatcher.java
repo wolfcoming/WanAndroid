@@ -1,10 +1,10 @@
-package com.czy.yq_wanandroid.launchstarter;
+package com.czy.business_base.launchstarter;
 
 import android.os.Looper;
 import android.os.MessageQueue;
 
-import com.czy.yq_wanandroid.launchstarter.task.DispatchRunnable;
-import com.czy.yq_wanandroid.launchstarter.task.Task;
+import com.czy.business_base.launchstarter.task.DispatchRunnable;
+import com.czy.business_base.launchstarter.task.Task;
 
 import java.util.LinkedList;
 import java.util.Queue;
