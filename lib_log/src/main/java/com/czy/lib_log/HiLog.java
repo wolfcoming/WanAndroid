@@ -1,6 +1,8 @@
 package com.czy.lib_log;
 
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.czy.lib_log.printer.HiLogPrinter;
@@ -75,15 +77,24 @@ public class HiLog {
     }
 
     public static void log(@HiLogType.TYPE int type, Object... contents) {
-        if(HiLogManager.getInstance()==null) return;//日志模块还未加载
+        if (HiLogManager.getInstance() == null){
+            Log.e("YYYYYY", "log: 日志模块未加载");
+            return;//日志模块还未加载
+        }
         log(type, HiLogManager.getInstance().getConfig().getGlobalTag(), contents);
     }
 
     public static void log(@HiLogType.TYPE int type, @NonNull String tag, Object... contents) {
+        if (HiLogManager.getInstance() == null) {
+            Log.e("YYYYYY", "log: 日志模块未加载");
+            return;
+        }
         log(HiLogManager.getInstance().getConfig(), type, tag, contents);
     }
+
     //记录需要在可视化控制台打印的历史信息
     public static ArrayList<HiLogMo> historyLogs = new ArrayList<>();
+
     public static void log(HiLogConfig hiLogConfig, @HiLogType.TYPE int type, String tag, Object... objects) {
         if (!hiLogConfig.enable()) {
             return;
@@ -103,7 +114,7 @@ public class HiLog {
 
         String body = parseBody(objects, hiLogConfig);
         sb.append(body);
-        List<HiLogPrinter> printers =HiLogManager.getInstance().getPrinters();
+        List<HiLogPrinter> printers = HiLogManager.getInstance().getPrinters();
         if (printers == null) {
             return;
         }
@@ -111,7 +122,7 @@ public class HiLog {
 
         HiLogMo hiLogMo = new HiLogMo(System.currentTimeMillis(), type, tag, msg);
         historyLogs.add(hiLogMo);
-        if(historyLogs.size()>CACHE_MAX){
+        if (historyLogs.size() > CACHE_MAX) {
             //只保留CACHE_MAX 条（TODO 是否有效率更高的方式?)
             historyLogs.remove(0);
         }

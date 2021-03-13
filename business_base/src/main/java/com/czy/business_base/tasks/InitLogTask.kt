@@ -27,7 +27,6 @@ class InitLogTask: Task() {
             HiConsolePrinter(),
             HiFilePrinter.getInstance(mContext.filesDir.path+File.separator+"log",1000*60*60*24*7)
         )
-        Thread.sleep(3000)
     }
 
 //    override fun needWait(): Boolean {
