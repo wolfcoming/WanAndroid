@@ -51,6 +51,7 @@ interface WanApi {
      * 方法：GET
      * 参数： 页码：拼接在链接中，从0开始。
      */
+    @Headers("Cache-Control:public ,max-age=60")
     @GET("lg/collect/list/{page}/json")
     fun getCollectArticleList(@Path("page") page: Int): Observable<BaseResult<ArticleList<ArticleEntity>>>
 

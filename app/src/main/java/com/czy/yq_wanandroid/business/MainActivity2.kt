@@ -42,8 +42,9 @@ class MainActivity2 : BaseActivity() {
                 R.id.main_home -> 0
                 R.id.main_answer -> 1
                 R.id.main_project -> {
-                    ARouter.getInstance().build(ArouterConfig.test_entry).navigation()
-                    return@setOnNavigationItemSelectedListener false
+//                    ARouter.getInstance().build(ArouterConfig.test_entry).navigation()
+//                    return@setOnNavigationItemSelectedListener false
+                    2
                 }
                 R.id.main_mine -> 3
                 else -> -1

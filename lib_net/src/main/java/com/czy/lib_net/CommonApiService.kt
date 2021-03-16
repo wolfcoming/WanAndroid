@@ -1,5 +1,6 @@
 package com.czy.lib_net
 
+import com.czy.lib_base.utils.ContentWrapperUtils
 import com.czy.lib_net.annotation.BaseUrl
 import com.czy.lib_net.annotation.TimeOut
 import com.czy.lib_net.convert.CustomGsonConverterFactory
@@ -7,22 +8,31 @@ import com.infoholdcity.basearchitecture.self_extends.log
 import okhttp3.*
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
+import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 class CommonApiService {
     companion object {
-        private var TIMEOUT: Long = 8 * 1000
+        private var TIMEOUT: Long = 8 * 1000//超时时间
+        val cacheSize = 10 * 1024 * 1024//缓存大小
         private var BASEURL = ""
         var cookieManage: CookieManage? = null
         val interceptors = ArrayList<Interceptor>()
         val netInterceptors = ArrayList<Interceptor>()
         fun initOkHttp(timeout: Long = TIMEOUT): OkHttpClient {
             cookieManage = CookieManage()
+
+            val cachePath = ContentWrapperUtils.mContext.cacheDir.absolutePath + File.separator + "net_cache"
+            val cache = Cache(
+                File(cachePath),
+                cacheSize.toLong()
+            )
             val builder = OkHttpClient.Builder()
                 .connectTimeout(timeout, TimeUnit.SECONDS)
                 .readTimeout(timeout, TimeUnit.SECONDS)
+
 
             for (interceptor in interceptors) {
                 builder.addInterceptor(interceptor)
@@ -32,7 +42,8 @@ class CommonApiService {
                 builder.addNetworkInterceptor(netInterceptor)
             }
 
-            return builder.addInterceptor(LoggingInterceptor())
+            return builder
+                .cache(cache)
                 .cookieJar(cookieManage!!)
                 .build()
         }

@@ -22,7 +22,7 @@ class AnswerFragment : MvpFragment<AnswerPresenter>(), IAnswerView {
     lateinit var mAdapter: CommonArticleListAdapter
     override fun initView() {
         changNormalTopView(context!!, mTitleBar)
-        mSmartRefresh.setOnLoadMoreListener {
+        mSmartRefresh.setOnRefreshListener {
             getData(true)
         }
         mSmartRefresh.setOnLoadMoreListener {

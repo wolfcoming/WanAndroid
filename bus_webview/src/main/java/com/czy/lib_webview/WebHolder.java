@@ -39,6 +39,7 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -148,7 +149,8 @@ public class WebHolder {
         webSetting.setGeolocationEnabled(true);
         webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
         webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
-        webSetting.setCacheMode(WebSettings.LOAD_DEFAULT);
+        webSetting.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webSetting.setAppCachePath(activity.getFilesDir().getAbsolutePath()+ File.separator+"h5_cache");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSetting.setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }

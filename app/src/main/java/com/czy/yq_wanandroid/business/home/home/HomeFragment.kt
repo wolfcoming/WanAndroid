@@ -18,6 +18,7 @@ import com.czy.lib_net.ApiException
 import com.czy.lib_qrcode.app.CaptureActivity
 import com.czy.yq_wanandroid.R
 import com.czy.yq_wanandroid.adapter.HomeBannerAdapter
+import com.czy.yq_wanandroid.business.search.SearchActivity
 import com.infoholdcity.basearchitecture.self_extends.log
 import com.tbruyelle.rxpermissions3.RxPermissions
 import com.youth.banner.indicator.CircleIndicator
@@ -56,39 +57,6 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
             getData(true)
         }
         mTitleBar.leftClickListener {
-            if (true) {
-//                ARouter.getInstance().build(ArouterConfig.webviewPath)
-//                    .withString("url", "http://192.168.0.101:8080/#/jsAndroidCall")
-//                    .withString("title", "http://192.168.0.101:8080/#/yunzhengtong")
-//                    .navigation()
-
-//                showLoading()
-//                Handler().postDelayed({
-//                    hideLoading()
-//                }, 3000)
-
-//                ARouter.getInstance().build("/login/sss").navigation()
-                for(i in 0..24){
-                    HiExecutor.execute(i, Runnable {
-//                        SystemClock.sleep(((2000 - i*100).toLong()))
-                        SystemClock.sleep(1000)
-                    })
-                }
-                HiExecutor.blockingQueue?.size?.log()
-
-//                HiExecutor.execute(0, object : HiExecutor.Callable<String>() {
-//                    override fun onBackgroud(): String {
-//                        SystemClock.sleep(3000)
-//                        return "终于计算出来结果啦"
-//                    }
-//
-//                    override fun onCompleted(t: String) {
-//                        toast(t)
-//                    }
-//
-//                })
-                return@leftClickListener
-            }
             RxPermissions(this)
                 .request(Manifest.permission.CAMERA)
                 .subscribe {
@@ -112,16 +80,8 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
                     }
                 }
         }
-        var pause = true
         mTitleBar.rightClickListener {
-            if(pause){
-                HiExecutor.pause()
-            }else{
-                HiExecutor.resume()
-            }
-            pause=!pause
-
-//            startActivity(Intent(activity, SearchActivity::class.java))
+            startActivity(Intent(activity, SearchActivity::class.java))
         }
     }
 
