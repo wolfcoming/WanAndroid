@@ -10,7 +10,6 @@ class LoginPresenter : MvpPresenter<ILoginView>() {
 
     fun login(username: String, psw: String) {
         CommonApiService.getRequest(WanApi::class.java).login(username, psw)
-//            .delay(3,TimeUnit.SECONDS)
             .threadSwitchAndBindLifeCycle(baseView)
             .commonSubscribe({
                 baseView?.showLoading()

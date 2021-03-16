@@ -85,7 +85,6 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
         }
     }
 
-
     override fun initData() {
 
     }

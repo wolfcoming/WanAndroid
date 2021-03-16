@@ -27,7 +27,7 @@ public class OfflineCacheInterceptor implements Interceptor {
             request = request.newBuilder()
                     .cacheControl(new CacheControl.Builder()
                             .onlyIfCached()
-                            .maxStale(120, TimeUnit.SECONDS)
+                            .maxStale(120, TimeUnit.MINUTES)
                             .build())
 //                    .header("Cache-Control", "public, only-if-cached, max-stale=60")
                     .build();
