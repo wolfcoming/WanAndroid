@@ -24,8 +24,8 @@ class InitLogTask: Task() {
                 return 0
             }
         },
-            HiConsolePrinter(),
-            HiFilePrinter.getInstance(mContext.filesDir.path+File.separator+"log",1000*60*60*24*7)
+            HiConsolePrinter()
+//            HiFilePrinter.getInstance(mContext.filesDir.path+File.separator+"log",1000*60*60*24*7)
         )
     }
 

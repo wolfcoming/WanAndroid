@@ -16,6 +16,9 @@ class TestMainActivity : BaseActivity() {
         btnDataSave.setOnClickListener {
             startActivity(Intent(TestMainActivity@this,DataStoreActivity::class.java))
         }
+        btnNetRequest.setOnClickListener {
+            startActivity(Intent(TestMainActivity@this,TestNetRequestActivity::class.java))
+        }
     }
 
     override fun initData() {

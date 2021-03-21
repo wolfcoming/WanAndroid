@@ -25,4 +25,10 @@
         app:itemTextColor="@drawable/main_tab_text_color_selector"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_main" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="30dp"
+        android:id="@+id/fab_test"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="-120dp"
+        android:layout_height="30dp"/>
 </LinearLayout>

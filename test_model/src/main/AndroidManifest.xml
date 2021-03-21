@@ -5,5 +5,6 @@
     <application>
         <activity android:name=".DataStoreActivity" />
         <activity android:name=".TestMainActivity" />
+        <activity android:name=".TestNetRequestActivity" />
     </application>
 </manifest>

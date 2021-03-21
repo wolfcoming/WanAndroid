@@ -45,18 +45,15 @@ fun <T> Observable<T>.commonSubscribe(
 ): Disposable {
     return this.subscribe(
         {
-            "onNext".log()
             onNext(it)
         },
         {
             it.printStackTrace()
-            "throwable".log()
             val wanApiException = ApiErrorHandlerUtil.getWanApiException(it)
             onError(wanApiException)
             onComplete()
         },
         {
-            "onComplete".log()
             onComplete()
         }
     )

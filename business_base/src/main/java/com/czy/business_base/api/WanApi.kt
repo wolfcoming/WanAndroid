@@ -79,4 +79,9 @@ interface WanApi {
         @Field("k") words: String
     ): Observable<BaseResult<ArticleList<ArticleEntity>>>
 
+
+    //搜索热词
+    @GET("hotkey/json")
+    fun getHotKeys2(): Observable<String>
+
 }

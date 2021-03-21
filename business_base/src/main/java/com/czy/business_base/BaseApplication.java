@@ -15,8 +15,6 @@ import com.czy.business_base.tasks.InitLogTask;
 import com.czy.business_base.tasks.InitSmartRefresh;
 import com.czy.lib_base.utils.ContentWrapperUtils;
 import com.czy.lib_net.CommonApiService;
-import com.czy.lib_net.interceptor.LoggingInterceptor;
-import com.czy.lib_net.interceptor.PublicHeaderAndParamInterceptor;
 
 public abstract class BaseApplication extends Application {
 
@@ -45,9 +43,6 @@ public abstract class BaseApplication extends Application {
 
         this.taskDispatcher.await();
         //初始化网络拦截器
-        if(BuildConfig.DEBUG){
-            CommonApiService.Companion.getInterceptors().add(new LoggingInterceptor());
-        }
         CommonApiService.Companion.getNetInterceptors().add(new NetCacheInterceptor());
         CommonApiService.Companion.getInterceptors().add(new OfflineCacheInterceptor());
 

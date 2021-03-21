@@ -74,6 +74,9 @@ class MainActivity2 : BaseActivity() {
     }
 
     override fun initData() {
+        fab_test.setOnClickListener {
+            ARouter.getInstance().build(ArouterConfig.test_entry).navigation()
+        }
     }
 
     class ViewPagerFragmentStateAdapter(
