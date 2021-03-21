@@ -38,7 +38,7 @@ public abstract class ApiSubscriberHelper<T> extends DisposableObserver<T> {
         onFailed(apiException);
     }
 
-    protected abstract void onResult(T t);
+    protected abstract void onResult(@NonNull T t);
 
-    protected abstract void onFailed(ApiException msg);
+    protected abstract void onFailed(@NonNull ApiException msg);
 }

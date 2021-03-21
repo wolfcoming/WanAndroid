@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.push_service">
+<!--    个推配置开始-->
+<!--    <uses-permission android:name="android.permission.INTERNET"/>-->
+   <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <!-- iBeancon 功能所需权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <!-- 个推电子围栏功能所需权限 -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="getui.permission.GetuiService.${applicationId}"/>
+    <permission
+        android:name="getui.permission.GetuiService.${applicationId}"
+        android:protectionLevel="normal"/>
+    <!--    个推配置结束-->
+
+    <application
+        tools:ignore="GoogleAppIndexingWarning"
+        android:usesCleartextTraffic="true">
+
+     <meta-data android:name="GETUI_APPID" android:value="${GETUI_APPID}"  tools:replace="android:value"  />
+      <service android:name="com.example.push_service.getui.CustomGeTuiPushService"
+          android:exported="true"
+          android:label="PushService"
+          android:process=":pushservice"/>
+        <service
+            android:name="com.example.push_service.getui.DemoIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+    </application>
+</manifest>

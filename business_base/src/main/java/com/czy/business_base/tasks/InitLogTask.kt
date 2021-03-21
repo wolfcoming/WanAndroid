@@ -5,9 +5,7 @@ import com.czy.lib_log.HiLogConfig
 import com.czy.lib_log.HiLogConfig.JsonParser
 import com.czy.lib_log.HiLogManager
 import com.czy.lib_log.printer.HiConsolePrinter
-import com.czy.lib_log.printer.HiFilePrinter
 import com.google.gson.Gson
-import java.io.File
 
 class InitLogTask: Task() {
     override fun run() {

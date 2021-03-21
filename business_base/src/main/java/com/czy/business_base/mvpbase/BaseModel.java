@@ -6,8 +6,4 @@ import io.reactivex.rxjava3.core.Observable;
 
 public class BaseModel {
 
-    public <T> Observable<T> commonDealNetObservableResult(Observable<T> observable) {
-        return observable.compose(Transformer.serverCodeDeal());
-    }
-
 }

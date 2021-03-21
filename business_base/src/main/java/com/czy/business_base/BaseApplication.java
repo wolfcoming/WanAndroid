@@ -12,6 +12,7 @@ import com.czy.business_base.tasks.InitCompontService;
 import com.czy.business_base.tasks.InitDarkMode;
 import com.czy.business_base.tasks.InitDataSave;
 import com.czy.business_base.tasks.InitLogTask;
+import com.czy.business_base.tasks.InitPushTask;
 import com.czy.business_base.tasks.InitSmartRefresh;
 import com.czy.lib_base.utils.ContentWrapperUtils;
 import com.czy.lib_net.CommonApiService;
@@ -37,6 +38,7 @@ public abstract class BaseApplication extends Application {
                 .addTask(new InitCompontService())
                 .addTask(new InitDataSave())
                 .addTask(new InitDarkMode())
+                .addTask(new InitPushTask())
                 .addTask(new InitLogTask());
         initMouduleApplication();
         taskDispatcher.start();

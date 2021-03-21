@@ -44,16 +44,13 @@ class SearchModel : BaseModel() {
     }
 
     fun searchArticle(pageIndex: Int, words: String): Observable<ArticleList<ArticleEntity>> {
-        return commonDealNetObservableResult(
-            CommonApiService.getRequest(WanApi::class.java).search(pageIndex, words)
-        ).map {
+        return CommonApiService.getRequest(WanApi::class.java).search(pageIndex, words).map {
             return@map it.data
         }
     }
 
     fun getHotKeys(): Observable<BaseResult<List<HotKey>>> {
-        return commonDealNetObservableResult(
-            CommonApiService.getRequest(WanApi::class.java).getHotKeys()
-        )
+        return  CommonApiService.getRequest(WanApi::class.java).getHotKeys()
+
     }
 }
