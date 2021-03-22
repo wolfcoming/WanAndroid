@@ -38,50 +38,50 @@ fun <T> Observable<T>.threadSwitchAndBindLifeCycle(view: IView?): Observable<T> 
 
 // <editor-fold defaultstate="collapsed" desc="rxjava 扩展处理错误码，建议使用 Transformer 类中的功能">
 // rxjava 统一错误处理扩展
-fun <T> Observable<T>.commonSubscribe(
-    onNext: (reult: T) -> Unit,
-    onError: (error: ApiException) -> Unit,
-    onComplete: () -> Unit
-): Disposable {
-    return this.subscribe(
-        {
-            onNext(it)
-        },
-        {
-            it.printStackTrace()
-            val wanApiException = ApiErrorHandlerUtil.getWanApiException(it)
-            onError(wanApiException)
-            onComplete()
-        },
-        {
-            onComplete()
-        }
-    )
-}
-
-
-fun <T> Observable<T>.commonSubscribe(
-    onNext: (result: T) -> Unit
-): Disposable {
-    return this.commonSubscribe(onNext, {}, {})
-}
-
-fun <T> Observable<T>.commonSubscribe(
-    onNext: (result: T) -> Unit,
-    onError: (error: ApiException) -> Unit
-): Disposable {
-    return this.commonSubscribe(onNext, onError, {})
-}
-
-fun <T> Observable<T>.commonSubscribe(
-    onStart: () -> Unit,
-    onNext: (result: T) -> Unit,
-    onError: (error: ApiException) -> Unit,
-    onComplete: () -> Unit
-): Disposable {
-    onStart()
-    return this.commonSubscribe(onNext, onError, onComplete)
-}
+//fun <T> Observable<T>.commonSubscribe(
+//    onNext: (reult: T) -> Unit,
+//    onError: (error: ApiException) -> Unit,
+//    onComplete: () -> Unit
+//): Disposable {
+//    return this.subscribe(
+//        {
+//            onNext(it)
+//        },
+//        {
+//            it.printStackTrace()
+//            val wanApiException = ApiErrorHandlerUtil.getWanApiException(it)
+//            onError(wanApiException)
+//            onComplete()
+//        },
+//        {
+//            onComplete()
+//        }
+//    )
+//}
+//
+//
+//fun <T> Observable<T>.commonSubscribe(
+//    onNext: (result: T) -> Unit
+//): Disposable {
+//    return this.commonSubscribe(onNext, {}, {})
+//}
+//
+//fun <T> Observable<T>.commonSubscribe(
+//    onNext: (result: T) -> Unit,
+//    onError: (error: ApiException) -> Unit
+//): Disposable {
+//    return this.commonSubscribe(onNext, onError, {})
+//}
+//
+//fun <T> Observable<T>.commonSubscribe(
+//    onStart: () -> Unit,
+//    onNext: (result: T) -> Unit,
+//    onError: (error: ApiException) -> Unit,
+//    onComplete: () -> Unit
+//): Disposable {
+//    onStart()
+//    return this.commonSubscribe(onNext, onError, onComplete)
+//}
 
 // </editor-fold>
 

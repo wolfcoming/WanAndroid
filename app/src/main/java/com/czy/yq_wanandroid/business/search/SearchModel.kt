@@ -12,6 +12,7 @@ import com.czy.lib_net.CommonApiService
 import com.czy.yq_wanandroid.room.AppDatabase
 import com.czy.yq_wanandroid.room.entity.SearchHistory
 import io.reactivex.rxjava3.core.Observable
+import java.lang.IllegalArgumentException
 
 class SearchModel : BaseModel() {
 

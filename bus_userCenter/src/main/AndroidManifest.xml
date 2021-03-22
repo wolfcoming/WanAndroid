@@ -4,5 +4,6 @@
 
     <application>
         <activity android:name="com.czy.yq_wanandroid.business.login.LoginActivity" />
+        <activity android:name=".collect.CollectArticleActivity" />
     </application>
 </manifest>

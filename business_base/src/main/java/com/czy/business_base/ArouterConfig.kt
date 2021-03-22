@@ -19,9 +19,6 @@ object ArouterConfig {
     //降级界面
     const val lost_page = "/lost/lost_page"
 
-    //网络请求错误码处理
-    const val errorCodeProcess: String = "/intercept/errorCode"
-
 
     //测试总入口
     const val test_entry:String = "/test/test_entry"

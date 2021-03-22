@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
 import com.czy.business_base.R
-import com.czy.business_base.api.Transformer
+import com.czy.business_base.net.Transformer
 import com.czy.business_base.api.WanApi
 import com.czy.business_base.entity.ArticleEntity
 import com.czy.lib_base.utils.SettingUtils

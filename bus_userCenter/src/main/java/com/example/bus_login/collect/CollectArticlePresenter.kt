@@ -1,6 +1,6 @@
 package com.example.bus_login.collect
 
-import com.czy.business_base.api.Transformer
+import com.czy.business_base.net.Transformer
 import com.czy.business_base.api.WanApi
 import com.czy.business_base.mvpbase.MvpPresenter
 import com.czy.lib_net.CommonApiService

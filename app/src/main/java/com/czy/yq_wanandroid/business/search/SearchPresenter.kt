@@ -1,7 +1,9 @@
 package com.czy.yq_wanandroid.business.search
 
-import com.czy.business_base.api.Transformer
+import com.czy.business_base.net.Transformer
 import com.czy.business_base.api.WanApi
+import com.czy.business_base.entity.ArticleEntity
+import com.czy.business_base.entity.ArticleList
 import com.czy.business_base.entity.HotKey
 import com.czy.business_base.ext.threadSwitch
 import com.czy.business_base.mvpbase.MvpPresenter
@@ -9,44 +11,36 @@ import com.czy.business_base.net.ApiSubscriberHelper
 import com.czy.business_base.net.entity.BaseResult
 import com.czy.lib_net.ApiException
 import com.czy.lib_net.CommonApiService
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.functions.Consumer
-import io.reactivex.rxjava3.observers.DisposableObserver
 
 class SearchPresenter : MvpPresenter<ISearchView>() {
     val searchModel = SearchModel()
     fun getHotKey() {
-        searchModel.getHotKeys()
-            .compose(Transformer.threadSwitchAndBindLifeCycle(baseView))
-            .subscribe({
-                baseView?.showHotKeys(it.data!!)
-            }) {
-                baseView?.getHotKeysFailed(it.message!!)
-            }
+        CommonApiService.getRequest(WanApi::class.java).getHotKeys()
+            .compose(Transformer.threadSwitch())
+            .subscribe(object : ApiSubscriberHelper<BaseResult<List<HotKey>>>() {
+                override fun onResult(t: BaseResult<List<HotKey>>) {
+                    baseView?.showHotKeys(t.data!!)
+                }
 
-
-//        CommonApiService.getRequest(WanApi::class.java).getHotKeys()
-//            .compose(Transformer.threadSwitch())
-//            .subscribe(object : ApiSubscriberHelper<BaseResult<HotKey>>() {
-//                override fun onResult(t: BaseResult<HotKey>?) {
-//                }
-//
-//                override fun onFailed(msg: ApiException?) {
-//
-//                }
-//            })
+                override fun onFailed(msg: ApiException) {
+                    baseView?.getHotKeysFailed(msg.message!!)
+                }
+            })
     }
-
 
     fun searchArticle(pageIndex: Int, words: String) {
         searchModel.searchArticle(pageIndex, words)
             .compose(Transformer.threadSwitchAndBindLifeCycle(baseView))
-            .subscribe({
-                baseView?.showArticleList(it)
-            }) {
-                baseView?.getArticleListFailed(it.message!!)
-            }
+            .subscribe(object :ApiSubscriberHelper<ArticleList<ArticleEntity>>(){
+                override fun onResult(t: ArticleList<ArticleEntity>) {
+                    baseView?.showArticleList(t)
+                }
+
+                override fun onFailed(msg: ApiException) {
+                    baseView?.getArticleListFailed(msg.message!!)
+                }
+
+            })
     }
 
     fun insertSearchHistory(name: String) {

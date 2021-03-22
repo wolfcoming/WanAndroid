@@ -1,4 +1,4 @@
-package com.czy.business_base.api;
+package com.czy.business_base.net;
 
 
 import com.czy.business_base.Constants;
@@ -6,6 +6,7 @@ import com.czy.business_base.mvpbase.IView;
 import com.czy.business_base.net.ApiErrorHandlerUtil;
 import com.czy.business_base.net.entity.BaseResult;
 import com.czy.business_base.service.ServiceFactory;
+import com.czy.lib_net.ApiException;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -53,13 +54,12 @@ public class Transformer {
      */
     public static <T> ObservableTransformer<T, T> serverCodeDeal(boolean jumpLogin) {
         return upstream -> upstream.map(t -> {
-            if (t instanceof BaseResult) {// 还可以新增else 处理其他数据结构的错误
-                if (Constants.API_NEED_LOGIN == ((BaseResult) t).getErrorCode()) {
-                    if (jumpLogin) {
-                        ServiceFactory.Companion.getUserService().gotoLogin();
-                    }
+            if (t instanceof BaseResult) {
+                BaseResult<?> baseResult = (BaseResult<?>) t;
+                if (baseResult.getErrorCode() != Constants.API_SUCCESS_CODE) {
+                    SpecialCodeDeal.INSTANCE.dealSpecialCode(baseResult);
+                    throw new ApiException(baseResult.getErrorCode(), baseResult.getErrorMsg());
                 }
-                ApiErrorHandlerUtil.INSTANCE.throwApiException(t);
             }
             return t;
         }).onErrorResumeNext((Function<Throwable, ObservableSource<? extends T>>) throwable -> {
