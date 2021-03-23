@@ -29,6 +29,7 @@ import com.czy.lib_webview.jsApi.JSGetVersion;
 import com.czy.lib_webview.jsBridge.InvokeFunction;
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebSettingsExtension;
 import com.tencent.smtt.export.external.interfaces.IX5WebSettings;
+import com.tencent.smtt.export.external.interfaces.WebResourceError;
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
 import com.tencent.smtt.sdk.CookieManager;
@@ -65,6 +66,7 @@ public class WebHolder {
 
     ProgressBar mProgressBar;
     private boolean handleCreateFunctionFinished;//js桥是否注入完成
+    private String mDefaultErrorHtml = "file:///android_asset/ErrorPage.html";
 
     public static WebHolder with(Activity activity, WebContainer container, ProgressBar progressBar) {
         return new WebHolder(activity, container, progressBar);
@@ -150,7 +152,7 @@ public class WebHolder {
         webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
         webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
         webSetting.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        webSetting.setAppCachePath(activity.getFilesDir().getAbsolutePath()+ File.separator+"h5_cache");
+        webSetting.setAppCachePath(activity.getFilesDir().getAbsolutePath() + File.separator + "h5_cache");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSetting.setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
@@ -165,7 +167,7 @@ public class WebHolder {
     }
 
     private void initJs() {
-        InvokeFunction invokeFunction  = new InvokeFunction(mWebView);
+        InvokeFunction invokeFunction = new InvokeFunction(mWebView);
         invokeFunction.addJSApi(new JSGetVersion());
         mWebView.addJavascriptInterface(invokeFunction, "JSBridge");
 
@@ -191,6 +193,7 @@ public class WebHolder {
             }
         }
     }
+
     public static boolean isNightMode(Configuration config) {
         int uiMode = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return uiMode == Configuration.UI_MODE_NIGHT_YES;
@@ -342,7 +345,15 @@ public class WebHolder {
             if (mOnPageTitleCallback != null) {
                 mOnPageTitleCallback.onReceivedTitle(title);
             }
+            // android 6.0 以下通过title获取判断
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                if (title.contains("404") || title.contains("500") || title.contains("Error") || title.contains("找不到网页") || title.contains("网页无法打开")) {
+                    view.loadUrl("about:blank");// 避免出现默认的错误界面
+                    view.loadUrl(mDefaultErrorHtml);// 加载自定义错误页面
+                }
+            }
         }
+
 
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
@@ -446,6 +457,37 @@ public class WebHolder {
     }
 
     public class WanWebViewClient extends WebViewClient {
+        @Override
+        public void onReceivedHttpError(WebView webView, WebResourceRequest webResourceRequest, WebResourceResponse webResourceResponse) {
+            super.onReceivedHttpError(webView, webResourceRequest, webResourceResponse);
+            // 这个方法在 android 6.0才出现
+            int statusCode = webResourceResponse.getStatusCode();
+            if (404 == statusCode || 500 == statusCode) {
+                webView.loadUrl("about:blank");// 避免出现默认的错误界面
+                webView.loadUrl(mDefaultErrorHtml);// 加载自定义错误页面
+            }
+        }
+
+        @Override
+        public void onReceivedError(WebView webView, int i, String s, String s1) {
+            super.onReceivedError(webView, i, s, s1);
+            //6.0以下执行
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return;
+            }
+            webView.loadUrl("about:blank");// 避免出现默认的错误界面
+            webView.loadUrl(mDefaultErrorHtml);// 加载自定义错误页面
+        }
+
+        @Override
+        public void onReceivedError(WebView webView, WebResourceRequest webResourceRequest, WebResourceError webResourceError) {
+            super.onReceivedError(webView, webResourceRequest, webResourceError);
+            if (webResourceRequest.isForMainFrame()) {//是否是为 main frame创建
+                webView.loadUrl("about:blank");// 避免出现默认的错误界面
+                webView.loadUrl(mDefaultErrorHtml);// 加载自定义错误页面
+            }
+        }
+
         private WebResourceResponse shouldInterceptRequest(@NonNull Uri reqUri,
                                                            @Nullable Map<String, String> reqHeaders,
                                                            @Nullable String reqMethod) {
@@ -522,7 +564,7 @@ public class WebHolder {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            if(!handleCreateFunctionFinished){
+            if (!handleCreateFunctionFinished) {
                 handleBridgeCallback(view);
             }
             if (mOnPageTitleCallback != null) {
@@ -549,7 +591,7 @@ public class WebHolder {
             webView.evaluateJavascript("javascript:window.BROSJSBridge", new ValueCallback<String>() {
                 @Override
                 public void onReceiveValue(String s) {
-                    Log.d("WWWWWW", "WebView -- BROSJSBridge -- onReceiveValue  "+s);
+                    Log.d("WWWWWW", "WebView -- BROSJSBridge -- onReceiveValue  " + s);
                     if ("null".equals(s)) {
                         webView.evaluateJavascript("javascript:" + FileUtils.getAssetsStr(webView.getContext(), "BROSJSBridge.js"), new ValueCallback<String>() {
                             @Override
@@ -616,8 +658,7 @@ public class WebHolder {
     }
 
 
-
-    public void addJavaScript(){
+    public void addJavaScript() {
     }
 
 }

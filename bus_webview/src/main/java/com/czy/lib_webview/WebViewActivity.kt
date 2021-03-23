@@ -24,7 +24,7 @@ class WebViewActivity : BaseActivity() {
         window.addFlags(SOFT_INPUT_STATE_VISIBLE)
         changNormalTopView(this, mTitleBar)
         var title = intent.getStringExtra("title")
-        val url = intent.getStringExtra("url")!!
+        var url = intent.getStringExtra("url")!!
         mTitleBar.setTitle(title)
         ServiceFactory.getAppService().recodeReadHistory(url, title, System.currentTimeMillis())
         mWebHolder = WebHolder.with(this, mWebContainer, mProgressBar)

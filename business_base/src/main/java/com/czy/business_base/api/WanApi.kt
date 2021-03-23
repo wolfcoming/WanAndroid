@@ -68,7 +68,7 @@ interface WanApi {
     fun unCollectArticle(@Path("id") id: Int): Observable<BaseResult<String>>
 
     //搜索热词
-    @GET("hotkey/json")
+    @GET("hotkey/json?test_key=testValue")
     fun getHotKeys(): Observable<BaseResult<List<HotKey>>>
 
     //搜索
@@ -78,10 +78,5 @@ interface WanApi {
         @Path("id") id: Int,
         @Field("k") words: String
     ): Observable<BaseResult<ArticleList<ArticleEntity>>>
-
-
-    //搜索热词
-    @GET("hotkey/json")
-    fun getHotKeys2(): Observable<String>
 
 }

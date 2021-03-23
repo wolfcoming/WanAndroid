@@ -4,8 +4,10 @@ import android.app.Application;
 import android.content.Context;
 
 import com.czy.business_base.launchstarter.TaskDispatcher;
+import com.czy.lib_net.interceptor.LogInterceptor;
 import com.czy.business_base.net.interceptor.NetCacheInterceptor;
 import com.czy.business_base.net.interceptor.OfflineCacheInterceptor;
+import com.czy.business_base.net.interceptor.PublicHeaderAndParamInterceptor;
 import com.czy.business_base.tasks.InitArouter;
 import com.czy.business_base.tasks.InitBuglyTask;
 import com.czy.business_base.tasks.InitCompontService;
@@ -47,8 +49,6 @@ public abstract class BaseApplication extends Application {
         //初始化网络拦截器
         CommonApiService.Companion.getNetInterceptors().add(new NetCacheInterceptor());
         CommonApiService.Companion.getInterceptors().add(new OfflineCacheInterceptor());
-
-
-//        CommonApiService.Companion.getInterceptors().add(new PublicHeaderAndParamInterceptor());
+        CommonApiService.Companion.getInterceptors().add(new PublicHeaderAndParamInterceptor());
     }
 }

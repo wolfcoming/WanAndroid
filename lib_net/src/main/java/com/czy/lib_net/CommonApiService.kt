@@ -1,13 +1,12 @@
 package com.czy.lib_net
 
 import com.czy.lib_base.utils.ContentWrapperUtils
-import com.czy.lib_log.HiLog
 import com.czy.lib_net.annotation.BaseUrl
 import com.czy.lib_net.annotation.TimeOut
 import com.czy.lib_net.convert.CustomGsonConverterFactory
+import com.czy.lib_net.interceptor.LogInterceptor
 import com.infoholdcity.basearchitecture.self_extends.log
 import okhttp3.*
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import java.io.File
@@ -44,9 +43,9 @@ class CommonApiService {
                 builder.addNetworkInterceptor(netInterceptor)
             }
 
-            val logging = HttpLoggingInterceptor()
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-            builder.addInterceptor(logging)
+            if(BuildConfig.DEBUG){
+                builder.addInterceptor(LogInterceptor())
+            }
             return builder
                 .cache(cache)
                 .cookieJar(cookieManage!!)
