@@ -25,6 +25,7 @@ import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
 
 import com.czy.lib_base.utils.file.FileUtils;
+import com.czy.lib_log.HiLog;
 import com.czy.lib_webview.jsApi.JSGetVersion;
 import com.czy.lib_webview.jsBridge.InvokeFunction;
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebSettingsExtension;
@@ -35,7 +36,9 @@ import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
 import com.tencent.smtt.sdk.CookieManager;
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.ValueCallback;
+import com.tencent.smtt.sdk.WebBackForwardList;
 import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebHistoryItem;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
@@ -287,7 +290,17 @@ public class WebHolder {
             return false;
         }
         if (mWebView.canGoBack()) {
-            mWebView.goBack();
+            WebBackForwardList webBackForwardList = mWebView.copyBackForwardList();
+            //回退时如果当前页面是错误提示页面，则多回退一步，解决无线提示错误页的问题
+            if (webBackForwardList.getCurrentItem().getUrl().equals(mDefaultErrorHtml)) {
+                if (webBackForwardList.getSize() > 2) {
+                    mWebView.goBackOrForward(-2);
+                } else {
+                    return false;
+                }
+            }else {
+                mWebView.goBack();
+            }
             return true;
         }
         return false;
@@ -350,6 +363,7 @@ public class WebHolder {
                 if (title.contains("404") || title.contains("500") || title.contains("Error") || title.contains("找不到网页") || title.contains("网页无法打开")) {
                     view.loadUrl("about:blank");// 避免出现默认的错误界面
                     view.loadUrl(mDefaultErrorHtml);// 加载自定义错误页面
+                    HiLog.e("添加错误页面1");
                 }
             }
         }
@@ -465,6 +479,7 @@ public class WebHolder {
             if (404 == statusCode || 500 == statusCode) {
                 webView.loadUrl("about:blank");// 避免出现默认的错误界面
                 webView.loadUrl(mDefaultErrorHtml);// 加载自定义错误页面
+                HiLog.e("添加错误页面2");
             }
         }
 
@@ -477,6 +492,7 @@ public class WebHolder {
             }
             webView.loadUrl("about:blank");// 避免出现默认的错误界面
             webView.loadUrl(mDefaultErrorHtml);// 加载自定义错误页面
+            HiLog.e("添加错误页面3");
         }
 
         @Override
@@ -485,6 +501,7 @@ public class WebHolder {
             if (webResourceRequest.isForMainFrame()) {//是否是为 main frame创建
                 webView.loadUrl("about:blank");// 避免出现默认的错误界面
                 webView.loadUrl(mDefaultErrorHtml);// 加载自定义错误页面
+                HiLog.e("添加错误页面4");
             }
         }
 
@@ -655,10 +672,6 @@ public class WebHolder {
         WebResourceResponse onInterceptUrl(@NonNull Uri reqUri,
                                            @Nullable Map<String, String> reqHeaders,
                                            @Nullable String reqMethod);
-    }
-
-
-    public void addJavaScript() {
     }
 
 }
