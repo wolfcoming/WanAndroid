@@ -2,6 +2,8 @@ package com.czy.lib_log.printer;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +24,8 @@ import com.czy.lib_log.HiLogManager;
 import com.czy.lib_log.HiLogMo;
 import com.czy.lib_log.HiLogType;
 import com.czy.lib_log.R;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,22 +34,117 @@ public class HiViewPrinter implements HiLogPrinter {
 
     private RecyclerView recyclerView;
     private LogAdapter adapter;
+    private ViewGroup logcatview;
 
 
     public HiViewPrinter(Activity activity) {
-        if(!HiLogManager.getInstance().getConfig().enable()){
+        if (!HiLogManager.getInstance().getConfig().enable()) {
             return;
         }
         if (activity == null) return;
         FrameLayout rootView = activity.findViewById(android.R.id.content);
-        recyclerView = new RecyclerView(activity);
+        logcatview = (ViewGroup) LayoutInflater.from(activity).inflate(R.layout.logcatview, null);
+        initLogCatView(rootView);
+        //添加一个右下角按钮
+        addFlotingView(rootView);
+    }
+
+
+    private String tag = "";
+
+    public void initLogCatView(FrameLayout rootView) {
+        recyclerView = logcatview.findViewById(R.id.rv_content);
         adapter = new LogAdapter();
         adapter.addAll(HiLog.historyLogs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(recyclerView.getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        //添加一个右下角按钮
-        addFlotingView(rootView);
+
+
+        TextView closeView = logcatview.findViewById(R.id.btn_close);
+        closeView.setOnClickListener(v -> {
+            rootView.removeView(logcatview);
+        });
+
+
+        //2. 清空按钮
+        TextView clearView = logcatview.findViewById(R.id.btn_clear);
+        clearView.setGravity(Gravity.CENTER);
+        clearView.setOnClickListener(v -> {
+            adapter.getLogs().clear();
+            adapter.notifyDataSetChanged();
+        });
+
+        TextInputEditText tagEdit = logcatview.findViewById(R.id.etTag);
+        tagEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String trim = editable.toString().trim();
+                 filterLog(currentType,trim);
+            }
+        });
+        TabLayout tabLayout = logcatview.findViewById(R.id.tabLayout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0://所有日志信息
+                        adapter.getLogs().addAll(HiLog.historyLogs);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 1:
+                        filterLog(HiLogType.V, tag);
+                        break;
+                    case 2:
+                        filterLog(HiLogType.D, tag);
+                        break;
+                    case 3:
+                        filterLog(HiLogType.I, tag);
+                        break;
+                    case 4:
+                        filterLog(HiLogType.W, tag);
+                        break;
+                    case 5:
+                        filterLog(HiLogType.E, tag);
+                        break;
+                    default:
+
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+    }
+    private int currentType = -1;
+    private void filterLog(int type, String tag) {
+        currentType = type;
+        adapter.getLogs().clear();
+        for (HiLogMo historyLog : HiLog.historyLogs) {
+            if (historyLog.level == type &&(tag.isEmpty()||tag.equals(historyLog.tag))) {
+                adapter.getLogs().add(historyLog);
+            }
+        }
+        adapter.notifyDataSetChanged();
     }
 
     private void addFlotingView(FrameLayout rootView) {
@@ -72,76 +172,22 @@ public class HiViewPrinter implements HiLogPrinter {
      */
     public void showLogView(FrameLayout rootView) {
         FrameLayout.LayoutParams params =
-                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) DisplayInfoUtils.getInstance().getHeightPixels()*3/4);
+                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) DisplayInfoUtils.getInstance().getHeightPixels() * 4 / 5);
         params.gravity = Gravity.BOTTOM;
-
-        //创建logView
-        LinearLayout logView = new LinearLayout(rootView.getContext());
-
-        logView.setClickable(true);
-        logView.setOrientation(LinearLayout.VERTICAL);
-        logView.setBackgroundColor(Color.BLACK);
-
-        FrameLayout.LayoutParams logViewParam =
-                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        logViewParam.topMargin = 10;
-        logViewParam.bottomMargin = 10;
-        //1. logView的关闭按钮
-        TextView closeView = new TextView(rootView.getContext());
-        closeView.setGravity(Gravity.CENTER);
-        logView.addView(closeView, logViewParam);
-        logView.setPadding(10,10,10,10);
-        closeView.setText("Close");
-        closeView.setBackgroundColor(Color.GRAY);
-        closeView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logView.removeAllViews();
-                rootView.removeView(logView);
-            }
-        });
+        rootView.addView(logcatview, params);
 
 
-        //2. 清空按钮
-        TextView clearView = new TextView(rootView.getContext());
-        clearView.setGravity(Gravity.CENTER);
-        logView.addView(clearView, logViewParam);
-        clearView.setText("清空控制台");
-        clearView.setPadding(10,10,10,10);
-        clearView.setBackgroundColor(Color.GRAY);
-        clearView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter.getLogs().clear();
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-        //3. logView的显示内容
-        logView.addView(recyclerView);
-        LinearLayout.LayoutParams recyclerViewLayoutParams = (LinearLayout.LayoutParams) recyclerView.getLayoutParams();
-        recyclerViewLayoutParams.weight = 1;
-        recyclerView.setLayoutParams(recyclerViewLayoutParams);
-        int px = (int) DisplayInfoUtils.getInstance().dp2px(10);
-        recyclerView.setPadding(px,px,px,3*px);
-        recyclerView.scrollToPosition(adapter.getItemCount() -1);
-
-
-
-        rootView.addView(logView, params);
+        recyclerView.scrollToPosition(adapter.getItemCount() - 1);
     }
 
 
     @Override
     public void print(@NonNull HiLogConfig config, int level, String tag, @NonNull String printString) {
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                // 将log展示添加到recycleView
-                adapter.addItem(new HiLogMo(System.currentTimeMillis(), level, tag, printString));
-                // 滚动到对应的位置
-                recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
-            }
+        recyclerView.post(() -> {
+            // 将log展示添加到recycleView
+            adapter.addItem(new HiLogMo(System.currentTimeMillis(), level, tag, printString));
+            // 滚动到对应的位置
+            recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
         });
     }
 
@@ -153,7 +199,7 @@ public class HiViewPrinter implements HiLogPrinter {
             notifyItemInserted(logs.size() - 1);
         }
 
-        void addAll(List<HiLogMo> datas){
+        void addAll(List<HiLogMo> datas) {
             logs.addAll(datas);
             notifyDataSetChanged();
         }

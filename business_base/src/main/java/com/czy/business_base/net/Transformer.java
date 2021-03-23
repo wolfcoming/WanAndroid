@@ -7,6 +7,11 @@ import com.czy.business_base.net.ApiErrorHandlerUtil;
 import com.czy.business_base.net.entity.BaseResult;
 import com.czy.business_base.service.ServiceFactory;
 import com.czy.lib_net.ApiException;
+import com.trello.rxlifecycle4.android.ActivityEvent;
+import com.trello.rxlifecycle4.android.FragmentEvent;
+import com.trello.rxlifecycle4.components.RxFragment;
+import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle4.components.support.RxFragmentActivity;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -40,6 +45,18 @@ public class Transformer {
         return upstream -> upstream
                 .compose(threadSwitch())
                 .compose(view.bindLifecycleEvent());
+    }
+
+    public static <T> ObservableTransformer<T, T> threadSwitchAndBindLifeCycle(RxAppCompatActivity appCompatActivity) {
+        return upstream -> upstream
+                .compose(threadSwitch())
+                .compose(appCompatActivity.bindUntilEvent(ActivityEvent.DESTROY));
+    }
+
+    public static <T> ObservableTransformer<T, T> threadSwitchAndBindLifeCycle(RxFragment rxFragment) {
+        return upstream -> upstream
+                .compose(threadSwitch())
+                .compose(rxFragment.bindUntilEvent(FragmentEvent.DESTROY));
     }
 
     public static <T> ObservableTransformer<T, T> serverCodeDeal() {

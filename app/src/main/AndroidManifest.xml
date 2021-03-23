@@ -33,7 +33,8 @@
         <activity android:name=".business.readHistory.ReadHistoryActivity" />
 
 
-        <activity android:name=".business.MainActivity2">
+        <activity android:name=".business.MainActivity2"
+            android:windowSoftInputMode="adjustResize|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
