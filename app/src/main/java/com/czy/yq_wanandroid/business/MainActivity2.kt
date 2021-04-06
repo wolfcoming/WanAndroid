@@ -17,6 +17,7 @@ import com.czy.yq_wanandroid.business.home.home.HomeFragment
 import com.czy.yq_wanandroid.business.home.mine.MineFragment
 import com.czy.yq_wanandroid.business.home.projects.ProjectsFragment
 import com.infoholdcity.basearchitecture.self_extends.log
+import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.activity_main2.*
 
 
