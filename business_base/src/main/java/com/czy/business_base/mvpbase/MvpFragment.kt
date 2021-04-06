@@ -2,6 +2,7 @@ package com.czy.business_base.mvpbase
 
 import android.widget.Toast
 import com.czy.business_base.LazyFragment
+import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.LifecycleTransformer
 import com.trello.rxlifecycle4.android.FragmentEvent
 
@@ -13,6 +14,7 @@ abstract class MvpFragment<P : MvpPresenter<*>> : LazyFragment(), IView {
     override fun onDestroy() {
         mPresenter?.detach()
         super.onDestroy()
+        "a".log()
     }
 
     override fun showLoading() {

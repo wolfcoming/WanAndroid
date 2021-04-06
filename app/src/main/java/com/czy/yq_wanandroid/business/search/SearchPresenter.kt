@@ -26,12 +26,16 @@ class SearchPresenter : MvpPresenter<ISearchView>() {
                     baseView?.getHotKeysFailed(msg.message!!)
                 }
             })
+
+        CommonApiService.getRequest(WanApi::class.java).getHotKeys()
+            .compose(Transformer.threadSwitch())
+            .subscribe({}, {}, {})
     }
 
     fun searchArticle(pageIndex: Int, words: String) {
         searchModel.searchArticle(pageIndex, words)
             .compose(Transformer.threadSwitchAndBindLifeCycle(baseView))
-            .subscribe(object :ApiSubscriberHelper<ArticleList<ArticleEntity>>(){
+            .subscribe(object : ApiSubscriberHelper<ArticleList<ArticleEntity>>() {
                 override fun onResult(t: ArticleList<ArticleEntity>) {
                     baseView?.showArticleList(t)
                 }

@@ -13,6 +13,17 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/bus_userCenter" />
+            <option value="$PROJECT_DIR$/bus_webview" />
+            <option value="$PROJECT_DIR$/business_base" />
+            <option value="$PROJECT_DIR$/lib_base" />
+            <option value="$PROJECT_DIR$/lib_imageloader" />
+            <option value="$PROJECT_DIR$/lib_log" />
+            <option value="$PROJECT_DIR$/lib_net" />
+            <option value="$PROJECT_DIR$/lib_qrcode" />
+            <option value="$PROJECT_DIR$/lib_ui" />
+            <option value="$PROJECT_DIR$/push_service" />
+            <option value="$PROJECT_DIR$/test_model" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

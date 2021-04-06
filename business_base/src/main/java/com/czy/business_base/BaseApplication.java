@@ -4,13 +4,11 @@ import android.app.Application;
 import android.content.Context;
 
 import com.czy.business_base.launchstarter.TaskDispatcher;
-import com.czy.lib_net.interceptor.LogInterceptor;
 import com.czy.business_base.net.interceptor.NetCacheInterceptor;
 import com.czy.business_base.net.interceptor.OfflineCacheInterceptor;
 import com.czy.business_base.net.interceptor.PublicHeaderAndParamInterceptor;
 import com.czy.business_base.tasks.InitArouter;
 import com.czy.business_base.tasks.InitBuglyTask;
-import com.czy.business_base.tasks.InitCompontService;
 import com.czy.business_base.tasks.InitDarkMode;
 import com.czy.business_base.tasks.InitDataSave;
 import com.czy.business_base.tasks.InitLogTask;
@@ -37,7 +35,6 @@ public abstract class BaseApplication extends Application {
                 .addTask(new InitBuglyTask())
                 .addTask(new InitArouter())
                 .addTask(new InitSmartRefresh())
-                .addTask(new InitCompontService())
                 .addTask(new InitDataSave())
                 .addTask(new InitDarkMode())
                 .addTask(new InitPushTask())

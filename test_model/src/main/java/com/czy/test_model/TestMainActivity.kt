@@ -19,6 +19,9 @@ class TestMainActivity : BaseActivity() {
         btnNetRequest.setOnClickListener {
             startActivity(Intent(TestMainActivity@this,TestNetRequestActivity::class.java))
         }
+        btnRxJava.setOnClickListener {
+            startActivity(Intent(TestMainActivity@this,RxJavaTestActivity::class.java))
+        }
     }
 
     override fun initData() {

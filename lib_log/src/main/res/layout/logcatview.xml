@@ -58,14 +58,6 @@
             android:text="ERROR" />
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etTag"
         android:textColor="#000"
@@ -74,6 +66,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="请输入过滤的TAG" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

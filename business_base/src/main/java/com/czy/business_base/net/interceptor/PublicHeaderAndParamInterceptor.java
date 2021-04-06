@@ -10,7 +10,9 @@ import java.util.Map;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
+import okhttp3.MultipartBody;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class PublicHeaderAndParamInterceptor implements Interceptor {
@@ -56,12 +58,14 @@ public class PublicHeaderAndParamInterceptor implements Interceptor {
                 }
                 builder.url(httpUrlBuilder.build());
             } else {
-                FormBody formBody = (FormBody) request.body();
                 //创建新的请求表单
                 FormBody.Builder newFormBodyBuilder = new FormBody.Builder();
-                //迁移旧的数据
-                for (int i = 0; i < formBody.size(); i++) {
-                    newFormBodyBuilder.add(formBody.encodedName(i), formBody.encodedValue(i));
+                if(request.body() instanceof FormBody){
+                    FormBody formBody = (FormBody) request.body();
+                    //迁移旧的数据
+                    for (int i = 0; i < formBody.size(); i++) {
+                        newFormBodyBuilder.add(formBody.encodedName(i), formBody.encodedValue(i));
+                    }
                 }
                 //追加新的数据
                 for (String key : params.keySet()) {

@@ -9,6 +9,11 @@ object ArouterConfig {
     //登录模块
     const val login: String = "/userCenter/loginActivity"
 
+    //用户服务暴露模块
+    const val userService: String = "/userCenter/userService"
+    //app模块暴露模块（TODO 待将app模块功能迁移成模块化）
+    const val appService: String = "/app/appService"
+
     //收藏页面
     const val collectPage = "/userCenter/collectPage"
 

@@ -89,8 +89,8 @@ public class HiViewPrinter implements HiLogPrinter {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String trim = editable.toString().trim();
-                 filterLog(currentType,trim);
+                tag = editable.toString().trim();
+                filterLog(currentType, tag);
             }
         });
         TabLayout tabLayout = logcatview.findViewById(R.id.tabLayout);
@@ -99,8 +99,7 @@ public class HiViewPrinter implements HiLogPrinter {
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0://所有日志信息
-                        adapter.getLogs().addAll(HiLog.historyLogs);
-                        adapter.notifyDataSetChanged();
+                       filterLog(-1,tag);
                         break;
                     case 1:
                         filterLog(HiLogType.V, tag);
@@ -135,13 +134,23 @@ public class HiViewPrinter implements HiLogPrinter {
         });
 
     }
+
     private int currentType = -1;
+
     private void filterLog(int type, String tag) {
         currentType = type;
         adapter.getLogs().clear();
-        for (HiLogMo historyLog : HiLog.historyLogs) {
-            if (historyLog.level == type &&(tag.isEmpty()||tag.equals(historyLog.tag))) {
-                adapter.getLogs().add(historyLog);
+        if(type == -1){
+            for (HiLogMo historyLog : HiLog.historyLogs) {
+                if (tag.isEmpty() || historyLog.tag.toLowerCase().contains(tag.toLowerCase())) {
+                    adapter.getLogs().add(historyLog);
+                }
+            }
+        }else {
+            for (HiLogMo historyLog : HiLog.historyLogs) {
+                if (historyLog.level == type && (tag.isEmpty() || historyLog.tag.toLowerCase().contains(tag.toLowerCase()))) {
+                    adapter.getLogs().add(historyLog);
+                }
             }
         }
         adapter.notifyDataSetChanged();

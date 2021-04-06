@@ -23,4 +23,7 @@ class UserServiceEmptImpl:UserService {
 
     override fun gotoLogin() {
     }
+
+    override fun init(context: Context?) {
+    }
 }

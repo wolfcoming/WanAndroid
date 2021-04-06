@@ -61,6 +61,8 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
                 .request(Manifest.permission.CAMERA)
                 .subscribe {
                     if (it) {
+
+
                         FlowResult.Builder(activity)
                             .setIntent(Intent(context, CaptureActivity::class.java))
                             .addResultListener {
@@ -75,6 +77,10 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
                                 }
                             }
                             .call()
+
+
+
+
                     } else {
                         toast("暂无相机权限")
                     }

@@ -24,17 +24,12 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Yq_wanAndroid">
-        <activity
-            android:name=".business.MainActivity"
-            android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation">
-
-        </activity>
         <activity android:name=".business.projects.ProjectsListActivity" />
         <activity android:name=".business.readHistory.ReadHistoryActivity" />
 
 
         <activity android:name=".business.MainActivity2"
-            android:windowSoftInputMode="adjustResize|adjustResize">
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -2,6 +2,7 @@ package com.czy.business_base.net;
 
 import com.czy.business_base.Constants;
 import com.czy.business_base.net.entity.BaseResult;
+import com.czy.lib_log.HiLog;
 import com.czy.lib_net.ApiException;
 
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -32,6 +33,7 @@ public abstract class ApiSubscriberHelper<T> extends DisposableObserver<T> {
 
     @Override
     public void onComplete() {
+        HiLog.e("onComplete");
     }
 
     @Override

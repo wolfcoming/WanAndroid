@@ -1,10 +1,13 @@
 package com.example.bus_login.service
 
 import android.content.Context
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.czy.business_base.ArouterConfig
 import com.czy.business_base.entity.UserInfo
 import com.czy.business_base.service.UserService
 import com.example.bus_login.UserManage
 
+@Route(path = ArouterConfig.userService)
 class UserServiceImpl:UserService {
     override fun getUserInfo(): UserInfo? {
         return UserManage.getUserInfo()
@@ -24,5 +27,8 @@ class UserServiceImpl:UserService {
 
     override fun gotoLogin() {
         UserManage.gotoLogin()
+    }
+
+    override fun init(context: Context?) {
     }
 }

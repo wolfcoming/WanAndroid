@@ -1,5 +1,6 @@
 package com.czy.yq_wanandroid.business
 
+import android.util.Log
 import android.view.ViewGroup
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.czy.yq_wanandroid.business.home.answer.AnswerFragment
 import com.czy.yq_wanandroid.business.home.home.HomeFragment
 import com.czy.yq_wanandroid.business.home.mine.MineFragment
 import com.czy.yq_wanandroid.business.home.projects.ProjectsFragment
+import com.infoholdcity.basearchitecture.self_extends.log
 import kotlinx.android.synthetic.main.activity_main2.*
 
 
@@ -49,6 +51,8 @@ class MainActivity2 : BaseActivity() {
                 R.id.main_mine -> 3
                 else -> -1
             }
+            "aaa".log()
+            Log.e("","")
             mViewpager.setCurrentItem(position, false)
             true
         }

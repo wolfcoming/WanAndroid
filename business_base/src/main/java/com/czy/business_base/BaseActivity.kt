@@ -15,6 +15,7 @@ import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus
 
 
+
 abstract class BaseActivity : RxAppCompatActivity() {
     lateinit var viewPrinter:HiViewPrinter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +50,9 @@ abstract class BaseActivity : RxAppCompatActivity() {
         if (context == null || topView == null || Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return
         }
+       //region 地址
+
+       //endregion
         val statusBarHeight: Int = DisplayInfoUtils.getInstance().statusBarHeight
         val params = topView.layoutParams as ViewGroup.MarginLayoutParams
         params.height += statusBarHeight
@@ -59,6 +63,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
             topView.paddingRight,
             topView.paddingBottom
         )
+        //endregion
     }
 
     /**
