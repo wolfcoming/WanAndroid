@@ -82,12 +82,12 @@ public class FlowResult {
                 throw new IllegalArgumentException("intent必须传递");
             }
             FragmentActivity activity = (FragmentActivity) this.context;
-            int requestedOrientation = activity.getRequestedOrientation();
-            if (requestedOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT &&
-                    requestedOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-                //咱未处理屏幕旋转逻辑，因绝大部分应用均会屏幕方向固定，暂不处理
-                throw new IllegalArgumentException("暂不支持屏幕旋转的activity");
-            }
+//            int requestedOrientation = activity.getRequestedOrientation();
+//            if (requestedOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT &&
+//                    requestedOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+//                //咱未处理屏幕旋转逻辑，因绝大部分应用均会屏幕方向固定，暂不处理
+//                throw new IllegalArgumentException("暂不支持屏幕旋转的activity");
+//            }
 
             Request request = new Request(intent, requestCode);
             request.subscribe(new IResult() {

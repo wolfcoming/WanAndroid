@@ -47,9 +47,9 @@ public class MyActivityManager {
     public void popActivity(Activity activity) {
         if (activity != null && activityStack.contains(activity)) {
             activityStack.remove(activity);
-            if (!activity.isFinishing()) {
-                activity.finish();
-            }
+//            if (!activity.isFinishing()) {
+//                activity.finish();
+//            }
         }
     }
 

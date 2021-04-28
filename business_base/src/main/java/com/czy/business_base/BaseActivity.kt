@@ -120,12 +120,13 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
 
     override fun onDestroy() {
-        MyActivityManager.getActivityManager().popActivity(this)
+//
         HiLogManager.getInstance().removePrinter(viewPrinter)
         if (isRegisterEventBus()) {
             EventBus.getDefault().unregister(this)
         }
         super.onDestroy()
+        MyActivityManager.getActivityManager().popActivity(this)
         "${this.javaClass.simpleName}:  onDestroy".log()
     }
 

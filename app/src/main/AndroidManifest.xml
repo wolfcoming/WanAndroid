@@ -27,8 +27,7 @@
         <activity android:name=".business.readHistory.ReadHistoryActivity" />
 
 
-        <activity android:name=".business.MainActivity2"
-            android:screenOrientation="portrait">
+        <activity android:name=".business.MainActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
