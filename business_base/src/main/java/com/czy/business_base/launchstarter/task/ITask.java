@@ -61,7 +61,4 @@ public interface ITask {
      */
     Runnable getTailRunnable();
 
-    void setTaskCallBack(TaskCallBack callBack);
-
-    boolean needCall();
 }

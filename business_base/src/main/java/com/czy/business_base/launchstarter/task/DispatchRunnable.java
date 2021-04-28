@@ -3,11 +3,10 @@ package com.czy.business_base.launchstarter.task;
 import android.os.Looper;
 import android.os.Process;
 
-import androidx.core.os.TraceCompat;
-
 import com.czy.business_base.launchstarter.TaskDispatcher;
 import com.czy.business_base.launchstarter.stat.TaskStat;
 import com.czy.business_base.launchstarter.utils.DispatcherLog;
+
 
 /**
  * 任务真正执行的地方
@@ -20,6 +19,7 @@ public class DispatchRunnable implements Runnable {
     public DispatchRunnable(Task task) {
         this.mTask = task;
     }
+
     public DispatchRunnable(Task task, TaskDispatcher dispatcher) {
         this.mTask = task;
         this.mTaskDispatcher = dispatcher;
@@ -27,7 +27,7 @@ public class DispatchRunnable implements Runnable {
 
     @Override
     public void run() {
-        TraceCompat.beginSection(mTask.getClass().getSimpleName());
+//        TraceCompat.beginSection(mTask.getClass().getSimpleName());
         DispatcherLog.i(mTask.getClass().getSimpleName()
                 + " begin run" + "  Situation  " + TaskStat.getCurrentSituation());
 
@@ -40,7 +40,6 @@ public class DispatchRunnable implements Runnable {
 
         long waitTime = System.currentTimeMillis() - startTime;
         startTime = System.currentTimeMillis();
-
         // 执行Task
         mTask.setRunning(true);
         mTask.run();
@@ -51,18 +50,17 @@ public class DispatchRunnable implements Runnable {
             tailRunnable.run();
         }
 
-        if (!mTask.needCall() || !mTask.runOnMainThread()) {
-            printTaskLog(startTime, waitTime);
+        printTaskLog(startTime, waitTime);
 
-            TaskStat.markTaskDone();
-            mTask.setFinished(true);
-            if(mTaskDispatcher != null){
-                mTaskDispatcher.satisfyChildren(mTask);
-                mTaskDispatcher.markTaskDone(mTask);
-            }
-            DispatcherLog.i(mTask.getClass().getSimpleName() + " finish");
+        TaskStat.markTaskDone();
+        mTask.setFinished(true);
+        if (mTaskDispatcher != null) {
+            mTaskDispatcher.satisfyChildren(mTask);
+            mTaskDispatcher.markTaskDone(mTask);
         }
-        TraceCompat.endSection();
+        DispatcherLog.i(mTask.getClass().getSimpleName() + " finish");
+
+//        TraceCompat.endSection();
     }
 
     /**

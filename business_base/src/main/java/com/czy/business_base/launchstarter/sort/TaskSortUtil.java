@@ -4,6 +4,8 @@ package com.czy.business_base.launchstarter.sort;
 import androidx.annotation.NonNull;
 import androidx.collection.ArraySet;
 
+
+import com.czy.business_base.BuildConfig;
 import com.czy.business_base.launchstarter.task.Task;
 import com.czy.business_base.launchstarter.utils.DispatcherLog;
 
@@ -77,12 +79,12 @@ public class TaskSortUtil {
     }
 
     private static void printAllTaskName(List<Task> newTasksAll) {
-        if (true) {
-            return;
+        if (BuildConfig.DEBUG) {
+            for (Task task : newTasksAll) {
+                DispatcherLog.i(task.getClass().getSimpleName());
+            }
         }
-        for (Task task : newTasksAll) {
-            DispatcherLog.i(task.getClass().getSimpleName());
-        }
+
     }
 
     public static List<Task> getTasksHigh() {

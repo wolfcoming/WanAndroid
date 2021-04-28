@@ -2,17 +2,15 @@ package com.czy.business_base.launchstarter;
 
 import android.content.Context;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.annotation.UiThread;
 
+import com.czy.business_base.BuildConfig;
 import com.czy.business_base.launchstarter.sort.TaskSortUtil;
-import com.czy.business_base.launchstarter.stat.TaskStat;
 import com.czy.business_base.launchstarter.task.DispatchRunnable;
 import com.czy.business_base.launchstarter.task.Task;
-import com.czy.business_base.launchstarter.task.TaskCallBack;
 import com.czy.business_base.launchstarter.utils.DispatcherLog;
-import com.example.lib_imageloader.image.Utils;
+import com.czy.business_base.launchstarter.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,8 +37,8 @@ public class TaskDispatcher {
     private AtomicInteger mNeedWaitCount = new AtomicInteger();//保存需要Wait的Task的数量
     private List<Task> mNeedWaitTasks = new ArrayList<>();//调用了await的时候还没结束的且需要等待的Task
     private volatile List<Class<? extends Task>> mFinishedTasks = new ArrayList<>(100);//已经结束了的Task
-    private HashMap<Class<? extends Task>, ArrayList<Task>> mDependedHashMap = new HashMap<>();
-    private AtomicInteger mAnalyseCount = new AtomicInteger();//启动器分析的次数，统计下分析的耗时；
+    private HashMap<Class<? extends Task>, ArrayList<Task>> mDependedHashMap = new HashMap<>();// 被依赖的task（value 是依赖者集合）
+//    private AtomicInteger mAnalyseCount = new AtomicInteger();//启动器分析的次数，统计下分析的耗时；
 
     private TaskDispatcher() {
     }
@@ -104,13 +102,11 @@ public class TaskDispatcher {
             throw new RuntimeException("must be called from UiThread");
         }
         if (mAllTasks.size() > 0) {
-            mAnalyseCount.getAndIncrement();
+//            mAnalyseCount.getAndIncrement();
             printDependedMsg();
             mAllTasks = TaskSortUtil.getSortResult(mAllTasks, mClsAllTasks);
             mCountDownLatch = new CountDownLatch(mNeedWaitCount.get());
-
             sendAndExecuteAsyncTasks();
-
             DispatcherLog.i("task analyse cost " + (System.currentTimeMillis() - mStartTime) + "  begin main ");
             executeTaskMain();
         }
@@ -127,7 +123,7 @@ public class TaskDispatcher {
         mStartTime = System.currentTimeMillis();
         for (Task task : mMainThreadTasks) {
             long time = System.currentTimeMillis();
-            new DispatchRunnable(task,this).run();
+            new DispatchRunnable(task, this).run();
             DispatcherLog.i("real main " + task.getClass().getSimpleName() + " cost   " +
                     (System.currentTimeMillis() - time));
         }
@@ -149,13 +145,16 @@ public class TaskDispatcher {
      * 查看被依赖的信息
      */
     private void printDependedMsg() {
-        DispatcherLog.i("needWait size : " + (mNeedWaitCount.get()));
-        if (false) {
+        if (BuildConfig.DEBUG) {
+            DispatcherLog.i("needWait size : " + (mNeedWaitCount.get()));
             for (Class<? extends Task> cls : mDependedHashMap.keySet()) {
-                DispatcherLog.i("cls " + cls.getSimpleName() + "   " + mDependedHashMap.get(cls).size());
+                StringBuilder sb = new StringBuilder();
+                sb.append("cls ").append(cls.getSimpleName()).append("有").append(mDependedHashMap.get(cls).size()).append("个依赖者，他们是[");
                 for (Task task : mDependedHashMap.get(cls)) {
-                    DispatcherLog.i("cls       " + task.getClass().getSimpleName());
+                    sb.append(task.getClass().getSimpleName()).append(",");
                 }
+                sb.deleteCharAt(sb.length()-1).append("]");
+                DispatcherLog.i(sb.toString());
             }
         }
     }
@@ -186,24 +185,9 @@ public class TaskDispatcher {
     private void sendTaskReal(final Task task) {
         if (task.runOnMainThread()) {
             mMainThreadTasks.add(task);
-
-            if (task.needCall()) {
-                task.setTaskCallBack(new TaskCallBack() {
-                    @Override
-                    public void call() {
-                        TaskStat.markTaskDone();
-                        task.setFinished(true);
-                        satisfyChildren(task);
-                        markTaskDone(task);
-                        DispatcherLog.i(task.getClass().getSimpleName() + " finish");
-
-                        Log.i("testLog", "call");
-                    }
-                });
-            }
         } else {
             // 直接发，是否执行取决于具体线程池
-            Future future = task.runOn().submit(new DispatchRunnable(task,this));
+            Future future = task.runOn().submit(new DispatchRunnable(task, this));
             mFutures.add(future);
         }
     }
@@ -212,7 +196,7 @@ public class TaskDispatcher {
         if (ifNeedWait(task)) {
             mNeedWaitCount.getAndIncrement();
         }
-        task.runOn().execute(new DispatchRunnable(task,this));
+        task.runOn().execute(new DispatchRunnable(task, this));
     }
 
     @UiThread
@@ -230,6 +214,7 @@ public class TaskDispatcher {
                 mCountDownLatch.await();
             }
         } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
