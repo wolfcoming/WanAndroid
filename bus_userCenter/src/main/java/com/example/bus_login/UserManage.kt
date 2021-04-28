@@ -40,7 +40,9 @@ class UserManage {
             } else {
                 FlowResult.Builder(context)
                     .setIntent(Intent(context, LoginActivity::class.java))
-                    .addResultListener { result() }
+                    .addResultListener { requestCode, resultCode, data ->
+                        result()
+                    }
                     .call()
             }
         }

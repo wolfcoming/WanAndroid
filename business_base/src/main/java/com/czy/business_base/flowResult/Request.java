@@ -2,20 +2,27 @@ package com.czy.business_base.flowResult;
 
 import android.content.Intent;
 
-public class Request {
+/**
+ * @author yangqing
+ * @time 2021/4/16 15:46
+ * @describe 请求简单封装（传递参数，抛出结果作用）
+ */
+class Request {
     Intent intent;
-    Observer observer;
+    IResult observer;
+    int requestCode;
 
-    protected void post(int resultCode, Intent data) {
-        observer.update(resultCode, data);
+    protected void post(int request, int resultCode, Intent data) {
+        observer.result(request, resultCode, data);
     }
 
-    protected void subscribe(Observer observer) {
+    protected void subscribe(IResult observer) {
         this.observer = observer;
     }
 
-    public Request(Intent intent) {
+    public Request(Intent intent, int request) {
         this.intent = intent;
+        this.requestCode = request;
     }
 }
 
