@@ -8,6 +8,7 @@ buildscript {
         jcenter()
         maven { url "https://jitpack.io" }
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url 'https://repo1.maven.org/maven2/' }
         //本地maven仓库
 //        mavenCentral()
 //        maven{
@@ -47,6 +48,7 @@ allprojects {
         maven {
             url "http://mvn.gt.getui.com/nexus/content/repositories/releases/"
         }
+        maven { url 'https://repo1.maven.org/maven2/' }
         //本地maven仓库
 //        mavenCentral()
 //        maven{
