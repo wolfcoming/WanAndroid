@@ -7,5 +7,6 @@
         <activity android:name=".TestMainActivity" />
         <activity android:name=".TestNetRequestActivity" />
         <activity android:name=".RxJavaTestActivity" />
+        <activity android:name=".im.TestImActivity" />
     </application>
 </manifest>

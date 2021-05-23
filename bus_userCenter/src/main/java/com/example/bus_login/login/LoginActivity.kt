@@ -1,20 +1,29 @@
 package com.czy.yq_wanandroid.business.login
 
 import android.text.TextUtils
+import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.czy.business_base.ArouterConfig
+import com.czy.business_base.dataSave.DataSaveProxy
 import com.czy.business_base.entity.UserInfo
 import com.czy.business_base.event.LoginEvent
 import com.czy.business_base.ext.toast
 import com.czy.business_base.mvpbase.MvpActivity
 import com.czy.lib_base.utils.BarUtils
+import com.czy.lib_log.HiLog
 import com.example.bus_login.R
 import com.example.bus_login.UserManage
 import com.example.lib_imageloader.image.ImageLoaderUtil
 import com.example.lib_imageloader.image.listener.ProgressListener
+import com.google.gson.Gson
 import com.infoholdcity.basearchitecture.self_extends.log
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.RequestCallback
+import com.netease.nimlib.sdk.auth.AuthService
+import com.netease.nimlib.sdk.auth.LoginInfo
 import kotlinx.android.synthetic.main.activity_login.*
+
 
 @Route(path = ArouterConfig.login)
 class LoginActivity : MvpActivity<LoginPresenter>(), ILoginView {
@@ -70,7 +79,8 @@ class LoginActivity : MvpActivity<LoginPresenter>(), ILoginView {
         } else {
             setResult(RESULT_OK)
         }
-        finish()
+       finish()
+
     }
 
     override fun loginFailed(msg: String) {

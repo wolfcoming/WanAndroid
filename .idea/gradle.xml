@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/bus_userCenter" />
             <option value="$PROJECT_DIR$/bus_webview" />
             <option value="$PROJECT_DIR$/business_base" />
+            <option value="$PROJECT_DIR$/lib_IM" />
             <option value="$PROJECT_DIR$/lib_ability" />
             <option value="$PROJECT_DIR$/lib_base" />
             <option value="$PROJECT_DIR$/lib_imageloader" />
@@ -25,6 +26,7 @@
             <option value="$PROJECT_DIR$/lib_ui" />
             <option value="$PROJECT_DIR$/push_service" />
             <option value="$PROJECT_DIR$/test_model" />
+            <option value="$PROJECT_DIR$/uikit" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

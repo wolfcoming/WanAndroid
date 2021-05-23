@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="item_image_key" type="id" />
+    <string name="string_count">%1$s/%2$s</string>
+</resources>

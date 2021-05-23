@@ -6,6 +6,7 @@ import com.czy.business_base.ArouterConfig
 import com.czy.business_base.BaseActivity
 import com.czy.business_base.ext.toast
 import com.czy.lib_log.HiLog
+import com.czy.test_model.im.TestImActivity
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.activity_main_test.*
 
@@ -35,6 +36,9 @@ class TestMainActivity : BaseActivity() {
                 toast("暂无现版本")
             }
             HiLog.e(upgradeInfo)
+        }
+        btnIM.setOnClickListener {
+            startActivity(Intent(TestMainActivity@ this, TestImActivity::class.java))
         }
     }
 

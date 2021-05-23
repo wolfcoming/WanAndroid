@@ -17,7 +17,7 @@ import org.greenrobot.eventbus.EventBus
 
 
 
-abstract class BaseActivity : RxAppCompatActivity() {
+abstract class BaseActivity() : RxAppCompatActivity() {
     lateinit var viewPrinter:HiViewPrinter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

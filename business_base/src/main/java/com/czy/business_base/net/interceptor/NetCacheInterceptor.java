@@ -24,7 +24,7 @@ public class NetCacheInterceptor implements Interceptor {
         if (NetUtils.isConnected(ContentWrapperUtils.mContext)) {
             //获取头部信息
             String cacheControl = request.cacheControl().toString();
-            HiLog.et("NetCacheInterceptor",cacheControl);
+//            HiLog.et("NetCacheInterceptor",cacheControl);
             return response.newBuilder()
                     .removeHeader("Pragma")//清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
                     .header("Cache-Control", cacheControl)

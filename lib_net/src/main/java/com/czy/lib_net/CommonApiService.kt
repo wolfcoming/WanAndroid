@@ -134,12 +134,12 @@ class CommonApiService {
             //缓存中移除过期的Cookie
             cache.removeAll(invalidCookies)
             //返回List<Cookie>让Request进行设置
-            "上传的cookie：$validCookies".log()
+//            "上传的cookie：$validCookies".log()
             return validCookies
         }
 
         override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
-            "获取到的：cookie $cookies".log()
+//            "获取到的：cookie $cookies".log()
             cache.addAll(cookies);
 
         }

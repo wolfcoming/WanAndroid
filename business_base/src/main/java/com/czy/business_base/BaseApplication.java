@@ -17,6 +17,7 @@ import com.czy.business_base.tasks.InitSmartRefresh;
 import com.czy.lib_base.utils.ContentWrapperUtils;
 import com.czy.lib_net.CommonApiService;
 import com.example.lib_ability.PushHelper;
+import com.netease.nimlib.sdk.NIMClient;
 
 public abstract class BaseApplication extends Application {
 
@@ -49,6 +50,38 @@ public abstract class BaseApplication extends Application {
         CommonApiService.Companion.getInterceptors().add(new OfflineCacheInterceptor());
         CommonApiService.Companion.getInterceptors().add(new PublicHeaderAndParamInterceptor());
         initPushSDK();
+        initIM();
+    }
+
+    private void initIM() {
+
+        // 初始化
+//        NimUIKit.init(this, buildUIKitOptions());
+
+        // IM 会话窗口的定制初始化。
+//        SessionHelper.init();
+
+        // 聊天室聊天窗口的定制初始化。
+//        ChatRoomSessionHelper.init();
+
+        // 通讯录列表定制初始化
+//        ContactHelper.init();
+
+//        // SDK初始化（启动后台服务，若已经存在用户登录信息， SDK 将进行自动登录）。不能对初始化语句添加进程判断逻辑。
+//        String im_logininfo = DataSaveProxy.getInstance().getString("IM_LOGININFO", null);
+//        LoginInfo loginInfo = new Gson().fromJson(im_logininfo,LoginInfo.class);
+        NIMClient.init(this, null, null);
+//        NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(
+//                new Observer<StatusCode>() {
+//                    public void onEvent(StatusCode status) {
+//                        //获取状态的描述
+//                        String desc = status.getDesc();
+//                        HiLog.e(desc);
+//                        if (status.wontAutoLogin()) {
+//                            // 被踢出、账号被禁用、密码错误等情况，自动登录失败，需要返回到登录界面进行重新登录操作
+//                        }
+//                    }
+//                }, true);
     }
 
     /**
@@ -66,4 +99,12 @@ public abstract class BaseApplication extends Application {
             }).start();
 
     }
+
+//    private UIKitOptions buildUIKitOptions() {
+//        UIKitOptions options = new UIKitOptions();
+//        // 设置app图片/音频/日志等缓存目录
+////        options.appCacheDir = NimSDKOptionConfig.getAppCacheDir(this) + "/app";
+//        return options;
+//    }
+
 }
