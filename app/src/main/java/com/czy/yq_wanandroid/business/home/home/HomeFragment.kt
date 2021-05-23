@@ -61,12 +61,10 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
                 .request(Manifest.permission.CAMERA)
                 .subscribe {
                     if (it) {
-
-
                         FlowResult.Builder(activity)
                             .setIntent(Intent(context, CaptureActivity::class.java))
-                            .addResultListener {
-                                val result = it.getStringExtra("SCAN_RESULT")
+                            .addResultListener { requestCode, resultCode, data ->
+                                val result = data.getStringExtra("SCAN_RESULT")
                                 result?.let {
                                     if (result.trim().startsWith("http")) {
                                         ARouter.getInstance().build(ArouterConfig.webviewPath)
@@ -75,12 +73,7 @@ class HomeFragment : MvpFragment<HomePresenter>(), IHomeView {
                                             .navigation()
                                     }
                                 }
-                            }
-                            .call()
-
-
-
-
+                            }.call()
                     } else {
                         toast("暂无相机权限")
                     }

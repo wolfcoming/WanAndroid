@@ -1,29 +1,29 @@
 package com.czy.business_base.flowResult;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.content.pm.ActivityInfo;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 
 /**
  * @author yangqing
- * @time 2020/8/4 4:58 PM
- * @describe 链式得到ActivityForResult 的结果
+ * @time 2021/4/16 14:58
+ * @describe 链式调用startActivityForResult
  */
 public class FlowResult {
     private FlowResult() {
     }
 
-
     public static class Builder {
         Context context;
         Intent intent;
         public IResult mIResult;//结果监听
-        public ICancel mICancel;//取消监听
-        int mResultCode = -10086;
-
-        Bundle data = new Bundle();
+        public INoResultBack mINoResultBack;//目标页面没有给我们抛回来结果的时候触发
+        int mQuestCode = 0x1001;//请求码
+//        int mResultCode = 0x10002; //响应码
 
         public Builder(Context t) {
             context = t;
@@ -31,6 +31,7 @@ public class FlowResult {
 
         /**
          * 设置intent
+         *
          * @param i
          * @return
          */
@@ -39,78 +40,75 @@ public class FlowResult {
             return this;
         }
 
-        /**
-         * 过滤返回结果码
-         *
-         * @param resultCode
-         * @return
-         */
-        public Builder filterResultCode(int resultCode) {
-            this.mResultCode = resultCode;
-            return this;
-        }
 
         /**
          * 设置结果回调监听
+         *
          * @param result
          * @return
          */
-        public Builder addResultListener(IResult result){
+        public Builder addResultListener(IResult result) {
             this.mIResult = result;
             return this;
         }
 
         /**
-         * 设置取消监听
-         * @param cancel
+         * 设置无结果返回回调
+         *
+         * @param noResultBack
          * @return
          */
-        public Builder addCancelListener(ICancel cancel){
-            this.mICancel = cancel;
+        public Builder addNoResultBackListener(INoResultBack noResultBack) {
+            this.mINoResultBack = noResultBack;
             return this;
         }
 
 
         public void call() {
-            if(mResultCode==-10086){
-                mResultCode = Activity.RESULT_OK;
-            }
-            call(mResultCode);
+            call(mQuestCode);
         }
 
-        private void call(final int mResultCode) {
-            if (!(context instanceof Activity)){
-                throw new IllegalArgumentException("context 必须是Activity类型");
+        /**
+         * 吊起目标界面
+         *
+         * @param requestCode 请求码
+         */
+        public void call(int requestCode) {
+
+            if (!(context instanceof FragmentActivity)) {
+                throw new IllegalArgumentException("context 必须是FragmentActivity类型");
             }
-            if(intent==null){
+            if (intent == null) {
                 throw new IllegalArgumentException("intent必须传递");
             }
-            if (!data.isEmpty()) {
-                intent.putExtras(data);
-            }
+            FragmentActivity activity = (FragmentActivity) this.context;
+//            int requestedOrientation = activity.getRequestedOrientation();
+//            if (requestedOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT &&
+//                    requestedOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+//                //咱未处理屏幕旋转逻辑，因绝大部分应用均会屏幕方向固定，暂不处理
+//                throw new IllegalArgumentException("暂不支持屏幕旋转的activity");
+//            }
 
-            Request request = new Request(intent);
-            request.subscribe(new Observer() {
+            Request request = new Request(intent, requestCode);
+            request.subscribe(new IResult() {
                 @Override
-                public void update(int resultCode, Intent data) {
-                    if (resultCode == mResultCode) {
-                        if(mIResult!=null){
-                            mIResult.result(data);
+                public void result(int requestCode, int resultCode, Intent data) {
+                    if (resultCode == 0 && data == null) {
+                        if (mINoResultBack != null) {
+                            mINoResultBack.noResultCallBack();
                         }
                     } else {
-                        if(mICancel!=null){
-                            mICancel.cancel();
+                        if (mIResult != null) {
+                            mIResult.result(requestCode, resultCode, data);
                         }
                     }
                 }
             });
-
             final VirtualFragment appFragment = new VirtualFragment();
             appFragment.setRequest(request);
-
-            ((Activity) context).getFragmentManager()
-                    .beginTransaction().replace(android.R.id.content, appFragment)
-                    .commitAllowingStateLoss();
+            FragmentManager supportFragmentManager = ((FragmentActivity) this.context).getSupportFragmentManager();
+            supportFragmentManager.beginTransaction().replace(android.R.id.content, appFragment).commitAllowingStateLoss();
+            supportFragmentManager.executePendingTransactions();
         }
 
 

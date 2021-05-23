@@ -3,6 +3,7 @@ package com.czy.business_base.launchstarter.task;
 import android.content.Context;
 import android.os.Process;
 
+
 import com.czy.business_base.launchstarter.TaskDispatcher;
 import com.czy.business_base.launchstarter.utils.DispatcherExecutor;
 
@@ -99,13 +100,6 @@ public abstract class Task implements ITask {
         return null;
     }
 
-    @Override
-    public void setTaskCallBack(TaskCallBack callBack) {}
-
-    @Override
-    public boolean needCall() {
-        return false;
-    }
 
     /**
      * 是否只在主进程，默认是

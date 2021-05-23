@@ -47,6 +47,7 @@ dependencies {
     api project(path: ':lib_qrcode')
     api project(path: ':push_service')
     api project(path: ':lib_log') //日志
+    api project(path: ':lib_ability') //三方sdk封装
 
     api 'org.greenrobot:eventbus:3.2.0'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'

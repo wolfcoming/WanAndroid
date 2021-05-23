@@ -16,6 +16,7 @@ import com.czy.business_base.tasks.InitPushTask;
 import com.czy.business_base.tasks.InitSmartRefresh;
 import com.czy.lib_base.utils.ContentWrapperUtils;
 import com.czy.lib_net.CommonApiService;
+import com.example.lib_ability.PushHelper;
 
 public abstract class BaseApplication extends Application {
 
@@ -47,5 +48,22 @@ public abstract class BaseApplication extends Application {
         CommonApiService.Companion.getNetInterceptors().add(new NetCacheInterceptor());
         CommonApiService.Companion.getInterceptors().add(new OfflineCacheInterceptor());
         CommonApiService.Companion.getInterceptors().add(new PublicHeaderAndParamInterceptor());
+        initPushSDK();
+    }
+
+    /**
+     * 初始化推送SDK，在用户隐私政策协议同意后，再做初始化
+     */
+    private void initPushSDK() {
+
+
+            //建议在线程中执行初始化
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    PushHelper.init(getApplicationContext());
+                }
+            }).start();
+
     }
 }

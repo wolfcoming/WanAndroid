@@ -12,6 +12,7 @@ import com.czy.lib_log.printer.HiViewPrinter
 import com.gyf.immersionbar.ImmersionBar
 import com.infoholdcity.basearchitecture.self_extends.log
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
+import com.umeng.message.PushAgent
 import org.greenrobot.eventbus.EventBus
 
 
@@ -20,6 +21,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
     lateinit var viewPrinter:HiViewPrinter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        PushAgent.getInstance(this).onAppStart();
         MyActivityManager.getActivityManager().pushActivity(this)
         "${this.javaClass.simpleName}:  onCreate".log()
 
@@ -120,12 +122,13 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
 
     override fun onDestroy() {
-        MyActivityManager.getActivityManager().popActivity(this)
+//
         HiLogManager.getInstance().removePrinter(viewPrinter)
         if (isRegisterEventBus()) {
             EventBus.getDefault().unregister(this)
         }
         super.onDestroy()
+        MyActivityManager.getActivityManager().popActivity(this)
         "${this.javaClass.simpleName}:  onDestroy".log()
     }
 

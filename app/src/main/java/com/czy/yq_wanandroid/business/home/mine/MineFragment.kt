@@ -29,10 +29,10 @@ class MineFragment : LazyFragment() {
 
         ll_collect.setOnClickListener {
             //换成拦截器来主动拦截
-//            ServiceFactory.getUserService().checkLogin(context!!) {
-//                  ARouter.getInstance().build(ArouterConfig.collectPage).navigation()
-//            }
-            ARouter.getInstance().build(ArouterConfig.collectPage).navigation()
+            ServiceFactory.getUserService().checkLogin(context!!) {
+                  ARouter.getInstance().build(ArouterConfig.collectPage).navigation()
+            }
+//            ARouter.getInstance().build(ArouterConfig.collectPage).navigation()
         }
         ll_history.setOnClickListener {
             startActivity(Intent(context, ReadHistoryActivity::class.java))
