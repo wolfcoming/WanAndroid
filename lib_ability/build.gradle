@@ -6,7 +6,11 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 30
@@ -29,6 +33,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
 }
 

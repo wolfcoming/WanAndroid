@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.czy.business_base.launchstarter.TaskDispatcher;
+import com.czy.business_base.launchstarter.utils.Utils;
 import com.czy.business_base.net.interceptor.NetCacheInterceptor;
 import com.czy.business_base.net.interceptor.OfflineCacheInterceptor;
 import com.czy.business_base.net.interceptor.PublicHeaderAndParamInterceptor;
@@ -16,7 +17,8 @@ import com.czy.business_base.tasks.InitPushTask;
 import com.czy.business_base.tasks.InitSmartRefresh;
 import com.czy.lib_base.utils.ContentWrapperUtils;
 import com.czy.lib_net.CommonApiService;
-import com.example.lib_ability.PushHelper;
+//import com.example.lib_ability.PushHelper;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nimlib.sdk.NIMClient;
 
 public abstract class BaseApplication extends Application {
@@ -71,6 +73,9 @@ public abstract class BaseApplication extends Application {
 //        String im_logininfo = DataSaveProxy.getInstance().getString("IM_LOGININFO", null);
 //        LoginInfo loginInfo = new Gson().fromJson(im_logininfo,LoginInfo.class);
         NIMClient.init(this, null, null);
+        if( Utils.isMainProcess(this)){
+            NimUIKit.init(this);
+        }
 //        NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(
 //                new Observer<StatusCode>() {
 //                    public void onEvent(StatusCode status) {
@@ -90,13 +95,13 @@ public abstract class BaseApplication extends Application {
     private void initPushSDK() {
 
 
-            //建议在线程中执行初始化
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    PushHelper.init(getApplicationContext());
-                }
-            }).start();
+//            //建议在线程中执行初始化
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    PushHelper.init(getApplicationContext());
+//                }
+//            }).start();
 
     }
 

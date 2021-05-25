@@ -21,7 +21,6 @@ abstract class BaseActivity() : RxAppCompatActivity() {
     lateinit var viewPrinter:HiViewPrinter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        PushAgent.getInstance(this).onAppStart();
         MyActivityManager.getActivityManager().pushActivity(this)
         "${this.javaClass.simpleName}:  onCreate".log()
 

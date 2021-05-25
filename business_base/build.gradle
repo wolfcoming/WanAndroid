@@ -51,6 +51,7 @@ dependencies {
     api project(path: ':lib_IM') //im
 
     api 'org.greenrobot:eventbus:3.2.0'
+    implementation project(path: ':uikit')
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
     api 'com.trello.rxlifecycle4:rxlifecycle-components:4.0.1'
     api 'com.alibaba:arouter-api:1.5.1'
